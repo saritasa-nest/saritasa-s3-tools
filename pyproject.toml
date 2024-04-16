@@ -22,6 +22,18 @@ packages = [
   { include = "saritasa_s3_tools" }
 ]
 
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "License :: OSI Approved :: MIT License",
+  "Natural Language :: English",
+  "Intended Audience :: Developers",
+  "Operating System :: OS Independent",
+  "Topic :: Software Development :: Libraries :: Python Modules",
+]
+
+[tool.poetry.plugins.pytest11]
+saritasa_s3_tools_plugin = "saritasa_s3_tools.testing.plugin"
+
 [tool.poetry.dependencies]
 python = "^3.11"
 # The AWS SDK for Python
@@ -30,11 +42,21 @@ boto3 = "*"
 # Mypy stubs for boto3
 # https://pypi.org/project/boto3-stubs/#how-to-install
 boto3-stubs = {extras=["s3"], version = "*"}
+# AnyIO is an asynchronous networking and concurrency library
+# that works on top of either asyncio or trio.
+# https://anyio.readthedocs.io/en/stable/
+anyio = {version= "<5", optional = true}
 
+[tool.poetry.extras]
+async = ["anyio"]
+all = ["anyio"]
 
 [tool.poetry.group.dev.dependencies]
-# Improved REPL
+# Exports functions to access the IPython debugger, which features tab completion, syntax highlighting, better tracebacks
+# https://github.com/gotcha/ipdb
 ipdb = "^0.13.13"
+# Provides a rich toolkit to help you make the most of using Python interactively
+# https://ipython.readthedocs.io/en/stable/
 ipython = "^8.23.0"
 # A framework for managing and maintaining multi-language pre-commit hooks.
 # https://pre-commit.com/
@@ -52,12 +74,20 @@ saritasa_invocations = "^1.1.0"
 mypy = "^1.9.0"
 
 [tool.poetry.group.test.dependencies]
+# Makes it easy to write small tests, yet scales to support complex functional testing
+# https://github.com/pytest-dev/pytest/
 pytest = "^8.1.1"
 # To prettify pytest output
+# https://github.com/Teemu/pytest-sugar
 pytest-sugar = "^1.0.0"
-# Coverage plugin for pytest.
-# https://github.com/pytest-dev/pytest-cov
-pytest-cov = "^5.0.0"
+# Coverage.py is a tool for measuring code coverage of Python programs.
+# It monitors your program, noting which parts of the code have been executed,
+# then analyzes the source to identify code that could have been executed but was not.
+# https://coverage.readthedocs.io/en/latest/
+coverage = "^7.4.4"
+# HTTPX is a fully featured HTTP client for Python 3, which provides sync and async APIs, and support for both HTTP/1.1 and HTTP/2.
+# https://www.python-httpx.org/
+httpx = {version ="^0.27.0"}
 
 [build-system]
 requires = ["poetry-core"]
@@ -103,11 +133,11 @@ extend-select = [
   "DJ",
   # https://docs.astral.sh/ruff/rules/#flake8-print-t20
   "T20",
-  # https://docs.astral.sh/ruff/rules/#flake8-simplify-sim
+  # https://docs.astral.sh/ruff/rules/#flake8-pytest-style-pt
   "PT",
   # https://docs.astral.sh/ruff/rules/#flake8-simplify-sim
   "SIM",
-  # https://docs.astral.sh/ruff/rules/#flake8-simplify-sim
+  # https://docs.astral.sh/ruff/rules/#flake8-use-pathlib-pth
   "PTH",
   # https://docs.astral.sh/ruff/rules/#flake8-todos-td
   "TD",
@@ -117,7 +147,7 @@ extend-select = [
   "RUF"
 ]
 ignore = [
-    # https://docs.astral.sh/ruff/rules/ANN101
+  # https://docs.astral.sh/ruff/rules/ANN101
   "ANN101",
   # https://docs.astral.sh/ruff/rules/ANN102
   "ANN102",
@@ -157,13 +187,17 @@ split-on-trailing-comma = true
 section-order = [
     "future",
     "standard-library",
-    "boto3",
     "third-party",
+    "boto3",
     "first-party",
     "local-folder",
 ]
 [tool.ruff.lint.isort.sections]
-boto3 = ["boto3"]
+boto3 = [
+  "boto3",
+  "botocore",
+  "mypy_boto3_s3",
+]
 
 [tool.ruff.lint.flake8-pytest-style]
 fixture-parentheses = false
@@ -212,17 +246,24 @@ ignore = [
 addopts = [
     "--capture=no",
     "--ff",
-    "--cov=saritasa_s3_tools",
-    "--cov-report=html",
 ]
 # skip all files inside following dirs
 norecursedirs = [
     "venv",
     ".venv",
 ]
+# Configuration for s3
+s3_endpoint_url = "https://localhost.localstack.cloud:4566"
+s3_region="us-west-1"
+s3_bucket="saritasa-s3-tools-files"
+s3_access_key="root"
+s3_secret_key="rootroot"
 
 [tool.coverage.run]
 omit = []
+
+[tool.coverage.report]
+include = ["saritasa_s3_tools/**"]
 
 # https://docformatter.readthedocs.io/en/latest/configuration.html#
 [tool.docformatter]

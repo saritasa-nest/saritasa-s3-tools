@@ -6,7 +6,7 @@ import saritasa_invocations
 def build(
     context: invoke.Context,
 ) -> None:
-    """Build python environ."""
+    """Build python environment."""
     saritasa_invocations.poetry.install(context)
 
 

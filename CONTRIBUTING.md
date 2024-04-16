@@ -16,6 +16,14 @@ To activate your `virtualenv` run command.
 poetry shell
 ```
 
+## Base setup
+
+Run this command to install hooks and prepare environment for work
+
+```bash
+inv project.init
+```
+
 ## Style checks
 
 We use `pre-commit` for quality control.
@@ -25,9 +33,6 @@ To run checks:
 ```bash
 inv pre-commit.run-hooks
 ```
-
-Note: we also have flake8 dependencies for proper support of flake8 vscode
-plugin.
 
 ## Submitting your code
 
