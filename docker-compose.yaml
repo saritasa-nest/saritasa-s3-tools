@@ -1,0 +1,42 @@
+name: "saritasa-s3-tools"
+
+services:
+  # ###########################################################################
+  # Localstack - solution for many aws services in one container
+  # Used for s3
+  # Docs: https://docs.localstack.cloud/overview/
+  # ###########################################################################
+  localstack-services:
+    image: localstack/localstack:3.3.0
+    hostname: localhost.localstack.cloud
+    ports:
+      - "4566:4566"
+      - '9000:9000'
+      - '9001:9001'
+    environment:
+      # https://docs.localstack.cloud/references/configuration/
+      - SERVICES=s3
+      - DEBUG=1
+      - DOCKER_HOST=unix:///var/run/docker.sock
+      - AWS_ACCESS_KEY_ID=root
+      - AWS_SECRET_ACCESS_KEY=rootroot
+      - AWS_DEFAULT_REGION=us-west-1
+    volumes:
+      - "${LOCALSTACK_VOLUME_DIR:-./localstack_volume}:/var/lib/localstack"
+      - "/var/run/docker.sock:/var/run/docker.sock"
+
+  localstack-services-s3:
+    image: localstack/localstack:3.3.0
+    depends_on:
+      - localstack-services
+    environment:
+      - AWS_DEFAULT_REGION=us-west-1
+      - AWS_ENDPOINT_URL=http://localhost.localstack.cloud:4566
+    entrypoint: >
+      /bin/sh -c "
+      awslocal s3api create-bucket --bucket ${COMPOSE_PROJECT_NAME}-files --region us-west-1 --create-bucket-configuration LocationConstraint=us-west-1;
+      exit 0;
+      "
+    volumes:
+      - "${LOCALSTACK_VOLUME_DIR:-./localstack_volume}:/var/lib/localstack"
+      - "/var/run/docker.sock:/var/run/docker.sock"

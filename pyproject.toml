@@ -1,0 +1,273 @@
+[tool.poetry]
+name = "saritasa-s3-tools"
+version = "0.1.0"
+description = "Tools For S3 Used By Saritasa"
+authors = [
+  "Saritasa <pypi@saritasa.com>",
+]
+maintainers = [
+    "Stanislav Khlud <stanislav.khlud@saritasa.com>",
+]
+homepage = "https://pypi.org/project/saritasa-s3-tools/"
+repository = "https://github.com/saritasa-nest/saritasa-s3-tools/"
+keywords = [
+  "python",
+  "aws",
+  "s3",
+  "boto3",
+]
+license = "MIT"
+readme = "README.md"
+packages = [
+  { include = "saritasa_s3_tools" }
+]
+
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "License :: OSI Approved :: MIT License",
+  "Natural Language :: English",
+  "Intended Audience :: Developers",
+  "Operating System :: OS Independent",
+  "Topic :: Software Development :: Libraries :: Python Modules",
+]
+
+[tool.poetry.plugins.pytest11]
+saritasa_s3_tools_plugin = "saritasa_s3_tools.testing.plugin"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+# The AWS SDK for Python
+# https://boto3.amazonaws.com/v1/documentation/api/latest/index.html
+boto3 = "*"
+# Mypy stubs for boto3
+# https://pypi.org/project/boto3-stubs/#how-to-install
+boto3-stubs = {extras=["s3"], version = "*"}
+# AnyIO is an asynchronous networking and concurrency library
+# that works on top of either asyncio or trio.
+# https://anyio.readthedocs.io/en/stable/
+anyio = {version= "<5", optional = true}
+
+[tool.poetry.extras]
+async = ["anyio"]
+all = ["anyio"]
+
+[tool.poetry.group.dev.dependencies]
+# Exports functions to access the IPython debugger, which features tab completion, syntax highlighting, better tracebacks
+# https://github.com/gotcha/ipdb
+ipdb = "^0.13.13"
+# Provides a rich toolkit to help you make the most of using Python interactively
+# https://ipython.readthedocs.io/en/stable/
+ipython = "^8.23.0"
+# A framework for managing and maintaining multi-language pre-commit hooks.
+# https://pre-commit.com/
+pre-commit = "^3.7.0"
+# Collection of invoke commands used by Saritasa
+# Invoke is a Python (2.7 and 3.4+) task execution tool & library,
+# drawing inspiration from various sources to arrive at a powerful & clean feature set.
+# http://www.pyinvoke.org/
+# https://github.com/saritasa-nest/saritasa-python-invocations/
+saritasa_invocations = "^1.1.0"
+
+[tool.poetry.group.linters.dependencies]
+# Mypy is a static type checker for Python.
+# https://mypy.readthedocs.io/en/stable/
+mypy = "^1.9.0"
+
+[tool.poetry.group.test.dependencies]
+# Makes it easy to write small tests, yet scales to support complex functional testing
+# https://github.com/pytest-dev/pytest/
+pytest = "^8.1.1"
+# To prettify pytest output
+# https://github.com/Teemu/pytest-sugar
+pytest-sugar = "^1.0.0"
+# Coverage.py is a tool for measuring code coverage of Python programs.
+# It monitors your program, noting which parts of the code have been executed,
+# then analyzes the source to identify code that could have been executed but was not.
+# https://coverage.readthedocs.io/en/latest/
+coverage = "^7.4.4"
+# HTTPX is a fully featured HTTP client for Python 3, which provides sync and async APIs, and support for both HTTP/1.1 and HTTP/2.
+# https://www.python-httpx.org/
+httpx = {version ="^0.27.0"}
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.ruff]
+line-length = 79
+indent-width = 4
+target-version = "py311"
+
+[tool.ruff.lint]
+extend-select = [
+  # https://docs.astral.sh/ruff/rules/#pycodestyle-e-w
+  "W",
+  "E",
+  # https://docs.astral.sh/ruff/rules/#mccabe-c90
+  "C90",
+  # https://docs.astral.sh/ruff/rules/#isort-i
+  "I",
+  # https://docs.astral.sh/ruff/rules/#pep8-naming-n
+  "N",
+  # https://docs.astral.sh/ruff/rules/#pydocstyle-d
+  "D",
+  # https://docs.astral.sh/ruff/rules/#pyupgrade-up
+  "UP",
+  # https://docs.astral.sh/ruff/rules/#flake8-annotations-ann
+  "ANN",
+  # https://docs.astral.sh/ruff/rules/#flake8-bandit-s
+  "S",
+  # https://docs.astral.sh/ruff/rules/#flake8-bugbear-b
+  "B",
+  # https://docs.astral.sh/ruff/rules/#flake8-builtins-a
+  "A",
+  # https://docs.astral.sh/ruff/rules/#flake8-commas-com
+  "COM",
+  # https://docs.astral.sh/ruff/rules/#flake8-comprehensions-c4
+  "C4",
+  # https://docs.astral.sh/ruff/rules/#flake8-datetimez-dtz
+  "DTZ",
+  # https://docs.astral.sh/ruff/rules/#flake8-debugger-t10
+  "T10",
+  # https://docs.astral.sh/ruff/rules/#flake8-django-dj
+  "DJ",
+  # https://docs.astral.sh/ruff/rules/#flake8-print-t20
+  "T20",
+  # https://docs.astral.sh/ruff/rules/#flake8-pytest-style-pt
+  "PT",
+  # https://docs.astral.sh/ruff/rules/#flake8-simplify-sim
+  "SIM",
+  # https://docs.astral.sh/ruff/rules/#flake8-use-pathlib-pth
+  "PTH",
+  # https://docs.astral.sh/ruff/rules/#flake8-todos-td
+  "TD",
+  # https://docs.astral.sh/ruff/rules/#eradicate-era
+  "ERA",
+  # https://docs.astral.sh/ruff/rules/#ruff-specific-rules-ruf
+  "RUF"
+]
+ignore = [
+  # https://docs.astral.sh/ruff/rules/ANN101
+  "ANN101",
+  # https://docs.astral.sh/ruff/rules/ANN102
+  "ANN102",
+  # https://docs.astral.sh/ruff/rules/ANN401
+  "ANN401",
+  # https://docs.astral.sh/ruff/rules/ANN003
+  "ANN003",
+  # https://docs.astral.sh/ruff/rules/D100
+  "D100",
+  # https://docs.astral.sh/ruff/rules/D104
+  "D104",
+  # https://docs.astral.sh/ruff/rules/D106
+  "D106",
+  # https://docs.astral.sh/ruff/rules/D107
+  "D107",
+]
+[tool.ruff.lint.per-file-ignores]
+"__init__.py" = [
+  # https://docs.astral.sh/ruff/rules/F401
+  "F401",
+]
+"**/tests/*" = [
+  # https://docs.astral.sh/ruff/rules/S101
+  "S101",
+  # https://docs.astral.sh/ruff/rules/S106
+  "S106",
+  # https://docs.astral.sh/ruff/rules/S311
+  "S311",
+]
+"**/test_*" = [
+  # https://docs.astral.sh/ruff/rules/ANN201
+  "ANN201",
+]
+[tool.ruff.lint.isort]
+force-wrap-aliases = true
+split-on-trailing-comma = true
+section-order = [
+    "future",
+    "standard-library",
+    "third-party",
+    "boto3",
+    "first-party",
+    "local-folder",
+]
+[tool.ruff.lint.isort.sections]
+boto3 = [
+  "boto3",
+  "botocore",
+  "mypy_boto3_s3",
+]
+
+[tool.ruff.lint.flake8-pytest-style]
+fixture-parentheses = false
+parametrize-names-type = "list"
+parametrize-values-type = "list"
+parametrize-values-row-type = "list"
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+skip-magic-trailing-comma = false
+line-ending = "auto"
+
+[tool.mypy]
+plugins = []
+# https://mypy.readthedocs.io/en/stable/running_mypy.html#missing-imports
+ignore_missing_imports = true
+strict = false
+warn_no_return = false
+check_untyped_defs = true
+disallow_any_generics = true
+exclude = [
+  "venv",
+  ".venv",
+]
+
+[[tool.mypy.overrides]]
+module = "tests/*"
+disable_error_code = [
+  "attr-defined",
+  "operator",
+]
+
+[tool.pyright]
+ignore = [
+  # Disabled for tests because of dynamic nature of pytest
+  "**/*test_*.py",
+  "invocations/**"
+]
+
+[tool.pytest.ini_options]
+# --capture=no
+#   allow use of ipdb during tests
+# --ff
+#   run last failed tests first
+addopts = [
+    "--capture=no",
+    "--ff",
+]
+# skip all files inside following dirs
+norecursedirs = [
+    "venv",
+    ".venv",
+]
+# Configuration for s3
+s3_endpoint_url = "https://localhost.localstack.cloud:4566"
+s3_region="us-west-1"
+s3_bucket="saritasa-s3-tools-files"
+s3_access_key="root"
+s3_secret_key="rootroot"
+
+[tool.coverage.run]
+omit = []
+
+[tool.coverage.report]
+include = ["saritasa_s3_tools/**"]
+
+# https://docformatter.readthedocs.io/en/latest/configuration.html#
+[tool.docformatter]
+wrap-descriptions=0
+in-place=true
+blank=true
+black=true
