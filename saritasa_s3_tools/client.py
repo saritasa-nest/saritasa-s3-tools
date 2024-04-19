@@ -1,5 +1,6 @@
 import collections.abc
 import dataclasses
+import warnings
 
 import boto3
 import botocore.client
@@ -110,6 +111,19 @@ class S3Client:
             conditions.append({key: value})
         return conditions
 
+    def prepare_meta_data(
+        self,
+        config: configs.S3FileTypeConfig,
+        extra_metadata: dict[str, str] | None = None,
+    ) -> dict[str, str]:
+        """Prepare metadata."""
+        meta_data = {
+            "x-amz-meta-config-name": config.name,
+        }
+        for key, value in (extra_metadata or {}).items():
+            meta_data[f"x-amz-meta-{key}"] = value
+        return meta_data
+
     def generate_params(
         self,
         filename: str,
@@ -120,11 +134,18 @@ class S3Client:
         extra_metadata: dict[str, str] | None = None,
     ) -> S3UploadParams:
         """Generate params for s3 upload."""
-        meta_data = {
-            "x-amz-meta-config-name": config.name,
-        }
-        for key, value in (extra_metadata or {}).items():
-            meta_data[f"x-amz-meta-{key}"] = value
+        meta_data = self.prepare_meta_data(
+            config=config,
+            extra_metadata=extra_metadata,
+        )
+        for key in meta_data:
+            if "_" in key:
+                warnings.warn(
+                    "Use `-` instead of `_` as separator for key. "
+                    f"Example {key.replace('x-amz-meta-', '')} -> "
+                    f"{key.replace('x-amz-meta-', '').replace('_', '-')}.",
+                    stacklevel=2,
+                )
         # https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/s3/client/generate_presigned_post.html
         s3_params = self.boto3_client.generate_presigned_post(
             Bucket=bucket or self.default_bucket,

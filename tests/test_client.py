@@ -1,9 +1,11 @@
 import io
 import pathlib
+import re
 import time
 import xml.etree.ElementTree
 
 import httpx
+import pytest
 
 import saritasa_s3_tools
 
@@ -109,3 +111,22 @@ def test_upload_expiration(s3_client: saritasa_s3_tools.S3Client) -> None:
     assert (
         error == "Invalid according to Policy: Policy expired."
     ), response.content
+
+
+def test_meta_data_key_warning(s3_client: saritasa_s3_tools.S3Client) -> None:
+    """Test warning about meta data keys."""
+    with pytest.warns(
+        UserWarning,
+        match=re.escape(
+            "Use `-` instead of `_` as separator for key. "
+            "Example user_id -> user-id.",
+        ),
+    ):
+        s3_client.generate_params(
+            filename=pathlib.Path(__file__).name,
+            config=saritasa_s3_tools.S3FileTypeConfig.configs["expires"],
+            content_type="application/x-python-code",
+            extra_metadata={
+                "user_id": "1",
+            },
+        )
