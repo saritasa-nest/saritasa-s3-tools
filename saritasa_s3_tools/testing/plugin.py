@@ -32,6 +32,10 @@ def pytest_addoption(parser: pytest.Parser) -> None:
         "s3_region",
         "Region for s3.",
     )
+    parser.addini(
+        "s3_bucket",
+        "Bucket for s3.",
+    )
 
 
 @pytest.fixture
