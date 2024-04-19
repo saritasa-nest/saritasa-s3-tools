@@ -10,10 +10,14 @@ with contextlib.suppress(ImportError):
 with contextlib.suppress(ImportError):
     from . import testing
 
+with contextlib.suppress(ImportError):
+    from . import factory
+
 __all__ = (
     "keys",
     "S3Client",
     "S3FileTypeConfig",
     "AsyncS3Client",
     "testing",
+    "factory",
 )

@@ -46,10 +46,17 @@ boto3-stubs = {extras=["s3"], version = "*"}
 # that works on top of either asyncio or trio.
 # https://anyio.readthedocs.io/en/stable/
 anyio = {version= "<5", optional = true}
+# Fast creating of model instances. May be used in tests
+# https://factoryboy.readthedocs.io/en/stable/
+factory-boy  = {version= "<4", optional = true}
+# Python Imaging Library(Used to generate test images)
+# https://pillow.readthedocs.io/en/stable/
+pillow = {version= "<11", optional = true}
 
 [tool.poetry.extras]
 async = ["anyio"]
-all = ["anyio"]
+factory = ["factory-boy", "pillow"]
+all = ["anyio", "factory-boy", "pillow"]
 
 [tool.poetry.group.dev.dependencies]
 # Exports functions to access the IPython debugger, which features tab completion, syntax highlighting, better tracebacks

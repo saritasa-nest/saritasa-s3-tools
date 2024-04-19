@@ -13,19 +13,19 @@ import mypy_boto3_s3.type_defs
 
 from . import configs
 
+AccessKeyGetter = collections.abc.Callable[
+    [],
+    botocore.credentials.Credentials,
+]
+S3EndpointUrlGetter = collections.abc.Callable[
+    [],
+    str | None,
+]
+
 
 def get_boto3_s3_client(
-    access_key_getter: collections.abc.Callable[
-        [],
-        botocore.credentials.Credentials,
-    ],
-    s3_endpoint_url_getter: (
-        collections.abc.Callable[
-            [],
-            str | None,
-        ]
-        | None
-    ) = None,
+    access_key_getter: AccessKeyGetter,
+    s3_endpoint_url_getter: S3EndpointUrlGetter | None = None,
     region: str = "",
     max_pool_connections: int = 100,
 ) -> mypy_boto3_s3.S3Client:
