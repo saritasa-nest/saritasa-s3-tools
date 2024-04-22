@@ -10,12 +10,6 @@ import saritasa_s3_tools
 
 def pytest_addoption(parser: pytest.Parser) -> None:
     """Set up cmd args."""
-    parser.addoption(
-        "--sqlalchemy-echo",
-        action="store_true",
-        default=False,
-        help="Should sqlalchemy print sql queries",
-    )
     parser.addini(
         "s3_access_key",
         "Access key for s3.",
