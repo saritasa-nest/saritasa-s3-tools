@@ -78,7 +78,7 @@ saritasa_invocations = "^1.1.0"
 [tool.poetry.group.linters.dependencies]
 # Mypy is a static type checker for Python.
 # https://mypy.readthedocs.io/en/stable/
-mypy = "^1.9.0"
+mypy = "^1.10.0"
 
 [tool.poetry.group.test.dependencies]
 # Makes it easy to write small tests, yet scales to support complex functional testing
