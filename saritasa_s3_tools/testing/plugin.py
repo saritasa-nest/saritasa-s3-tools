@@ -32,7 +32,7 @@ def pytest_addoption(parser: pytest.Parser) -> None:
     )
 
 
-@pytest.fixture
+@pytest.fixture(scope="session")
 def access_key_getter(
     request: pytest.FixtureRequest,
 ) -> collections.abc.Callable[
@@ -61,7 +61,7 @@ def access_key_getter(
     )
 
 
-@pytest.fixture
+@pytest.fixture(scope="session")
 def s3_endpoint_url_getter(
     request: pytest.FixtureRequest,
 ) -> (
@@ -77,7 +77,7 @@ def s3_endpoint_url_getter(
     return None  # pragma: no cover
 
 
-@pytest.fixture
+@pytest.fixture(scope="session")
 def s3_region(
     request: pytest.FixtureRequest,
 ) -> str:
@@ -85,7 +85,7 @@ def s3_region(
     return str(request.config.inicfg.get("s3_region", ""))
 
 
-@pytest.fixture
+@pytest.fixture(scope="session")
 def boto3_client(
     access_key_getter: collections.abc.Callable[
         [],
@@ -106,7 +106,7 @@ def boto3_client(
     )
 
 
-@pytest.fixture
+@pytest.fixture(scope="session")
 def s3_bucket(
     request: pytest.FixtureRequest,
 ) -> str:
@@ -118,7 +118,7 @@ def s3_bucket(
     )
 
 
-@pytest.fixture
+@pytest.fixture(scope="session")
 def s3_client(
     boto3_client: mypy_boto3_s3.S3Client,
     s3_bucket: str,
@@ -130,7 +130,7 @@ def s3_client(
     )
 
 
-@pytest.fixture
+@pytest.fixture(scope="session")
 def async_s3_client(
     boto3_client: mypy_boto3_s3.S3Client,
     s3_bucket: str,

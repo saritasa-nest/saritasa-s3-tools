@@ -13,6 +13,8 @@ from . import client, configs
 class S3FileField(factory.LazyAttribute):
     """Generate file and upload to s3."""
 
+    _boto3_client: mypy_boto3_s3.S3Client | None = None
+
     def __init__(
         self,
         s3_config: str,
@@ -20,8 +22,8 @@ class S3FileField(factory.LazyAttribute):
         bucket: str,
         access_key_getter: client.AccessKeyGetter,
         s3_endpoint_url_getter: client.S3EndpointUrlGetter | None = None,
-        filename: str = "example.dat",
-        data: bytes = b"",
+        filename: str = "example.txt",
+        data: bytes = b"Test",
     ) -> None:
         self.access_key_getter = access_key_getter
         self.s3_endpoint_url_getter = s3_endpoint_url_getter
@@ -36,11 +38,13 @@ class S3FileField(factory.LazyAttribute):
         )
 
     def _get_boto3(self) -> mypy_boto3_s3.S3Client:
-        return client.get_boto3_s3_client(
-            region=self.s3_region,
-            s3_endpoint_url_getter=self.s3_endpoint_url_getter,
-            access_key_getter=self.access_key_getter,
-        )
+        if not self._boto3_client:
+            self._boto3_client = client.get_boto3_s3_client(
+                region=self.s3_region,
+                s3_endpoint_url_getter=self.s3_endpoint_url_getter,
+                access_key_getter=self.access_key_getter,
+            )
+        return self._boto3_client
 
     def _get_s3_client(self) -> client.S3Client:
         """Set up s3 client."""
