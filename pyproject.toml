@@ -64,7 +64,7 @@ all = ["anyio", "factory-boy", "pillow"]
 ipdb = "^0.13.13"
 # Provides a rich toolkit to help you make the most of using Python interactively
 # https://ipython.readthedocs.io/en/stable/
-ipython = "^8.24.0"
+ipython = "^8.25.0"
 # A framework for managing and maintaining multi-language pre-commit hooks.
 # https://pre-commit.com/
 pre-commit = "^3.7.1"
