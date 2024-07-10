@@ -145,22 +145,28 @@ def s3_bucket_cleaner(
     """Get bucket cleaner."""
 
     def _clean(bucket: str) -> None:
-        s3_objects: list[mypy_boto3_s3.type_defs.ObjectIdentifierTypeDef] = [
-            {"Key": s3_object.get("Key", "")}
-            for s3_object in boto3_client.list_objects_v2(Bucket=bucket).get(
-                "Contents",
-                [],
+        while True:
+            s3_objects: list[
+                mypy_boto3_s3.type_defs.ObjectIdentifierTypeDef
+            ] = [
+                {"Key": s3_object.get("Key", "")}
+                for s3_object in boto3_client.list_objects_v2(
+                    Bucket=bucket,
+                    MaxKeys=1000,
+                ).get(
+                    "Contents",
+                    [],
+                )
+                if s3_object.get("Key", "")
+            ]
+            if not s3_objects:
+                return
+            boto3_client.delete_objects(
+                Bucket=bucket,
+                Delete={
+                    "Objects": s3_objects,
+                },
             )
-            if s3_object.get("Key", "")
-        ]
-        if not s3_objects:
-            return
-        boto3_client.delete_objects(
-            Bucket=bucket,
-            Delete={
-                "Objects": s3_objects,
-            },
-        )
 
     return _clean
 
