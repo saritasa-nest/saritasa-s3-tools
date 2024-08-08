@@ -1,3 +1,4 @@
+import collections.abc
 import io
 import random
 
@@ -9,6 +10,11 @@ import mypy_boto3_s3
 
 from . import client, configs
 
+BucketGetter = collections.abc.Callable[
+    [],
+    str,
+]
+
 
 class S3FileField(factory.LazyAttribute):
     """Generate file and upload to s3."""
@@ -18,8 +24,8 @@ class S3FileField(factory.LazyAttribute):
     def __init__(
         self,
         s3_config: str,
-        s3_region: str,
-        bucket: str,
+        s3_region: client.RegionGetter | str,
+        bucket: BucketGetter | str,
         access_key_getter: client.AccessKeyGetter,
         s3_endpoint_url_getter: client.S3EndpointUrlGetter | None = None,
         filename: str = "example.txt",
@@ -48,9 +54,13 @@ class S3FileField(factory.LazyAttribute):
 
     def _get_s3_client(self) -> client.S3Client:
         """Set up s3 client."""
+        if isinstance(self.bucket, str):
+            bucket = self.bucket
+        if callable(self.bucket):
+            bucket = self.bucket()
         return client.S3Client(
             boto3_client=self._get_boto3(),
-            default_bucket=self.bucket,
+            default_bucket=bucket,
         )
 
     def _generate_file_data(self) -> bytes:

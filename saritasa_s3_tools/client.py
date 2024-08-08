@@ -21,18 +21,24 @@ S3EndpointUrlGetter = collections.abc.Callable[
     [],
     str | None,
 ]
+RegionGetter = collections.abc.Callable[
+    [],
+    str,
+]
 
 
 def get_boto3_s3_client(
     access_key_getter: AccessKeyGetter,
     s3_endpoint_url_getter: S3EndpointUrlGetter | None = None,
-    region: str = "",
+    region: RegionGetter | str = "",
     max_pool_connections: int = 100,
 ) -> mypy_boto3_s3.S3Client:
     """Prepare boto3's s3 client for usage."""
     endpoint_url = None
     if s3_endpoint_url_getter:
         endpoint_url = s3_endpoint_url_getter()
+    if callable(region):
+        region = region()
     credentials = access_key_getter()
     return boto3.client(
         service_name="s3",  # type: ignore
