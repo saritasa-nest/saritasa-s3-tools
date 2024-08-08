@@ -32,6 +32,7 @@ def get_boto3_s3_client(
     s3_endpoint_url_getter: S3EndpointUrlGetter | None = None,
     region: RegionGetter | str = "",
     max_pool_connections: int = 100,
+    signature_version: str | None = None,
 ) -> mypy_boto3_s3.S3Client:
     """Prepare boto3's s3 client for usage."""
     endpoint_url = None
@@ -50,6 +51,7 @@ def get_boto3_s3_client(
         config=botocore.config.Config(
             # Increase for work in async env
             max_pool_connections=max_pool_connections,
+            signature_version=signature_version,
         ),
     )
 
