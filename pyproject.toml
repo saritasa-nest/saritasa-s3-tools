@@ -52,11 +52,15 @@ factory-boy  = {version= "<4", optional = true}
 # Python Imaging Library(Used to generate test images)
 # https://pillow.readthedocs.io/en/stable/
 pillow = {version= "<11", optional = true}
+# HTTPX is a fully featured HTTP client for Python 3, which provides sync and async APIs, and support for both HTTP/1.1 and HTTP/2.
+# https://www.python-httpx.org/
+httpx = {version ="^0.27.0", optional = true}
 
 [tool.poetry.extras]
 async = ["anyio"]
 factory = ["factory-boy", "pillow"]
-all = ["anyio", "factory-boy", "pillow"]
+testing = ["httpx"]
+all = ["anyio", "factory-boy", "pillow", "httpx"]
 
 [tool.poetry.group.dev.dependencies]
 # Exports functions to access the IPython debugger, which features tab completion, syntax highlighting, better tracebacks
@@ -92,9 +96,6 @@ pytest-sugar = "^1.0.0"
 # then analyzes the source to identify code that could have been executed but was not.
 # https://coverage.readthedocs.io/en/latest/
 coverage = "^7.6.1"
-# HTTPX is a fully featured HTTP client for Python 3, which provides sync and async APIs, and support for both HTTP/1.1 and HTTP/2.
-# https://www.python-httpx.org/
-httpx = {version ="^0.27.0"}
 
 [build-system]
 requires = ["poetry-core"]
