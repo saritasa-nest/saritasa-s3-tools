@@ -26,7 +26,7 @@ services:
       - "/var/run/docker.sock:/var/run/docker.sock"
 
   localstack-services-s3:
-    image: localstack/localstack:3.3.0
+    image: localstack/localstack:3.7.0
     depends_on:
       - localstack-services
     environment:
@@ -40,3 +40,20 @@ services:
     volumes:
       - "${LOCALSTACK_VOLUME_DIR:-./localstack_volume}:/var/lib/localstack"
       - "/var/run/docker.sock:/var/run/docker.sock"
+
+  postgres:
+    image: postgres:16
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: [
+        "CMD-SHELL",
+        "pg_isready -h postgres -t 5 -U ${COMPOSE_PROJECT_NAME} || false"
+      ]
+      interval: 1s
+      timeout: 5s
+      retries: 10
+    environment:
+      - POSTGRES_DB=${COMPOSE_PROJECT_NAME}
+      - POSTGRES_USER=${COMPOSE_PROJECT_NAME}
+      - POSTGRES_PASSWORD=postgres

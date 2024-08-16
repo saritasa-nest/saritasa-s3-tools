@@ -27,32 +27,73 @@ RegionGetter = collections.abc.Callable[
 ]
 
 
-def get_boto3_s3_client(
+def get_boto3_session(
     access_key_getter: AccessKeyGetter,
-    s3_endpoint_url_getter: S3EndpointUrlGetter | None = None,
     region: RegionGetter | str = "",
-    max_pool_connections: int = 100,
-    signature_version: str | None = None,
-) -> mypy_boto3_s3.S3Client:
-    """Prepare boto3's s3 client for usage."""
-    endpoint_url = None
-    if s3_endpoint_url_getter:
-        endpoint_url = s3_endpoint_url_getter()
+) -> boto3.session.Session:
+    """Get AWS session."""
     if callable(region):
         region = region()
     credentials = access_key_getter()
-    return boto3.client(
-        service_name="s3",  # type: ignore
-        region_name=region,
+    return boto3.session.Session(
         aws_session_token=credentials.token or None,
         aws_access_key_id=credentials.access_key or None,
         aws_secret_access_key=credentials.secret_key or None,
+        region_name=region,
+    )
+
+
+def get_boto3_s3_client(
+    session: boto3.session.Session | None = None,
+    access_key_getter: AccessKeyGetter | None = None,
+    region: RegionGetter | str = "",
+    s3_endpoint_url_getter: S3EndpointUrlGetter | None = None,
+    config: botocore.config.Config | None = None,
+) -> mypy_boto3_s3.S3Client:
+    """Prepare boto3's s3 client for usage."""
+    if access_key_getter:
+        session = get_boto3_session(
+            access_key_getter=access_key_getter,
+            region=region,
+        )
+    if not session:
+        raise ValueError("Please pass either session or access_key_getter")
+
+    endpoint_url = None
+    if s3_endpoint_url_getter:
+        endpoint_url = s3_endpoint_url_getter()
+
+    return session.client(
+        service_name="s3",  # type: ignore
         endpoint_url=endpoint_url,
-        config=botocore.config.Config(
-            # Increase for work in async env
-            max_pool_connections=max_pool_connections,
-            signature_version=signature_version,
-        ),
+        config=config,
+    )
+
+
+def get_boto3_s3_resource(
+    session: boto3.session.Session | None = None,
+    access_key_getter: AccessKeyGetter | None = None,
+    region: RegionGetter | str = "",
+    s3_endpoint_url_getter: S3EndpointUrlGetter | None = None,
+    config: botocore.config.Config | None = None,
+) -> mypy_boto3_s3.S3ServiceResource:
+    """Prepare boto3's s3 resource for usage."""
+    if access_key_getter:
+        session = get_boto3_session(
+            access_key_getter=access_key_getter,
+            region=region,
+        )
+    if not session:
+        raise ValueError("Please pass either session or access_key_getter")
+
+    endpoint_url = None
+    if s3_endpoint_url_getter:
+        endpoint_url = s3_endpoint_url_getter()
+
+    return session.resource(
+        service_name="s3",  # type: ignore
+        endpoint_url=endpoint_url,
+        config=config,
     )
 
 

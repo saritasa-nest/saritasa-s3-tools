@@ -54,13 +54,54 @@ factory-boy  = {version= "<4", optional = true}
 pillow = {version= "<11", optional = true}
 # HTTPX is a fully featured HTTP client for Python 3, which provides sync and async APIs, and support for both HTTP/1.1 and HTTP/2.
 # https://www.python-httpx.org/
-httpx = {version ="^0.27.2", optional = true}
+httpx = {version ="<1", optional = true}
+# Django framework
+# https://www.djangoproject.com/
+django = {version ="<6", optional = true}
+# Storage to AWS S3
+# https://django-storages.readthedocs.io/en/latest/
+django-storages = {extras = ["boto3"], version = "<2", optional = true}
+# Django REST Framework
+# https://www.django-rest-framework.org/
+djangorestframework = {version ="<4", optional = true}
+# Python humanize functions
+# https://python-humanize.readthedocs.io/en/latest/
+humanize = {version = "<5", optional = true}
+# OpenApi auto specs generator
+# https://drf-spectacular.readthedocs.io/en/latest/
+drf-spectacular = {version = "<1", optional = true}
 
 [tool.poetry.extras]
-async = ["anyio"]
-factory = ["factory-boy", "pillow"]
-testing = ["httpx"]
-all = ["anyio", "factory-boy", "pillow", "httpx"]
+async = [
+  "anyio"
+]
+factory = [
+  "factory-boy",
+  "pillow",
+]
+testing = [
+  "httpx",
+]
+django = [
+  "django",
+  "django-storages",
+  "djangorestframework",
+  "humanize",
+]
+django-openapi = [
+  "drf-spectacular",
+]
+all = [
+  "anyio",
+  "factory-boy",
+  "pillow",
+  "httpx",
+  "django",
+  "django-storages",
+  "djangorestframework",
+  "humanize",
+  "drf-spectacular",
+]
 
 [tool.poetry.group.dev.dependencies]
 # Exports functions to access the IPython debugger, which features tab completion, syntax highlighting, better tracebacks
@@ -91,11 +132,29 @@ pytest = "^8.3.2"
 # To prettify pytest output
 # https://github.com/Teemu/pytest-sugar
 pytest-sugar = "^1.0.0"
+# Allows you to use fixtures in @pytest.mark.parametrize.
+# https://pypi.org/project/pytest-lazy-fixtures/
+pytest-lazy-fixtures = "^1.1.1"
 # Coverage.py is a tool for measuring code coverage of Python programs.
 # It monitors your program, noting which parts of the code have been executed,
 # then analyzes the source to identify code that could have been executed but was not.
 # https://coverage.readthedocs.io/en/latest/
 coverage = "^7.6.1"
+# Django related stuff
+# Provides useful tools for testing Django apps
+# Docs https://pytest-django.readthedocs.io/en/latest/
+pytest-django = "^4.8.0"
+# Provide management command to check if primary database is ready to accept
+# connections
+# https://github.com/painless-software/django-probes
+django-probes = "^1.7.0"
+# Different useful Django utils
+# https://django-extensions.readthedocs.io/en/latest/
+django-extensions = "^3.2.3"
+# Psycopg 3 is a modern implementation of a PostgreSQL adapter for Python.
+# https://psycopg.org/
+# Needed for sync support
+psycopg = {extras = ["binary"], version = "^3.2.1" }
 
 [build-system]
 requires = ["poetry-core"]
@@ -260,6 +319,8 @@ norecursedirs = [
     "venv",
     ".venv",
 ]
+# set Django settings
+DJANGO_SETTINGS_MODULE = "example.settings"
 # Configuration for s3
 s3_endpoint_url = "https://localhost.localstack.cloud:4566"
 s3_region="us-west-1"

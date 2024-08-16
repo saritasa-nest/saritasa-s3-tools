@@ -1,6 +1,6 @@
 import contextlib
 
-from . import keys
+from . import constants, keys
 from .client import S3Client
 from .configs import S3FileTypeConfig
 
@@ -15,6 +15,7 @@ with contextlib.suppress(ImportError):
 
 __all__ = (
     "keys",
+    "constants",
     "S3Client",
     "S3FileTypeConfig",
     "AsyncS3Client",

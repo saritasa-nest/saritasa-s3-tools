@@ -14,6 +14,7 @@ ns = invoke.Collection(  # type: ignore
     saritasa_invocations.poetry,
     saritasa_invocations.mypy,
     saritasa_invocations.pytest,
+    saritasa_invocations.django,
 )
 
 # Configurations for run command
@@ -29,7 +30,12 @@ ns.configure(
                 main_containers=(
                     "localstack-services",
                     "localstack-services-s3",
+                    "postgres",
                 ),
+            ),
+            django=saritasa_invocations.DjangoSettings(
+                settings_path="example.settings",
+                manage_file_path="example/manage.py",
             ),
         ),
     },

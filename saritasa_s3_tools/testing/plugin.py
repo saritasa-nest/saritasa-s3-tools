@@ -3,6 +3,8 @@ import contextlib
 
 import pytest
 
+import boto3
+import botocore.config
 import botocore.credentials
 import botocore.exceptions
 import mypy_boto3_s3
@@ -90,24 +92,50 @@ def s3_region(
 
 
 @pytest.fixture(scope="session")
-def boto3_client(
+def aws_session(
     access_key_getter: collections.abc.Callable[
         [],
         botocore.credentials.Credentials,
     ],
+    s3_region: str,
+) -> boto3.session.Session:
+    """Get aws session."""
+    return saritasa_s3_tools.client.get_boto3_session(
+        access_key_getter=access_key_getter,
+        region=s3_region,
+    )
+
+
+@pytest.fixture(scope="session")
+def aws_config() -> botocore.config.Config | None:
+    """Get aws config."""
+    return None
+
+
+@pytest.fixture(scope="session")
+def boto3_resource(
+    aws_session: boto3.session.Session,
+    aws_config: botocore.config.Config,
     s3_endpoint_url_getter: collections.abc.Callable[
         [],
         str | None,
     ]
     | None,
-    s3_region: str,
+) -> mypy_boto3_s3.S3ServiceResource:
+    """Prepare boto3 resource."""
+    return saritasa_s3_tools.client.get_boto3_s3_resource(
+        session=aws_session,
+        s3_endpoint_url_getter=s3_endpoint_url_getter,
+        config=aws_config,
+    )
+
+
+@pytest.fixture(scope="session")
+def boto3_client(
+    boto3_resource: mypy_boto3_s3.S3ServiceResource,
 ) -> mypy_boto3_s3.S3Client:
     """Prepare boto3 client."""
-    return saritasa_s3_tools.client.get_boto3_s3_client(
-        access_key_getter=access_key_getter,
-        s3_endpoint_url_getter=s3_endpoint_url_getter,
-        region=s3_region,
-    )
+    return boto3_resource.meta.client
 
 
 @pytest.fixture(scope="session")
@@ -140,33 +168,12 @@ def s3_bucket_name(
 
 @pytest.fixture(scope="session")
 def s3_bucket_cleaner(
-    boto3_client: mypy_boto3_s3.S3Client,
+    boto3_resource: mypy_boto3_s3.ServiceResource,
 ) -> collections.abc.Callable[[str], None]:
     """Get bucket cleaner."""
 
     def _clean(bucket: str) -> None:
-        while True:
-            s3_objects: list[
-                mypy_boto3_s3.type_defs.ObjectIdentifierTypeDef
-            ] = [
-                {"Key": s3_object.get("Key", "")}
-                for s3_object in boto3_client.list_objects_v2(
-                    Bucket=bucket,
-                    MaxKeys=1000,
-                ).get(
-                    "Contents",
-                    [],
-                )
-                if s3_object.get("Key", "")
-            ]
-            if not s3_objects:
-                return
-            boto3_client.delete_objects(
-                Bucket=bucket,
-                Delete={
-                    "Objects": s3_objects,
-                },
-            )
+        boto3_resource.Bucket(bucket).objects.all().delete()
 
     return _clean
 
@@ -218,13 +225,13 @@ def s3_bucket(
     ],
     s3_bucket_name: str,
 ) -> collections.abc.Generator[
-    mypy_boto3_s3.type_defs.CreateBucketOutputTypeDef,
+    str,
     None,
     None,
 ]:
     """Create s3 bucket."""
-    with s3_bucket_factory(s3_bucket_name) as bucket:
-        yield bucket
+    with s3_bucket_factory(s3_bucket_name) as _:
+        yield s3_bucket_name
 
 
 @pytest.fixture(scope="session")
