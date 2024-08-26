@@ -77,12 +77,12 @@ pre-commit = "^3.8.0"
 # drawing inspiration from various sources to arrive at a powerful & clean feature set.
 # http://www.pyinvoke.org/
 # https://github.com/saritasa-nest/saritasa-python-invocations/
-saritasa_invocations = "^1.2.0"
+saritasa_invocations = "^1.2.1"
 
 [tool.poetry.group.linters.dependencies]
 # Mypy is a static type checker for Python.
 # https://mypy.readthedocs.io/en/stable/
-mypy = "^1.11.1"
+mypy = "^1.11.2"
 
 [tool.poetry.group.test.dependencies]
 # Makes it easy to write small tests, yet scales to support complex functional testing
