@@ -7,7 +7,7 @@ services:
   # Docs: https://docs.localstack.cloud/overview/
   # ###########################################################################
   localstack-services:
-    image: localstack/localstack:3.3.0
+    image: localstack/localstack:3.7.0
     hostname: localhost.localstack.cloud
     ports:
       - "4566:4566"
