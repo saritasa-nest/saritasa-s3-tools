@@ -54,7 +54,7 @@ factory-boy  = {version= "<4", optional = true}
 pillow = {version= "<11", optional = true}
 # HTTPX is a fully featured HTTP client for Python 3, which provides sync and async APIs, and support for both HTTP/1.1 and HTTP/2.
 # https://www.python-httpx.org/
-httpx = {version ="^0.27.0", optional = true}
+httpx = {version ="^0.27.2", optional = true}
 
 [tool.poetry.extras]
 async = ["anyio"]
@@ -68,7 +68,7 @@ all = ["anyio", "factory-boy", "pillow", "httpx"]
 ipdb = "^0.13.13"
 # Provides a rich toolkit to help you make the most of using Python interactively
 # https://ipython.readthedocs.io/en/stable/
-ipython = "^8.26.0"
+ipython = "^8.27.0"
 # A framework for managing and maintaining multi-language pre-commit hooks.
 # https://pre-commit.com/
 pre-commit = "^3.8.0"
