@@ -10,6 +10,15 @@
 
 Extension for boto3 to ease work with s3
 
+## Table of contents
+
+* [Installation](#installation)
+* [Features](#features)
+* [Django](#django)
+* [Optional dependencies](#optional-dependencies)
+* [Direct upload example](#direct-upload-example)
+* [Pytest](#pytest-plugin)
+
 ## Installation
 
 ```bash
@@ -22,14 +31,110 @@ or if you are using [poetry](https://python-poetry.org/)
 poetry add saritasa-s3-tools
 ```
 
-To install all optional dependencies add `[all]`
-
 ## Features
 
-* `S3Client` and `AsyncS3Client` for integrations with s3 buckets
-* `S3FileTypeConfig` for defining configuration parameters for direct upload to s3
-* `S3Key` for generating unique keys for s3 upload
-* `pytest` plugin with fixtures for `boto3`, `S3Client` and `AsyncS3Client`
+* `S3Client` and `AsyncS3Client` for integrations with s3 buckets. This clients
+are extension to boto3 clients with proper typing, support for async and
+method to generate signed urls for file upload.
+* `S3FileTypeConfig` for defining configuration parameters for direct upload to s3.
+[Check out more](saritasa_s3_tools/configs.py#L24)
+* `S3Key` for generating unique keys for s3 upload, used for `S3FileTypeConfig`
+* `S3FileField` and `S3ImageFileField` - [factory-boy](https://github.com/FactoryBoy/factory_boy) fields for generating files and saving it in `s3`
+* `pytest` plugin with fixtures for `boto3`, `S3Client` and `AsyncS3Client` and etc
+* `Django` plugin for setting up models and api
+
+## Django
+
+`saritasa-s3-tools` comes with django plugin which helps with models
+config and api(`Django Rest Framework` and `drf_spectacular`).
+You can try it out in `example` folder.
+
+### Configuration
+
+#### Setup model
+
+First you need to add file/image fields to you model, like below
+
+```python
+import saritasa_s3_tools.django
+
+from django.db import models
+
+class ModelWithFiles(models.Model):
+    """Test model with different files configs."""
+
+    file = saritasa_s3_tools.django.S3FileField(
+        blank=True,
+        null=True,
+        # S3FileTypeConfig is needed so that we could understand where to save
+        # file, who can save file, what files can be save and what are size
+        # constraints
+        s3_config=saritasa_s3_tools.S3FileTypeConfig(
+            name="django-files",
+            key=saritasa_s3_tools.keys.S3KeyWithPrefix("django-files"),
+            allowed=("text/plain",),
+            auth=lambda user: bool(user and user.is_authenticated),
+            content_length_range=(1000, 20000000),
+        ),
+    )
+
+    image = saritasa_s3_tools.django.S3ImageField(
+        blank=True,
+        null=True,
+        s3_config=saritasa_s3_tools.S3FileTypeConfig(
+            name="django-images",
+            key=saritasa_s3_tools.keys.S3KeyWithPrefix("django-images"),
+            allowed=("image/png",),
+            content_length_range=(5000, 20000000),
+        ),
+    )
+```
+
+Then add `S3FieldsConfigMixin` mixin to your serializer, like this
+
+```python
+from rest_framework import serializers
+
+import saritasa_s3_tools.django
+
+from .. import models
+
+
+class ModelWithFilesSerializer(
+    saritasa_s3_tools.django.S3FieldsConfigMixin,
+    serializers.ModelSerializer,
+):
+    """Serializer to show info model with files."""
+
+    class Meta:
+        model = models.ModelWithFiles
+        fields = "__all__"
+
+```
+
+Then just add `S3GetParamsView` view to your project urls like that.
+
+```python
+from django.urls import path
+
+path(
+    "s3/",
+    include("saritasa_s3_tools.django.urls"),
+    name="saritasa-s3-tools",
+),
+```
+
+## Optional dependencies
+
+* `[async]` - Add this to enable async support
+* `[factory]` - Add this to enable factory-boy field `S3FileField` and `S3ImageFileField`
+from `saritasa_s3_tools.factory`
+* `[testing]` - Add this to enable testing helping functions from
+`saritasa_s3_tools.testing.shortcuts`
+* `[django]` - Add this to enable [django support](#django)
+* `[django-openapi]` - Add this to enable [drf-spectacular support](#django)
+
+To install all optional dependencies add `[all]`
 
 ## Direct upload example
 
@@ -69,3 +174,28 @@ parsed_response = xml.etree.ElementTree.fromstring(  # noqa: S314
 file_key = parsed_response[2].text
 file_url = parsed_response[0].text
 ```
+
+## pytest plugin
+
+`saritasa-s3-tools` comes with pytest plugin which can setup boto3 instances
+and create/clean up buckets for testing. Supports `pytest-xdist`.
+
+### Fixtures
+
+* `access_key_getter`, `s3_endpoint_url_getter`, `s3_region` - are used to
+configure boto3 session and clients/resources that are used in tests.
+You can override them or set values in ini file for pytest. Plugin will tell
+what you are missing.
+* `aws_session` - Returns `boto3.Session`
+* `aws_config` - Returns `botocore.config.Config`, override if you need
+customization, None by default.
+* `boto3_resource` - Returns s3 resource or in typing `mypy_boto3_s3.S3ServiceResource`
+* `boto3_client`- Returns s3 client or in typing `mypy_boto3_s3.S3Client`
+* `s3_bucket_name` - Name of bucket for testing, default: `saritasa-s3-tools`
+or `s3_bucket_name` from ini file.
+* `s3_bucket_cleaner` - Returns function which cleans all files from bucket
+* `s3_bucket_factory` - Returns manager which creates bucket, and when it's no
+longer needed deletes it
+* `s3_bucket` - Creates bucket via `s3_bucket_factory` and return it's name
+* `s3_client` - Returns `saritasa_s3_tools.S3Client`
+* `async_s3_client` - Returns `saritasa_s3_tools.AsyncS3Client`
