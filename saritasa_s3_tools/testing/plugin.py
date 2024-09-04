@@ -237,24 +237,22 @@ def s3_bucket(
 @pytest.fixture(scope="session")
 def s3_client(
     boto3_client: mypy_boto3_s3.S3Client,
-    s3_bucket_name: str,
-    s3_bucket: mypy_boto3_s3.type_defs.CreateBucketOutputTypeDef,
+    s3_bucket: str,
 ) -> saritasa_s3_tools.S3Client:
     """Set up s3 client."""
     return saritasa_s3_tools.S3Client(
         boto3_client=boto3_client,
-        default_bucket=s3_bucket_name,
+        default_bucket=s3_bucket,
     )
 
 
 @pytest.fixture(scope="session")
 def async_s3_client(
     boto3_client: mypy_boto3_s3.S3Client,
-    s3_bucket_name: str,
-    s3_bucket: mypy_boto3_s3.type_defs.CreateBucketOutputTypeDef,
-) -> saritasa_s3_tools.S3Client:
+    s3_bucket: str,
+) -> saritasa_s3_tools.AsyncS3Client:
     """Set up async s3 client."""
     return saritasa_s3_tools.AsyncS3Client(
         boto3_client=boto3_client,
-        default_bucket=s3_bucket_name,
+        default_bucket=s3_bucket,
     )
