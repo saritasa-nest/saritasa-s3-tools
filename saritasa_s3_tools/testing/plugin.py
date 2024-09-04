@@ -201,8 +201,8 @@ def s3_bucket_factory(
     ]:
         with contextlib.suppress(botocore.exceptions.ClientError):
             boto3_client.head_bucket(Bucket=bucket)
-            s3_bucket_cleaner(bucket)
-            boto3_client.delete_bucket(Bucket=bucket)
+            s3_bucket_cleaner(bucket)  # pragma: no cover
+            boto3_client.delete_bucket(Bucket=bucket)  # pragma: no cover
         yield boto3_client.create_bucket(
             Bucket=bucket,
             CreateBucketConfiguration={

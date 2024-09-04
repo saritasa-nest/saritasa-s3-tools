@@ -32,7 +32,7 @@ class S3FileFieldMixin:
     ) -> str:
         """Generate filename via config."""
         if not self.s3_config:
-            raise exceptions.ImproperlyConfigured(
+            raise exceptions.ImproperlyConfigured(  # pragma: no cover
                 "Please set s3_config for field",
             )
         filename = self.s3_config.key(filename=filename)

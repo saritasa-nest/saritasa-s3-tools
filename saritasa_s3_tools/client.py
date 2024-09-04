@@ -33,7 +33,7 @@ def get_boto3_session(
 ) -> boto3.session.Session:
     """Get AWS session."""
     if callable(region):
-        region = region()
+        region = region()  # pragma: no cover
     credentials = access_key_getter()
     return boto3.session.Session(
         aws_session_token=credentials.token or None,
@@ -57,7 +57,9 @@ def get_boto3_s3_client(
             region=region,
         )
     if not session:
-        raise ValueError("Please pass either session or access_key_getter")
+        raise ValueError(
+            "Please pass either session or access_key_getter",
+        )  # pragma: no cover
 
     endpoint_url = None
     if s3_endpoint_url_getter:
@@ -79,12 +81,14 @@ def get_boto3_s3_resource(
 ) -> mypy_boto3_s3.S3ServiceResource:
     """Prepare boto3's s3 resource for usage."""
     if access_key_getter:
-        session = get_boto3_session(
+        session = get_boto3_session(  # pragma: no cover
             access_key_getter=access_key_getter,
             region=region,
         )
     if not session:
-        raise ValueError("Please pass either session or access_key_getter")
+        raise ValueError(
+            "Please pass either session or access_key_getter",
+        )  # pragma: no cover
 
     endpoint_url = None
     if s3_endpoint_url_getter:

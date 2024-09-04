@@ -140,9 +140,13 @@ class S3UploadURLField(serializers.URLField):
                     _("File does not exist."),
                 )
         except botocore.exceptions.ParamValidationError as error:
-            raise exceptions.ValidationError(error) from error
+            raise exceptions.ValidationError(
+                error,
+            ) from error  # pragma: no cover
         except django_exceptions.SuspiciousFileOperation as error:
-            raise exceptions.ValidationError(error) from error
+            raise exceptions.ValidationError(
+                error,
+            ) from error  # pragma: no cover
         return file_url
 
     def to_representation(self, value: typing.Any) -> str | None:

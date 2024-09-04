@@ -15,6 +15,8 @@ keywords = [
   "aws",
   "s3",
   "boto3",
+  "django",
+  "drf"
 ]
 license = "MIT"
 readme = "README.md"
@@ -29,6 +31,10 @@ classifiers = [
   "Intended Audience :: Developers",
   "Operating System :: OS Independent",
   "Topic :: Software Development :: Libraries :: Python Modules",
+  "Framework :: Django",
+  "Framework :: Django :: 4.2",
+  "Framework :: Django :: 5.0",
+  "Framework :: Pytest",
 ]
 
 [tool.poetry.plugins.pytest11]
