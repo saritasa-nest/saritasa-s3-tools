@@ -49,9 +49,7 @@ method to generate signed urls for file upload.
 config and api(`Django Rest Framework` and `drf_spectacular`).
 You can try it out in `example` folder.
 
-### Configuration
-
-#### Setup model
+### Setup model
 
 First you need to add file/image fields to you model, like below
 
@@ -90,6 +88,8 @@ class ModelWithFiles(models.Model):
     )
 ```
 
+### Setup serializers
+
 Then add `S3FieldsConfigMixin` mixin to your serializer, like this
 
 ```python
@@ -112,6 +112,8 @@ class ModelWithFilesSerializer(
 
 ```
 
+### Setup view
+
 Then just add `S3GetParamsView` view to your project urls like that.
 
 ```python
@@ -122,6 +124,31 @@ path(
     include("saritasa_s3_tools.django.urls"),
     name="saritasa-s3-tools",
 ),
+```
+
+### Setup pytest
+
+Just add this to core `conftest.py` file
+
+```python
+from django.conf import settings
+from django.core.files.storage import default_storage
+import mypy_boto3_s3
+import pytest
+
+
+@pytest.fixture(scope="session", autouse=True)
+def _adjust_s3_bucket(
+    s3_bucket: str,
+) -> None:
+    """Set bucket to a test one."""
+    settings.AWS_STORAGE_BUCKET_NAME = s3_bucket
+
+
+@pytest.fixture(scope="session")
+def boto3_resource() -> mypy_boto3_s3.S3ServiceResource:
+    """Prepare boto3 resource."""
+    return default_storage.connection
 ```
 
 ## Optional dependencies
