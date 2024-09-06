@@ -1,11 +1,14 @@
 import abc
 import pathlib
+import re
 import unicodedata
 import uuid
 
 
 class S3Key:
     """Base class for s3 keys."""
+
+    uuid_regex = r"[\d|\w]{8}-[\d|\w]{4}-[\d|\w]{4}-[\d|\w]{4}-[\d|\w]{12}"
 
     @abc.abstractmethod
     def __call__(self, filename: str | None) -> str:
@@ -55,9 +58,13 @@ class S3Key:
 
         return "".join((path, ext))
 
+    def validate(self, key: str) -> bool:
+        """Check that input key is matching Key pattern."""
+        return True  # pragma: no cover
 
-class S3KeyWithUUID(S3Key):
-    """Prefixed key generator.
+
+class WithPrefixUUIDFileName(S3Key):
+    """Generate S3 key with prefix folder and uuid filename.
 
     Example:
     -------
@@ -66,7 +73,7 @@ class S3KeyWithUUID(S3Key):
     """
 
     def __init__(self, prefix: str) -> None:
-        self.prefix = prefix
+        self.prefix = prefix.removesuffix("/")
 
     def __call__(self, filename: str | None) -> str:
         """Return prefixed S3 key."""
@@ -74,9 +81,17 @@ class S3KeyWithUUID(S3Key):
             return f"{self.prefix}/{uuid.uuid4()}.incorrect"
         return f"{self.prefix}/{self.get_random_filename(filename)}"
 
+    def validate(self, key: str) -> bool:
+        """Check that input key is matching Key pattern."""
+        return bool(
+            re.compile(pattern=rf"{self.prefix}/{self.uuid_regex}\..+").match(
+                key,
+            ),
+        )
 
-class S3KeyWithPrefix(S3Key):
-    """Class to create S3 key for destination.
+
+class WithPrefixUUIDFolder(S3Key):
+    """Generate S3 key with prefix folder and uuid folder.
 
     Example:
     -------
@@ -85,10 +100,20 @@ class S3KeyWithPrefix(S3Key):
     """
 
     def __init__(self, prefix: str) -> None:
-        self.prefix = prefix
+        self.prefix = prefix.removesuffix("/")
 
     def __call__(self, filename: str | None) -> str:
         """Create key for destination using filename."""
         if not filename:
             return f"{self.prefix}/{uuid.uuid4()}/{uuid.uuid4()}.incorrect"
         return f"{self.prefix}/{uuid.uuid4()}/{self.clean_filename(filename)}"
+
+    def validate(self, key: str) -> bool:
+        """Check that input key is matching Key pattern."""
+        return bool(
+            re.compile(
+                pattern=rf"{self.prefix}/{self.uuid_regex}/.+\..+",
+            ).match(
+                key,
+            ),
+        )

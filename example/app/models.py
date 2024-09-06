@@ -16,7 +16,9 @@ class ModelWithFiles(models.Model):
         null=True,
         s3_config=saritasa_s3_tools.S3FileTypeConfig(  # pyright: ignore
             name="django-files",
-            key=saritasa_s3_tools.keys.S3KeyWithPrefix("django-files"),
+            key=saritasa_s3_tools.keys.WithPrefixUUIDFolder(
+                "django-files",
+            ),
             allowed=("text/plain",),
             auth=lambda user: bool(user and user.is_authenticated),
             content_length_range=(1000, 20000000),
@@ -28,7 +30,7 @@ class ModelWithFiles(models.Model):
         null=True,
         s3_config=saritasa_s3_tools.S3FileTypeConfig(  # pyright: ignore
             name="django-all-file-types",
-            key=saritasa_s3_tools.keys.S3KeyWithPrefix(
+            key=saritasa_s3_tools.keys.WithPrefixUUIDFolder(
                 "django-all-file-types",
             ),
             content_length_range=(5000, 20000000),
@@ -40,7 +42,7 @@ class ModelWithFiles(models.Model):
         null=True,
         s3_config=saritasa_s3_tools.S3FileTypeConfig(  # pyright: ignore
             name="django-all-file-sizes",
-            key=saritasa_s3_tools.keys.S3KeyWithPrefix(
+            key=saritasa_s3_tools.keys.WithPrefixUUIDFolder(
                 "django-all-file-sizes",
             ),
         ),
@@ -51,7 +53,9 @@ class ModelWithFiles(models.Model):
         null=True,
         s3_config=saritasa_s3_tools.S3FileTypeConfig(  # pyright: ignore
             name="django-anon-files",
-            key=saritasa_s3_tools.keys.S3KeyWithPrefix("django-anon-files"),
+            key=saritasa_s3_tools.keys.WithPrefixUUIDFolder(
+                "django-anon-files",
+            ),
         ),
     )
 
@@ -60,7 +64,9 @@ class ModelWithFiles(models.Model):
         null=True,
         s3_config=saritasa_s3_tools.S3FileTypeConfig(  # pyright: ignore
             name="django-images",
-            key=saritasa_s3_tools.keys.S3KeyWithPrefix("django-images"),
+            key=saritasa_s3_tools.keys.WithPrefixUUIDFolder(
+                "django-images",
+            ),
             allowed=("image/png",),
             content_length_range=(5000, 20000000),
         ),

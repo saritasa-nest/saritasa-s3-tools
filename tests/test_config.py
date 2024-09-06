@@ -13,5 +13,5 @@ def test_config_duplicate() -> None:
     ):
         saritasa_s3_tools.S3FileTypeConfig(
             name="files",
-            key=saritasa_s3_tools.keys.S3KeyWithPrefix("files"),
+            key=saritasa_s3_tools.keys.WithPrefixUUIDFolder("files"),
         )

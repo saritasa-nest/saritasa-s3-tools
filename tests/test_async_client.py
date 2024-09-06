@@ -81,7 +81,7 @@ async def test_copy(
             config=saritasa_s3_tools.S3FileTypeConfig.configs["files"],
             file_obj=upload_file,
         )
-    copy_key = saritasa_s3_tools.keys.S3KeyWithPrefix("copy")(None)
+    copy_key = saritasa_s3_tools.keys.WithPrefixUUIDFolder("copy")(None)
     await async_s3_client.async_copy_object(
         key=copy_key,
         source_key=upload_key,

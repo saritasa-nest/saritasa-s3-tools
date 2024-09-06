@@ -4,13 +4,13 @@ import saritasa_s3_tools
 
 saritasa_s3_tools.S3FileTypeConfig(
     name="files",
-    key=saritasa_s3_tools.keys.S3KeyWithPrefix("files"),
+    key=saritasa_s3_tools.keys.WithPrefixUUIDFolder("files"),
     content_length_range=(1, 20000000),
 )
 
 saritasa_s3_tools.S3FileTypeConfig(
     name="expires",
-    key=saritasa_s3_tools.keys.S3KeyWithUUID("expires"),
+    key=saritasa_s3_tools.keys.WithPrefixUUIDFileName("expires"),
     expires_in=1,
 )
 
