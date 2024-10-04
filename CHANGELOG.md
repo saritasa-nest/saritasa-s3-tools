@@ -4,6 +4,8 @@ We follow [Semantic Versions](https://semver.org/).
 
 ## Unreleased
 
+- Fix validators setup in `S3FileFieldMixin`
+
 ## 0.2.0
 
 - Refactor and improve validation on keys in django module

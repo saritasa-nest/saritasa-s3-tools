@@ -52,6 +52,14 @@ repos:
         types: [ file ]
         stages: [ push ]
 
+      - id: check_new_migrations
+        name: check for new migrations
+        entry: inv django.check-new-migrations
+        language: system
+        pass_filenames: false
+        types: [ file ]
+        stages: [ push ]
+
       - id: pytest
         name: Run pytest
         entry: inv pytest.run

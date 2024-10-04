@@ -1,8 +1,11 @@
+import collections.abc
+
 from django.core import exceptions
 from django.core.files import utils
 from django.core.files.storage import default_storage
 from django.db import models
 from django.db.models.fields import files
+from django.utils.functional import cached_property
 from django.utils.translation import gettext_lazy as _
 
 import botocore.exceptions
@@ -26,19 +29,24 @@ class S3FileFieldMixin:
         **kwargs,
     ) -> None:
         self.s3_config = s3_config
-        validators = [
-            self._validate_file_existence,
-        ]
-        if validate_key_pattern:
-            validators.append(self._validate_key)
-        kwargs["validators"] = (
-            *validators,
-            *kwargs.get("validators", ()),
-        )
+        self.validate_key_pattern = validate_key_pattern
         super().__init__(
             verbose_name=verbose_name,  # type: ignore
             **kwargs,
         )
+
+    @cached_property
+    def validators(
+        self,
+    ) -> collections.abc.Sequence[
+        collections.abc.Callable[[files.FieldFile | str], None],
+    ]:
+        """Get validators."""
+        validators = super().validators  # type: ignore
+        validators.append(self._validate_file_existence)
+        if self.validate_key_pattern:
+            validators.append(self._validate_key)
+        return validators
 
     def generate_filename(
         self,
