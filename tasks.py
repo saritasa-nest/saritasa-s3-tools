@@ -15,6 +15,7 @@ ns = invoke.Collection(  # type: ignore
     saritasa_invocations.mypy,
     saritasa_invocations.pytest,
     saritasa_invocations.django,
+    saritasa_invocations.open_api,
 )
 
 # Configurations for run command

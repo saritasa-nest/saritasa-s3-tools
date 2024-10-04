@@ -1,14 +1,9 @@
 import typing
 import urllib.parse
 
-from django.conf import settings
-from django.core import exceptions as django_exceptions
 from django.core import validators
 from django.core.files.storage import default_storage
-from django.utils.translation import gettext_lazy as _
-from rest_framework import exceptions, fields, serializers
-
-import botocore.exceptions
+from rest_framework import fields, serializers
 
 from .. import configs
 
@@ -69,11 +64,10 @@ class S3FileTypeConfigField(serializers.ChoiceField):
             self.fail("invalid_choice", input=data)
 
 
-class S3UploadURLField(serializers.URLField):
-    """URL serializer field for S3 `files or keys or URLs or objects`.
+class S3UploadURLField(serializers.CharField):
+    """Char serializer field for S3 `files or keys or URLs or objects`.
 
-    Convert url to a valid s3 key for bucket. On validation check that
-    key is present in bucket.
+    Convert url/path to a valid s3 key for bucket.
 
     Example:
     -------
@@ -86,18 +80,8 @@ class S3UploadURLField(serializers.URLField):
     """
 
     def __init__(self, **kwargs) -> None:
-        """Make custom initialization.
-
-        Add URLValidator to self, but don't add it to self.validators, because
-        now validation is called after `to_internal_value`. So it provides
-        validation before `to_internal_value`.
-
-        """
-        super(serializers.URLField, self).__init__(**kwargs)
-        self.url_validator = validators.URLValidator(
-            message=self.error_messages["invalid"],
-        )
-
+        """Make custom initialization."""
+        super().__init__(**kwargs)
         # Append this validator to enable invalid code for spec
         validator_for_spec = validators.MinLengthValidator(
             0,
@@ -113,40 +97,23 @@ class S3UploadURLField(serializers.URLField):
 
         """
         if not isinstance(data, str):
-            self.fail("invalid")
-        self.url_validator(value=data)
-
+            self.fail("invalid")  # pragma: no cover
         # Crop server domain and port and get relative path to avatar
         file_url = urllib.parse.urlparse(url=data).path
 
         # Crop S3 bucket name
         file_url = file_url.split(
-            f"{settings.AWS_STORAGE_BUCKET_NAME}/",
+            f"{default_storage.bucket_name}/",  # type: ignore
         )[-1].lstrip("/")
 
         # Normalize url
         file_url = urllib.parse.unquote_plus(file_url)
 
         # Remove aws-location prefix to keep only file name as key
-        aws_location = getattr(settings, "AWS_LOCATION", "")
+        aws_location = default_storage.location  # type: ignore
         if aws_location and file_url.startswith(aws_location):
             file_url = file_url.split(f"{aws_location}/")[-1]
 
-        # If url comes not from s3, then botocore on url validation will
-        # raise ParamValidationError
-        try:
-            if not default_storage.exists(file_url):
-                raise exceptions.ValidationError(
-                    _("File does not exist."),
-                )
-        except botocore.exceptions.ParamValidationError as error:
-            raise exceptions.ValidationError(
-                error,
-            ) from error  # pragma: no cover
-        except django_exceptions.SuspiciousFileOperation as error:
-            raise exceptions.ValidationError(
-                error,
-            ) from error  # pragma: no cover
         return file_url
 
     def to_representation(self, value: typing.Any) -> str | None:

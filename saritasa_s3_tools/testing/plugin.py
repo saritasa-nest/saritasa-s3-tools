@@ -1,5 +1,6 @@
 import collections.abc
 import contextlib
+import typing
 
 import pytest
 
@@ -256,3 +257,27 @@ def async_s3_client(
         boto3_client=boto3_client,
         default_bucket=s3_bucket,
     )
+
+
+@pytest.fixture
+def django_storage_changer() -> (
+    collections.abc.Iterator[
+        collections.abc.Callable[
+            [str, typing.Any],
+            None,
+        ]
+    ]
+):
+    """Temporary change default storage settings."""
+    from django.core.files.storage import default_storage
+
+    old_settings: dict[str, typing.Any] = {}
+
+    def _changer(key: str, value: typing.Any) -> None:
+        if key not in old_settings and hasattr(default_storage, key):
+            old_settings[key] = getattr(default_storage, key)
+        setattr(default_storage, key, value)
+
+    yield _changer
+    for key, value in old_settings.items():
+        setattr(default_storage, key, value)

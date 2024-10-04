@@ -56,7 +56,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = "tests.wsgi.application"
+WSGI_APPLICATION = "example.wsgi.application"
 
 # Database
 # https://docs.djangoproject.com/en/dev/ref/settings/#databases

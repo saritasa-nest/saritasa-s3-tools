@@ -72,7 +72,7 @@ class S3GetParamsView(viewsets.GenericViewSet):
         return client.S3Client(
             boto3_client=self.get_boto3_client(),
             default_bucket=(
-                default_storage.get_default_settings()["bucket_name"]  # type: ignore
+                default_storage.bucket_name  # type: ignore
             ),
         )
 

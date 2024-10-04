@@ -69,7 +69,7 @@ class ModelWithFiles(models.Model):
         # constraints
         s3_config=saritasa_s3_tools.S3FileTypeConfig(
             name="django-files",
-            key=saritasa_s3_tools.keys.S3KeyWithPrefix("django-files"),
+            key=saritasa_s3_tools.keys.WithPrefixUUIDFolder("django-files"),
             allowed=("text/plain",),
             auth=lambda user: bool(user and user.is_authenticated),
             content_length_range=(1000, 20000000),
@@ -81,7 +81,7 @@ class ModelWithFiles(models.Model):
         null=True,
         s3_config=saritasa_s3_tools.S3FileTypeConfig(
             name="django-images",
-            key=saritasa_s3_tools.keys.S3KeyWithPrefix("django-images"),
+            key=saritasa_s3_tools.keys.WithPrefixUUIDFolder("django-images"),
             allowed=("image/png",),
             content_length_range=(5000, 20000000),
         ),
@@ -131,7 +131,6 @@ path(
 Just add this to core `conftest.py` file
 
 ```python
-from django.conf import settings
 from django.core.files.storage import default_storage
 import mypy_boto3_s3
 import pytest
@@ -142,7 +141,7 @@ def _adjust_s3_bucket(
     s3_bucket: str,
 ) -> None:
     """Set bucket to a test one."""
-    settings.AWS_STORAGE_BUCKET_NAME = s3_bucket
+    default_storage.bucket_name = s3_bucket
 
 
 @pytest.fixture(scope="session")

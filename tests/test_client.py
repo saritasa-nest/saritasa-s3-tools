@@ -67,7 +67,7 @@ def test_copy(s3_client: saritasa_s3_tools.S3Client) -> None:
             config=saritasa_s3_tools.S3FileTypeConfig.configs["files"],
             file_obj=upload_file,
         )
-    copy_key = saritasa_s3_tools.keys.S3KeyWithUUID("copy")(None)
+    copy_key = saritasa_s3_tools.keys.WithPrefixUUIDFileName("copy")(None)
     s3_client.copy_object(
         key=copy_key,
         source_key=upload_key,

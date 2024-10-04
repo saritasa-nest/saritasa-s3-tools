@@ -1,6 +1,6 @@
 import pytest
 import pytest_django
-from django.conf import settings
+from django.core.files.storage import default_storage
 from django.urls import reverse_lazy
 from rest_framework import test
 
@@ -22,7 +22,7 @@ def _adjust_s3_bucket(
     s3_bucket: str,
 ) -> None:
     """Set bucket to a test one."""
-    settings.AWS_STORAGE_BUCKET_NAME = s3_bucket
+    default_storage.bucket_name = s3_bucket  # type: ignore
 
 
 @pytest.fixture
