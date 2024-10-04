@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "saritasa-s3-tools"
-version = "0.2.0"
+version = "0.2.1"
 description = "Tools For S3 Used By Saritasa"
 authors = [
   "Saritasa <pypi@saritasa.com>",

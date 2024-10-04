@@ -4,6 +4,8 @@ We follow [Semantic Versions](https://semver.org/).
 
 ## Unreleased
 
+## 0.2.1
+
 - Fix validators setup in `S3FileFieldMixin`
 
 ## 0.2.0
