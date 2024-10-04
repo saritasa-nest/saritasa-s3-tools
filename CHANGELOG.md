@@ -4,6 +4,8 @@ We follow [Semantic Versions](https://semver.org/).
 
 ## Unreleased
 
+## 0.2.0
+
 - Refactor and improve validation on keys in django module
 - Rename `S3KeyWithUUID` to `WithPrefixUUIDFileName`
 - Rename `S3KeyWithPrefix` to `WithPrefixUUIDFolder`
