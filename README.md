@@ -4,6 +4,7 @@
 ![PyPI](https://img.shields.io/pypi/v/saritasa-s3-tools)
 ![PyPI - Status](https://img.shields.io/pypi/status/saritasa-s3-tools)
 ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/saritasa-s3-tools)
+![PyPI - Django Version](https://img.shields.io/pypi/frameworkversions/django/saritasa-s3-tools)
 ![PyPI - License](https://img.shields.io/pypi/l/saritasa-s3-tools)
 ![PyPI - Downloads](https://img.shields.io/pypi/dm/saritasa-s3-tools)
 [![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
