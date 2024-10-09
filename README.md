@@ -151,6 +151,14 @@ def boto3_resource() -> mypy_boto3_s3.S3ServiceResource:
     return default_storage.connection
 ```
 
+### Note about signature version
+
+By default we assume `s3v4` version for signature. We recommend that you would
+set `AWS_S3_SIGNATURE_VERSION` to `s3v4`. If you need other versions, set it in
+`AWS_S3_SIGNATURE_VERSION` and update `SARITASA_S3_TOOLS_UPLOAD_PARAMS`
+(defaults are [here](saritasa_s3_tools/constants.py)) setting
+to reflect expected fields that would return.
+
 ## Optional dependencies
 
 * `[async]` - Add this to enable async support
