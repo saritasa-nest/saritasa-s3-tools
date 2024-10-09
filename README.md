@@ -1,7 +1,7 @@
 # saritasa-s3-tools
 
 ![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/saritasa-nest/saritasa-s3-tools/checks.yaml)
-![PyPI](https://img.shields.io/pypi/v/saritasa-s3-tools)
+[![PyPI](https://img.shields.io/pypi/v/saritasa-s3-tools)](https://pypi.org/project/saritasa-s3-tools/)
 ![PyPI - Status](https://img.shields.io/pypi/status/saritasa-s3-tools)
 ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/saritasa-s3-tools)
 ![PyPI - Django Version](https://img.shields.io/pypi/frameworkversions/django/saritasa-s3-tools)
