@@ -57,7 +57,7 @@ anyio = {version= "<5", optional = true}
 factory-boy  = {version= "<4", optional = true}
 # Python Imaging Library(Used to generate test images)
 # https://pillow.readthedocs.io/en/stable/
-pillow = {version= "<11", optional = true}
+pillow = {version= "<12", optional = true}
 # HTTPX is a fully featured HTTP client for Python 3, which provides sync and async APIs, and support for both HTTP/1.1 and HTTP/2.
 # https://www.python-httpx.org/
 httpx = {version ="<1", optional = true}
@@ -118,7 +118,7 @@ ipdb = "^0.13.13"
 ipython = "^8.27.0"
 # A framework for managing and maintaining multi-language pre-commit hooks.
 # https://pre-commit.com/
-pre-commit = "^3.8.0"
+pre-commit = ">=3.8,<5.0"
 # Collection of invoke commands used by Saritasa
 # Invoke is a Python (2.7 and 3.4+) task execution tool & library,
 # drawing inspiration from various sources to arrive at a powerful & clean feature set.
