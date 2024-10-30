@@ -115,7 +115,7 @@ all = [
 ipdb = "^0.13.13"
 # Provides a rich toolkit to help you make the most of using Python interactively
 # https://ipython.readthedocs.io/en/stable/
-ipython = "^8.27.0"
+ipython = "^8.29.0"
 # A framework for managing and maintaining multi-language pre-commit hooks.
 # https://pre-commit.com/
 pre-commit = "^3.8.0"
@@ -124,17 +124,17 @@ pre-commit = "^3.8.0"
 # drawing inspiration from various sources to arrive at a powerful & clean feature set.
 # http://www.pyinvoke.org/
 # https://github.com/saritasa-nest/saritasa-python-invocations/
-saritasa_invocations = "^1.2.1"
+saritasa_invocations = "^1.2.3"
 
 [tool.poetry.group.linters.dependencies]
 # Mypy is a static type checker for Python.
 # https://mypy.readthedocs.io/en/stable/
-mypy = "^1.11.2"
+mypy = "^1.13.0"
 
 [tool.poetry.group.test.dependencies]
 # Makes it easy to write small tests, yet scales to support complex functional testing
 # https://github.com/pytest-dev/pytest/
-pytest = "^8.3.2"
+pytest = "^8.3.3"
 # To prettify pytest output
 # https://github.com/Teemu/pytest-sugar
 pytest-sugar = "^1.0.0"
@@ -145,11 +145,11 @@ pytest-lazy-fixtures = "^1.1.1"
 # It monitors your program, noting which parts of the code have been executed,
 # then analyzes the source to identify code that could have been executed but was not.
 # https://coverage.readthedocs.io/en/latest/
-coverage = "^7.6.1"
+coverage = "^7.6.4"
 # Django related stuff
 # Provides useful tools for testing Django apps
 # Docs https://pytest-django.readthedocs.io/en/latest/
-pytest-django = "^4.8.0"
+pytest-django = "^4.9.0"
 # Provide management command to check if primary database is ready to accept
 # connections
 # https://github.com/painless-software/django-probes
@@ -160,7 +160,7 @@ django-extensions = "^3.2.3"
 # Psycopg 3 is a modern implementation of a PostgreSQL adapter for Python.
 # https://psycopg.org/
 # Needed for sync support
-psycopg = {extras = ["binary"], version = "^3.2.1" }
+psycopg = {extras = ["binary"], version = "^3.2.3" }
 
 [build-system]
 requires = ["poetry-core"]

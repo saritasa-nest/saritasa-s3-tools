@@ -4,6 +4,8 @@ We follow [Semantic Versions](https://semver.org/).
 
 ## Unreleased
 
+- Confirm support for python 3.13
+
 ## 0.2.1
 
 - Fix validators setup in `S3FileFieldMixin`
