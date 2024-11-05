@@ -57,7 +57,7 @@ anyio = {version= "<5", optional = true}
 factory-boy  = {version= "<4", optional = true}
 # Python Imaging Library(Used to generate test images)
 # https://pillow.readthedocs.io/en/stable/
-pillow = {version= "<11", optional = true}
+pillow = {version= "<12", optional = true}
 # HTTPX is a fully featured HTTP client for Python 3, which provides sync and async APIs, and support for both HTTP/1.1 and HTTP/2.
 # https://www.python-httpx.org/
 httpx = {version ="<1", optional = true}
