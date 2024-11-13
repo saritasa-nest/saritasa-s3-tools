@@ -53,7 +53,7 @@ class ModelWithFiles(models.Model):
         null=True,
         s3_config=saritasa_s3_tools.S3FileTypeConfig(  # pyright: ignore
             name="django-anon-files",
-            key=saritasa_s3_tools.keys.WithPrefixUUIDFolder(
+            key=saritasa_s3_tools.keys.WithPrefixUUIDFileName(
                 "django-anon-files",
             ),
         ),

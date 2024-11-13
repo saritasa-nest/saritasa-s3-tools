@@ -5,6 +5,7 @@ We follow [Semantic Versions](https://semver.org/).
 ## Unreleased
 
 - Confirm support for python 3.13
+- Add `get_s3_client` shortcut for `django` module
 
 ## 0.2.1
 
