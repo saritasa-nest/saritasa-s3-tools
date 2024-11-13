@@ -132,23 +132,12 @@ path(
 Just add this to core `conftest.py` file
 
 ```python
-from django.core.files.storage import default_storage
-import mypy_boto3_s3
 import pytest
 
 
 @pytest.fixture(scope="session", autouse=True)
-def _adjust_s3_bucket(
-    s3_bucket: str,
-) -> None:
+def _adjust_s3_bucket(django_adjust_s3_bucket: None) -> None:
     """Set bucket to a test one."""
-    default_storage.bucket_name = s3_bucket
-
-
-@pytest.fixture(scope="session")
-def boto3_resource() -> mypy_boto3_s3.S3ServiceResource:
-    """Prepare boto3 resource."""
-    return default_storage.connection
 ```
 
 ### Note about signature version

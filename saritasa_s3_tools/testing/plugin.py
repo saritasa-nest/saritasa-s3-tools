@@ -115,6 +115,25 @@ def aws_config() -> botocore.config.Config | None:
 
 @pytest.fixture(scope="session")
 def boto3_resource(
+    request: pytest.FixtureRequest,
+) -> mypy_boto3_s3.S3ServiceResource:
+    """Prepare boto3 resource."""
+    try:
+        return request.getfixturevalue("boto3_resource_from_django")
+    except ImportError:  # pragma: no cover
+        return request.getfixturevalue("boto3_resource_from_config")
+
+
+@pytest.fixture(scope="session")
+def boto3_resource_from_django() -> mypy_boto3_s3.S3ServiceResource:
+    """Get boto3 resource for django storage."""
+    from django.core.files.storage import default_storage
+
+    return default_storage.connection  # type: ignore
+
+
+@pytest.fixture(scope="session")
+def boto3_resource_from_config(
     aws_session: boto3.session.Session,
     aws_config: botocore.config.Config,
     s3_endpoint_url_getter: collections.abc.Callable[
@@ -281,3 +300,14 @@ def django_storage_changer() -> (
     yield _changer
     for key, value in old_settings.items():
         setattr(default_storage, key, value)
+
+
+@pytest.fixture(scope="session")
+def django_adjust_s3_bucket(s3_bucket: str) -> None:
+    """Set bucket to a test one."""
+    from django.conf import settings
+    from django.core.files.storage import default_storage
+
+    default_storage.bucket_name = s3_bucket  # type: ignore
+    settings.AWS_STORAGE_BUCKET_NAME = s3_bucket
+    return None

@@ -1,6 +1,5 @@
 import pytest
 import pytest_django
-from django.core.files.storage import default_storage
 from django.urls import reverse_lazy
 from rest_framework import test
 
@@ -18,11 +17,8 @@ def _enable_db_access_for_all_tests(django_db_setup, db) -> None:  # noqa: ANN00
 
 
 @pytest.fixture(scope="session", autouse=True)
-def _adjust_s3_bucket(
-    s3_bucket: str,
-) -> None:
+def _adjust_s3_bucket(django_adjust_s3_bucket: None) -> None:
     """Set bucket to a test one."""
-    default_storage.bucket_name = s3_bucket  # type: ignore
 
 
 @pytest.fixture
