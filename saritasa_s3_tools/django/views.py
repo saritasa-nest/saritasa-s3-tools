@@ -2,7 +2,6 @@ import contextlib
 import dataclasses
 import typing
 
-from django.core.files.storage import default_storage
 from rest_framework import (
     decorators,
     permissions,
@@ -12,10 +11,8 @@ from rest_framework import (
 )
 from rest_framework.request import Request
 
-import mypy_boto3_s3
-
 from .. import client
-from . import serializers
+from . import serializers, shortcuts
 
 
 class S3GetParamsView(viewsets.GenericViewSet):
@@ -63,18 +60,9 @@ class S3GetParamsView(viewsets.GenericViewSet):
             ).data,
         )
 
-    def get_boto3_client(self) -> mypy_boto3_s3.S3Client:
-        """Get s3 client for params generation."""
-        return default_storage.connection.meta.client  # type: ignore
-
     def get_s3_client(self) -> client.S3Client:
         """Get s3 client for params generation."""
-        return client.S3Client(
-            boto3_client=self.get_boto3_client(),
-            default_bucket=(
-                default_storage.bucket_name  # type: ignore
-            ),
-        )
+        return shortcuts.get_s3_client()
 
     def get_extra_meta_data(
         self,

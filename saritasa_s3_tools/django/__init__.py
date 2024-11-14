@@ -6,4 +6,5 @@ from .serializers import (
     S3RequestParamsSerializer,
     S3UploadSerializer,
 )
+from .shortcuts import get_s3_client
 from .views import S3GetParamsView
