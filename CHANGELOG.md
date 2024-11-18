@@ -4,6 +4,8 @@ We follow [Semantic Versions](https://semver.org/).
 
 ## Unreleased
 
+## 0.3.0
+
 - Confirm support for python 3.13
 - Add `get_s3_client` shortcut for `django` module
 - Make `pytest` plugin auto-detect if it's `django` project, so that it could
