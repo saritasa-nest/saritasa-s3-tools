@@ -4,6 +4,7 @@ import urllib.parse
 from django.core import validators
 from django.core.files.storage import default_storage
 from rest_framework import fields, serializers
+from rest_framework.utils.formatting import lazy_format
 
 from .. import configs
 
@@ -81,10 +82,28 @@ class S3UploadURLField(serializers.CharField):
 
     def __init__(self, **kwargs) -> None:
         """Make custom initialization."""
+        # Remove explicit max_length limit in field
+        # It causes issues with auto spec generation and validation.
+        # Since it can return full urls with auth query, which can easily pass
+        # a limit specified in model field(which is by default 100), it causes
+        # confusion for openapi specs validators.
+        max_length = kwargs.pop("max_length", None)
         super().__init__(**kwargs)
+        if max_length is not None:
+            # Append this validator to enable max length validation after
+            # converting input url
+            self.validators.append(
+                validators.MaxLengthValidator(
+                    limit_value=max_length,
+                    message=lazy_format(
+                        self.error_messages["max_length"],
+                        max_length=max_length,
+                    ),
+                ),
+            )
         # Append this validator to enable invalid code for spec
         validator_for_spec = validators.MinLengthValidator(
-            0,
+            limit_value=0,
             message=self.error_messages["invalid"],
         )
         validator_for_spec.code = "invalid"

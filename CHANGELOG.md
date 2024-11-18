@@ -8,6 +8,11 @@ We follow [Semantic Versions](https://semver.org/).
 - Add `get_s3_client` shortcut for `django` module
 - Make `pytest` plugin auto-detect if it's `django` project, so that it could
 use `django` storage for `s3` setup
+- Remove explicit `max_length` limit in `S3UploadURLField`
+  It causes issues with auto spec generation and validation.
+  Since it can return full urls with auth query, which can easily pass
+  a limit specified in model field(which is by default 100), it causes
+  confusion for openapi specs validators.
 
 ## 0.2.1
 
