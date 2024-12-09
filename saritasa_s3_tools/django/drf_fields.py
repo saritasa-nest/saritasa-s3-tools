@@ -88,17 +88,16 @@ class S3UploadURLField(serializers.CharField):
         # a limit specified in model field(which is by default 100), it causes
         # confusion for openapi specs validators.
         max_length = kwargs.pop("max_length", None)
+        self.max_length_validator = None
         super().__init__(**kwargs)
         if max_length is not None:
-            # Append this validator to enable max length validation after
-            # converting input url
-            self.validators.append(
-                validators.MaxLengthValidator(
-                    limit_value=max_length,
-                    message=lazy_format(
-                        self.error_messages["max_length"],
-                        max_length=max_length,
-                    ),
+            # Manually validate max length so that api specs would generate
+            # without limit
+            self.max_length_validator = validators.MaxLengthValidator(
+                limit_value=max_length,
+                message=lazy_format(
+                    self.error_messages["max_length"],
+                    max_length=max_length,
                 ),
             )
         # Append this validator to enable invalid code for spec
@@ -132,7 +131,8 @@ class S3UploadURLField(serializers.CharField):
         aws_location = default_storage.location  # type: ignore
         if aws_location and file_url.startswith(aws_location):
             file_url = file_url.split(f"{aws_location}/")[-1]
-
+        if self.max_length_validator:
+            self.max_length_validator(file_url)
         return file_url
 
     def to_representation(self, value: typing.Any) -> str | None:

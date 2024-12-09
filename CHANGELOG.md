@@ -4,6 +4,9 @@ We follow [Semantic Versions](https://semver.org/).
 
 ## Unreleased
 
+- Manually validate length in `S3UploadURLField`
+This is need so that in api specs there would be no length limit
+
 ## 0.3.0
 
 - Confirm support for python 3.13
