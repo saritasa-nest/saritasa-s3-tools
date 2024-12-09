@@ -14,11 +14,11 @@ with contextlib.suppress(ImportError):
     from . import factory
 
 __all__ = (
-    "keys",
-    "constants",
+    "AsyncS3Client",
     "S3Client",
     "S3FileTypeConfig",
-    "AsyncS3Client",
-    "testing",
+    "constants",
     "factory",
+    "keys",
+    "testing",
 )

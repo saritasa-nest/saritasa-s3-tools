@@ -220,10 +220,6 @@ extend-select = [
   "RUF"
 ]
 ignore = [
-  # https://docs.astral.sh/ruff/rules/ANN101
-  "ANN101",
-  # https://docs.astral.sh/ruff/rules/ANN102
-  "ANN102",
   # https://docs.astral.sh/ruff/rules/ANN401
   "ANN401",
   # https://docs.astral.sh/ruff/rules/ANN003

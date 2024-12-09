@@ -7,7 +7,7 @@ from example.app import factories, models
 
 
 @pytest.fixture(scope="session", autouse=True)
-def django_db_setup(django_db_setup) -> None:  # noqa: PT004, ANN001
+def django_db_setup(django_db_setup) -> None:  # noqa: ANN001
     """Set up test db for testing."""
 
 
