@@ -7,7 +7,7 @@ We follow [Semantic Versions](https://semver.org/).
 ## 0.3.1
 
 - Manually validate length in `S3UploadURLField`
-This is need so that in api specs there would be no length limit
+This is needed so that in api specs there would be no length limit
 
 ## 0.3.0
 
