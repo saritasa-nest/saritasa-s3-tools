@@ -16,7 +16,7 @@ def test_s3_file_factory(
             access_key="root",
             secret_key="rootroot",
         ),
-        s3_endpoint_url_getter=lambda: "https://localhost.localstack.cloud:4566",
+        s3_endpoint_url_getter=lambda: "http://s3.minio.localhost:9001",
     ).evaluate(object(), None, None)
     (
         s3_client.is_file_in_bucket(
@@ -40,7 +40,7 @@ def test_s3_image_factory(
             access_key="root",
             secret_key="rootroot",
         ),
-        s3_endpoint_url_getter=lambda: "https://localhost.localstack.cloud:4566",
+        s3_endpoint_url_getter=lambda: "http://s3.minio.localhost:9001",
     ).evaluate(object(), None, None)
     assert s3_client.is_file_in_bucket(
         file_key,

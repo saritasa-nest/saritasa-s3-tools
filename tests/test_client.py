@@ -23,6 +23,7 @@ def test_upload(s3_client: saritasa_s3_tools.S3Client) -> None:
     _, file_key = saritasa_s3_tools.testing.upload_file_and_verify(
         filepath=__file__,
         s3_params=s3_params,
+        is_minio=True,
     )
     meta_data = s3_client.get_file_metadata(key=file_key)
     assert meta_data["Metadata"]["config-name"] == "files"
@@ -109,7 +110,7 @@ def test_upload_expiration(s3_client: saritasa_s3_tools.S3Client) -> None:
         response.content.decode(),
     )[1].text
     assert (
-        error == "Invalid according to Policy: Policy expired."
+        error == "Access Denied. (Invalid according to Policy: Policy expired)"
     ), response.content
 
 

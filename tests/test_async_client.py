@@ -22,6 +22,7 @@ async def test_upload(
     _, file_key = saritasa_s3_tools.testing.upload_file_and_verify(
         filepath=__file__,
         s3_params=s3_params,
+        is_minio=True,
     )
     meta_data = await async_s3_client.async_get_file_metadata(
         key=file_key,

@@ -29,8 +29,8 @@ ns.configure(
             project_name="saritasa-s3-tools",
             docker=saritasa_invocations.DockerSettings(
                 main_containers=(
-                    "localstack-services",
-                    "localstack-services-s3",
+                    "minio",
+                    "minio-create-bucket",
                     "postgres",
                 ),
             ),

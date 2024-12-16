@@ -1,45 +1,58 @@
 name: "saritasa-s3-tools"
 
+volumes:
+  minio_data:
+
 services:
   # ###########################################################################
-  # Localstack - solution for many aws services in one container
-  # Used for s3
-  # Docs: https://docs.localstack.cloud/overview/
-  # ###########################################################################
-  localstack-services:
-    image: localstack/localstack:3.7.0
-    hostname: localhost.localstack.cloud
-    ports:
-      - "4566:4566"
-      - '9000:9000'
-      - '9001:9001'
-    environment:
-      # https://docs.localstack.cloud/references/configuration/
-      - SERVICES=s3
-      - DEBUG=1
-      - DOCKER_HOST=unix:///var/run/docker.sock
-      - AWS_ACCESS_KEY_ID=root
-      - AWS_SECRET_ACCESS_KEY=rootroot
-      - AWS_DEFAULT_REGION=us-west-1
-    volumes:
-      - "${LOCALSTACK_VOLUME_DIR:-./localstack_volume}:/var/lib/localstack"
-      - "/var/run/docker.sock:/var/run/docker.sock"
+  # MinIO Storage
+  # minio:9001 - Server
+  # minio:9000 - UI
 
-  localstack-services-s3:
-    image: localstack/localstack:3.7.0
-    depends_on:
-      - localstack-services
+  # We preferred to choose `Minio` instead of `Localstack` due to the fact
+  # that `localstack` does not support saving files after restarting the docker
+  # container for the free version.
+  # https://github.com/localstack/localstack/issues/6281#issuecomment-1169731265
+  # ###########################################################################
+  minio:
+    image: minio/minio:latest
+    command: server --address 0.0.0.0:9001 --console-address 0.0.0.0:9000 /data
     environment:
-      - AWS_DEFAULT_REGION=us-west-1
-      - AWS_ENDPOINT_URL=http://localhost.localstack.cloud:4566
+      - MINIO_ROOT_USER=root
+      - MINIO_ROOT_PASSWORD=rootroot
+      # Set `MINIO_DOMAIN` to enable virtual-hosted-style for minio.
+      # https://min.io/docs/minio/linux/administration/object-management.html#id1
+      - MINIO_DOMAIN=s3.minio.localhost
+    ports:
+      - "9001:9001"
+      - "9000:9000"
+    volumes:
+      - minio_data:/data
+    networks:
+      default:
+        aliases:
+          # Set alias that suitable for virtual-hosted-style URL structure:
+          # `https://<bucket>.s3.<region>.amazonaws.com/<key>
+          # We need apply this style for local S3 storage because path-style
+          # URLs will be discontinued in the future, and we want to make
+          # consistent URLs for uploading and downloading files.
+          # https://docs.aws.amazon.com/AmazonS3/latest/userguide/VirtualHosting.html
+          - ${COMPOSE_PROJECT_NAME}-files.s3.minio.localhost
+
+  # ###########################################################################
+  # Service for creating bucket in minio service
+  # ###########################################################################
+  minio-create-bucket:
+    image: minio/mc:latest
+    depends_on:
+      - minio
     entrypoint: >
       /bin/sh -c "
-      awslocal s3api create-bucket --bucket ${COMPOSE_PROJECT_NAME}-files --region us-west-1 --create-bucket-configuration LocationConstraint=us-west-1;
+      /usr/bin/mc alias set s3minio http://minio:9001 root rootroot;
+      /usr/bin/mc mb s3minio/${COMPOSE_PROJECT_NAME}-files;
+      /usr/bin/mc anonymous set public s3minio/${COMPOSE_PROJECT_NAME}-files;
       exit 0;
       "
-    volumes:
-      - "${LOCALSTACK_VOLUME_DIR:-./localstack_volume}:/var/lib/localstack"
-      - "/var/run/docker.sock:/var/run/docker.sock"
 
   postgres:
     image: postgres:16

@@ -33,6 +33,7 @@ def upload_file(
 def upload_file_and_verify(
     filepath: str,
     s3_params: client.S3UploadParams,
+    is_minio: bool = False,
 ) -> tuple[str, str]:
     """Upload and verify that file is uploaded."""
     upload_response = upload_file(
@@ -43,8 +44,12 @@ def upload_file_and_verify(
     parsed_response = xml.etree.ElementTree.fromstring(  # noqa: S314
         upload_response.content.decode(),
     )
-    file_key = parsed_response[2].text
-    file_url = parsed_response[0].text
+    if is_minio:
+        file_key = parsed_response[1].text
+        file_url = parsed_response[3].text
+    else:
+        file_key = parsed_response[2].text
+        file_url = parsed_response[0].text
     assert file_url, upload_response.content  # noqa: S101
     assert file_key, upload_response.content  # noqa: S101
     return file_url, file_key

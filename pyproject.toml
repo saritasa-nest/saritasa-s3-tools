@@ -324,7 +324,7 @@ norecursedirs = [
 # set Django settings
 DJANGO_SETTINGS_MODULE = "example.settings"
 # Configuration for s3
-s3_endpoint_url = "https://localhost.localstack.cloud:4566"
+s3_endpoint_url = "http://s3.minio.localhost:9001"
 s3_region="us-west-1"
 s3_access_key="root"
 s3_secret_key="rootroot"
