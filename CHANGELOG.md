@@ -4,6 +4,8 @@ We follow [Semantic Versions](https://semver.org/).
 
 ## Unreleased
 
+## 0.3.2
+
 - Make `S3UploadURLField` support just `str` values
 
 ## 0.3.1
