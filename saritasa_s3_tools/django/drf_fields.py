@@ -139,4 +139,6 @@ class S3UploadURLField(serializers.CharField):
         """Return full file url."""
         if not value:
             return None
+        if isinstance(value, str):
+            return default_storage.url(name=value)
         return value.url

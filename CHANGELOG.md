@@ -4,6 +4,8 @@ We follow [Semantic Versions](https://semver.org/).
 
 ## Unreleased
 
+- Make `S3UploadURLField` support just `str` values
+
 ## 0.3.1
 
 - Manually validate length in `S3UploadURLField`
