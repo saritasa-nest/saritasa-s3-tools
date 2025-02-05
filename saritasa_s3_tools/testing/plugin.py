@@ -279,14 +279,12 @@ def async_s3_client(
 
 
 @pytest.fixture
-def django_storage_changer() -> (
-    collections.abc.Iterator[
-        collections.abc.Callable[
-            [str, typing.Any],
-            None,
-        ]
+def django_storage_changer() -> collections.abc.Iterator[
+    collections.abc.Callable[
+        [str, typing.Any],
+        None,
     ]
-):
+]:
     """Temporary change default storage settings."""
     from django.core.files.storage import default_storage
 

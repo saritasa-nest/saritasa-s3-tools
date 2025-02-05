@@ -31,9 +31,9 @@ def test_auth_validation(
         },
     )  # type: ignore
     if user is None:
-        assert (
-            response.status_code == status.HTTP_400_BAD_REQUEST
-        ), response.data
+        assert response.status_code == status.HTTP_400_BAD_REQUEST, (
+            response.data
+        )
         assert (
             response.data["config"][0]  # type: ignore
             == "Current user can't use this destination"
@@ -93,12 +93,9 @@ def test_content_length_validation_lower(
         },
     )  # type: ignore
     assert response.status_code == status.HTTP_400_BAD_REQUEST, response.data
-    assert (
-        response.data["content_length"][0]
-        == (  # type: ignore
-            f"Invalid file size - {humanize.naturalsize(content_length)} of "
-            "test.txt. Need between 1.0 kB and 20.0 MB."
-        )
+    assert response.data["content_length"][0] == (  # type: ignore
+        f"Invalid file size - {humanize.naturalsize(content_length)} of "
+        "test.txt. Need between 1.0 kB and 20.0 MB."
     ), response.data
     return
 
@@ -120,12 +117,9 @@ def test_content_type_validation(
         },
     )  # type: ignore
     assert response.status_code == status.HTTP_400_BAD_REQUEST, response.data
-    assert (
-        response.data["content_type"][0]
-        == (  # type: ignore
-            "Invalid file type - `test/pytest` of `test.txt`. "
-            "Expected: text/plain."
-        )
+    assert response.data["content_type"][0] == (  # type: ignore
+        "Invalid file type - `test/pytest` of `test.txt`. "
+        "Expected: text/plain."
     ), response.data
     return
 
