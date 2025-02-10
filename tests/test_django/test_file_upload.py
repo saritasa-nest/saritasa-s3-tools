@@ -131,7 +131,7 @@ def test_file_validation_with_location_setting(
     response: Response = api_client.post(
         path=reverse_lazy("model-api-list"),
         data={
-            "file": factories.ModelWithFilesFactory().file.url,
+            "file": factories.ModelWithFilesFactory.create().file.url,
         },
     )  # type: ignore
     assert response.status_code == status.HTTP_201_CREATED, response.data
@@ -146,11 +146,11 @@ def test_file_validation_with_no_query_params(
     """Test what file url is validated when url passed with no query auth."""
     django_storage_changer("querystring_auth", False)
     api_client.force_authenticate(default_user)
-    factories.ModelWithFilesFactory().full_clean()
+    factories.ModelWithFilesFactory.create().full_clean()
     response: Response = api_client.post(
         path=reverse_lazy("model-api-list"),
         data={
-            "file": factories.ModelWithFilesFactory().file.url,
+            "file": factories.ModelWithFilesFactory.create().file.url,
         },
     )  # type: ignore
     assert response.status_code == status.HTTP_201_CREATED, response.data

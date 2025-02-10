@@ -7,7 +7,7 @@ from . import models
 DEFAULT_PASSWORD = "Test111!"  # noqa: S105
 
 
-class UserFactory(factory.django.DjangoModelFactory):
+class UserFactory(factory.django.DjangoModelFactory[models.User]):
     """Factory to generate test User instance."""
 
     email = factory.LazyAttribute(
@@ -22,7 +22,9 @@ class UserFactory(factory.django.DjangoModelFactory):
         model = models.User
 
 
-class ModelWithFilesFactory(factory.django.DjangoModelFactory):
+class ModelWithFilesFactory(
+    factory.django.DjangoModelFactory[models.ModelWithFiles],
+):
     """Factory to generate test ModelWithFiles instance."""
 
     file = factory.django.FileField(
