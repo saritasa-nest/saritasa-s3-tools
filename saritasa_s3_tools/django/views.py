@@ -4,6 +4,7 @@ import typing
 
 from rest_framework import (
     decorators,
+    exceptions,
     permissions,
     response,
     status,
@@ -11,7 +12,7 @@ from rest_framework import (
 )
 from rest_framework.request import Request
 
-from .. import client
+from .. import client, configs
 from . import serializers, shortcuts
 
 
@@ -20,6 +21,8 @@ class S3GetParamsView(viewsets.GenericViewSet):
 
     serializer_class = serializers.S3RequestParamsSerializer
     permission_classes = (permissions.AllowAny,)
+    filter_backends = ()
+    pagination_class = None
 
     @decorators.action(
         methods=["POST"],
@@ -60,6 +63,51 @@ class S3GetParamsView(viewsets.GenericViewSet):
             ).data,
         )
 
+    @decorators.action(
+        methods=["GET"],
+        url_path="list-configs",
+        url_name="list-configs",
+        detail=False,
+    )
+    def list_configs(
+        self,
+        request: Request,
+    ) -> response.Response:
+        """List all configs for s3 upload."""
+        return response.Response(
+            status=status.HTTP_200_OK,
+            data=serializers.S3ConfigSerializer(
+                instance=map(
+                    dataclasses.asdict,
+                    configs.S3FileTypeConfig.configs.values(),
+                ),
+                many=True,
+            ).data,
+        )
+
+    @decorators.action(
+        methods=["GET"],
+        url_path="retrieve-config/(?P<name>[^/.]+)",
+        url_name="retrieve-config",
+        detail=False,
+    )
+    def retrieve_config(
+        self,
+        request: Request,
+        name: str,
+    ) -> response.Response:
+        """Retrieve config for s3 upload."""
+        if name not in configs.S3FileTypeConfig.configs:
+            raise exceptions.NotFound
+        return response.Response(
+            status=status.HTTP_200_OK,
+            data=serializers.S3ConfigSerializer(
+                instance=dataclasses.asdict(
+                    configs.S3FileTypeConfig.configs[name],
+                ),
+            ).data,
+        )
+
     def get_s3_client(self) -> client.S3Client:
         """Get s3 client for params generation."""
         return shortcuts.get_s3_client()
@@ -81,5 +129,19 @@ with contextlib.suppress(ImportError):
         get_params=drf_spectacular.utils.extend_schema(
             request=serializers.S3RequestParamsSerializer,
             responses=serializers.S3UploadSerializer,
+        ),
+        list_configs=drf_spectacular.utils.extend_schema(
+            responses=serializers.S3ConfigSerializer(many=True),
+        ),
+        retrieve_config=drf_spectacular.utils.extend_schema(
+            parameters=[
+                drf_spectacular.utils.OpenApiParameter(
+                    name="name",
+                    type=str,
+                    required=True,
+                    location=drf_spectacular.utils.OpenApiParameter.PATH,
+                ),
+            ],
+            responses=serializers.S3ConfigSerializer(),
         ),
     )(S3GetParamsView)

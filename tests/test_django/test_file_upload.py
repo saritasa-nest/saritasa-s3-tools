@@ -23,13 +23,13 @@ from example.app import factories, models
 def test_file_upload(
     api_client: test.APIClient,
     default_user: models.User | None,
-    s3_api_url: str,
+    s3_get_params_url: str,
     value: str,
 ) -> None:
     """Test whole file upload workflow."""
     api_client.force_authenticate(default_user)
     response: Response = api_client.post(
-        path=s3_api_url,
+        path=s3_get_params_url,
         data={
             "config": "django-files",
             "filename": "test.txt",
@@ -64,12 +64,12 @@ def test_file_upload(
 def test_file_upload_invalid_config_used(
     api_client: test.APIClient,
     default_user: models.User | None,
-    s3_api_url: str,
+    s3_get_params_url: str,
 ) -> None:
     """Test file upload when invalid config for model is used."""
     api_client.force_authenticate(default_user)
     response: Response = api_client.post(
-        path=s3_api_url,
+        path=s3_get_params_url,
         data={
             "config": "django-all-file-types",
             "filename": "test.txt",
@@ -99,12 +99,12 @@ def test_file_upload_invalid_config_used(
 def test_file_upload_unknown_config_used(
     api_client: test.APIClient,
     default_user: models.User | None,
-    s3_api_url: str,
+    s3_get_params_url: str,
 ) -> None:
     """Test file upload when unknown config is used."""
     api_client.force_authenticate(default_user)
     response: Response = api_client.post(
-        path=s3_api_url,
+        path=s3_get_params_url,
         data={
             "config": "not-found",
             "filename": "test.txt",
@@ -122,7 +122,7 @@ def test_file_upload_unknown_config_used(
 def test_file_validation_with_location_setting(
     api_client: test.APIClient,
     default_user: models.User | None,
-    s3_api_url: str,
+    s3_get_params_url: str,
     django_storage_changer: collections.abc.Callable[[str, typing.Any], None],
 ) -> None:
     """Test what file url is validated when location setting is enabled."""
@@ -140,7 +140,7 @@ def test_file_validation_with_location_setting(
 def test_file_validation_with_no_query_params(
     api_client: test.APIClient,
     default_user: models.User | None,
-    s3_api_url: str,
+    s3_get_params_url: str,
     django_storage_changer: collections.abc.Callable[[str, typing.Any], None],
 ) -> None:
     """Test what file url is validated when url passed with no query auth."""
@@ -159,7 +159,7 @@ def test_file_validation_with_no_query_params(
 def test_file_validation_not_found(
     api_client: test.APIClient,
     default_user: models.User | None,
-    s3_api_url: str,
+    s3_get_params_url: str,
 ) -> None:
     """Test what non-existent file url won't be allowed."""
     api_client.force_authenticate(default_user)
@@ -176,7 +176,7 @@ def test_file_validation_not_found(
 def test_file_validation_non_s3_file(
     api_client: test.APIClient,
     default_user: models.User | None,
-    s3_api_url: str,
+    s3_get_params_url: str,
 ) -> None:
     """Test what non-existent file url won't be allowed."""
     api_client.force_authenticate(default_user)
