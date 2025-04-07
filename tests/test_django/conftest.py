@@ -22,8 +22,8 @@ def _adjust_s3_bucket(django_adjust_s3_bucket: None) -> None:
 
 
 @pytest.fixture
-def s3_api_url() -> str:
-    """Create api client."""
+def s3_get_params_url() -> str:
+    """Get url for params generation."""
     return reverse_lazy("s3-get-params")
 
 

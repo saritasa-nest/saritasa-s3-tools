@@ -130,3 +130,20 @@ class S3UploadSerializer(serializers.Serializer):
 
     url = serializers.URLField()
     params = S3ParamsSerializer()
+
+
+class S3ConfigSerializer(serializers.Serializer):
+    """Serializer to represent s3 config."""
+
+    name = serializers.CharField()
+    allowed = serializers.ListField(
+        child=serializers.CharField(),
+        allow_null=True,
+    )
+    content_length_range = serializers.ListField(
+        child=serializers.CharField(),
+        allow_null=True,
+    )
+    expires_in = serializers.IntegerField()
+    success_action_status = serializers.IntegerField()
+    content_disposition = serializers.CharField()

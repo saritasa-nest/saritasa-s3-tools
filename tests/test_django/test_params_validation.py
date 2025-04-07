@@ -17,12 +17,12 @@ from example.app import models
 def test_auth_validation(
     api_client: test.APIClient,
     user: models.User,
-    s3_api_url: str,
+    s3_get_params_url: str,
 ) -> None:
     """Test that anon user won't be able to get params."""
     api_client.force_authenticate(user=user)
     response: Response = api_client.post(
-        path=s3_api_url,
+        path=s3_get_params_url,
         data={
             "config": "django-files",
             "filename": "test.txt",
@@ -52,12 +52,12 @@ def test_auth_validation(
 def test_anon_auth_validation(
     api_client: test.APIClient,
     user: models.User,
-    s3_api_url: str,
+    s3_get_params_url: str,
 ) -> None:
     """Test that if no auth config was set, anyone could upload file."""
     api_client.force_authenticate(user=user)
     response: Response = api_client.post(
-        path=s3_api_url,
+        path=s3_get_params_url,
         data={
             "config": "django-anon-files",
             "filename": "test.txt",
@@ -78,13 +78,13 @@ def test_anon_auth_validation(
 def test_content_length_validation_lower(
     api_client: test.APIClient,
     default_user: models.User,
-    s3_api_url: str,
+    s3_get_params_url: str,
     content_length: int,
 ) -> None:
     """Test that user needs to set correct content_length."""
     api_client.force_authenticate(user=default_user)
     response: Response = api_client.post(
-        path=s3_api_url,
+        path=s3_get_params_url,
         data={
             "config": "django-files",
             "filename": "test.txt",
@@ -103,12 +103,12 @@ def test_content_length_validation_lower(
 def test_content_type_validation(
     api_client: test.APIClient,
     default_user: models.User,
-    s3_api_url: str,
+    s3_get_params_url: str,
 ) -> None:
     """Test that user needs to set correct content_type."""
     api_client.force_authenticate(user=default_user)
     response: Response = api_client.post(
-        path=s3_api_url,
+        path=s3_get_params_url,
         data={
             "config": "django-files",
             "filename": "test.txt",
@@ -134,12 +134,12 @@ def test_content_type_validation(
 def test_all_files_allowed_validation(
     api_client: test.APIClient,
     user: models.User,
-    s3_api_url: str,
+    s3_get_params_url: str,
 ) -> None:
     """Test that all files can be allowed."""
     api_client.force_authenticate(user=user)
     response: Response = api_client.post(
-        path=s3_api_url,
+        path=s3_get_params_url,
         data={
             "config": "django-all-file-types",
             "filename": "test.txt",
@@ -160,12 +160,12 @@ def test_all_files_allowed_validation(
 def test_all_file_sizes_allowed_validation(
     api_client: test.APIClient,
     user: models.User,
-    s3_api_url: str,
+    s3_get_params_url: str,
 ) -> None:
     """Test that all files sizes can be allowed."""
     api_client.force_authenticate(user=user)
     response: Response = api_client.post(
-        path=s3_api_url,
+        path=s3_get_params_url,
         data={
             "config": "django-all-file-sizes",
             "filename": "test.txt",
