@@ -140,7 +140,11 @@ def _adjust_s3_bucket(django_adjust_s3_bucket: None) -> None:
     """Set bucket to a test one."""
 ```
 
-### Note about signature version
+### Setup settings
+
+```python
+AWS_S3_SIGNATURE_VERSION = "s3v4"
+```
 
 By default we assume `s3v4` version for signature. We recommend that you would
 set `AWS_S3_SIGNATURE_VERSION` to `s3v4`. If you need other versions, set it in
