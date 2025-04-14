@@ -156,7 +156,7 @@ pytest-django = "^4.9.0"
 django-probes = "^1.7.0"
 # Different useful Django utils
 # https://django-extensions.readthedocs.io/en/latest/
-django-extensions = "^3.2.3"
+django-extensions = ">=3.2.3,<5.0.0"
 # Psycopg 3 is a modern implementation of a PostgreSQL adapter for Python.
 # https://psycopg.org/
 # Needed for sync support
