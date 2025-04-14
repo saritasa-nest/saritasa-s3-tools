@@ -11,12 +11,12 @@ from example.app import models
 def test_s3_upload_field_with_str_value(
     api_client: test.APIClient,
     default_user: models.User | None,
-    s3_api_url: str,
+    s3_get_params_url: str,
 ):
     """Check that S3UploadURLField can represent just str value."""
     api_client.force_authenticate(default_user)
     response: Response = api_client.post(
-        path=s3_api_url,
+        path=s3_get_params_url,
         data={
             "config": "django-files",
             "filename": "test.txt",

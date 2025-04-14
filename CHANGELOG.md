@@ -4,6 +4,8 @@ We follow [Semantic Versions](https://semver.org/).
 
 ## Unreleased
 
+- Extend api to list/retrieve configs for s3 uploads in django module
+
 ## 0.3.2
 
 - Make `S3UploadURLField` support just `str` values
