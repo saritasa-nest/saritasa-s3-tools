@@ -34,6 +34,8 @@ classifiers = [
   "Framework :: Django",
   "Framework :: Django :: 4.2",
   "Framework :: Django :: 5.0",
+  "Framework :: Django :: 5.1",
+  "Framework :: Django :: 5.2",
   "Framework :: Pytest",
 ]
 
@@ -118,13 +120,13 @@ ipdb = "^0.13.13"
 ipython = ">=8.29,<10.0"
 # A framework for managing and maintaining multi-language pre-commit hooks.
 # https://pre-commit.com/
-pre-commit = "^3.8.0"
+pre-commit = "^4.2.0"
 # Collection of invoke commands used by Saritasa
 # Invoke is a Python (2.7 and 3.4+) task execution tool & library,
 # drawing inspiration from various sources to arrive at a powerful & clean feature set.
 # http://www.pyinvoke.org/
 # https://github.com/saritasa-nest/saritasa-python-invocations/
-saritasa_invocations = "^1.2.3"
+saritasa_invocations = "^1.4.0"
 
 [tool.poetry.group.linters.dependencies]
 # Mypy is a static type checker for Python.
@@ -321,6 +323,12 @@ norecursedirs = [
     "venv",
     ".venv",
 ]
+# Configure warning that can be ignored
+filterwarnings = [
+  # Ignore datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version.
+  # Can be removed once this is released https://github.com/boto/boto3/issues/3889
+  "ignore:datetime.datetime.utcnow:DeprecationWarning:botocore.auth.*:",
+]
 # set Django settings
 DJANGO_SETTINGS_MODULE = "example.settings"
 # Configuration for s3
@@ -334,10 +342,3 @@ omit = []
 
 [tool.coverage.report]
 include = ["saritasa_s3_tools/**"]
-
-# https://docformatter.readthedocs.io/en/latest/configuration.html#
-[tool.docformatter]
-wrap-descriptions=0
-in-place=true
-blank=true
-black=true
