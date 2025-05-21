@@ -2,7 +2,7 @@ import typing
 import urllib.parse
 
 from django.core import validators
-from django.core.files.storage import default_storage
+from django.core.files.storage import Storage, default_storage
 from rest_framework import fields, serializers
 from rest_framework.utils.formatting import lazy_format
 
@@ -88,6 +88,7 @@ class S3UploadURLField(serializers.CharField):
         # a limit specified in model field(which is by default 100), it causes
         # confusion for openapi specs validators.
         max_length = kwargs.pop("max_length", None)
+        self.storage: Storage = kwargs.pop("storage", default_storage)
         self.max_length_validator = None
         super().__init__(**kwargs)
         if max_length is not None:
@@ -121,14 +122,14 @@ class S3UploadURLField(serializers.CharField):
 
         # Crop S3 bucket name
         file_url = file_url.split(
-            f"{default_storage.bucket_name}/",  # type: ignore
+            f"{self.storage.bucket_name}/",  # type: ignore
         )[-1].lstrip("/")
 
         # Normalize url
         file_url = urllib.parse.unquote_plus(file_url)
 
         # Remove aws-location prefix to keep only file name as key
-        aws_location = default_storage.location  # type: ignore
+        aws_location = self.storage.location  # type: ignore
         if aws_location and file_url.startswith(aws_location):
             file_url = file_url.split(f"{aws_location}/")[-1]
         if self.max_length_validator:
@@ -140,5 +141,5 @@ class S3UploadURLField(serializers.CharField):
         if not value:
             return None
         if isinstance(value, str):
-            return default_storage.url(name=value)
+            return self.storage.url(name=value)
         return value.url
