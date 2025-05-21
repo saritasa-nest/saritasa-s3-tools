@@ -4,6 +4,8 @@ We follow [Semantic Versions](https://semver.org/).
 
 ## Unreleased
 
+- Improve `django_adjust_s3_bucket` to take in account different storages
+
 ## 0.4.0
 
 - Extend api to list/retrieve configs for s3 uploads in django module

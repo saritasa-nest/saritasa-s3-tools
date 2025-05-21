@@ -304,8 +304,16 @@ def django_storage_changer() -> collections.abc.Iterator[
 def django_adjust_s3_bucket(s3_bucket: str) -> None:
     """Set bucket to a test one."""
     from django.conf import settings
-    from django.core.files.storage import default_storage
+    from django.core.files.storage import (
+        InvalidStorageError,
+        storages,
+    )
+    from storages.backends.s3 import S3Storage
 
-    default_storage.bucket_name = s3_bucket  # type: ignore
+    for storage_alias in settings.STORAGES:
+        with contextlib.suppress(InvalidStorageError):
+            storage = storages[storage_alias]
+            if isinstance(storage, S3Storage):
+                storage.bucket_name = s3_bucket  # type: ignore
     settings.AWS_STORAGE_BUCKET_NAME = s3_bucket
     return None
