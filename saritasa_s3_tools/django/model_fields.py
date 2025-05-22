@@ -2,7 +2,6 @@ import collections.abc
 
 from django.core import exceptions
 from django.core.files import utils
-from django.core.files.storage import default_storage
 from django.db import models
 from django.db.models.fields import files
 from django.utils.functional import cached_property
@@ -77,7 +76,7 @@ class S3FileFieldMixin:
             return  # pragma: no cover
 
         try:
-            if not default_storage.exists(str(value)):
+            if not self.storage.exists(str(value)):  # type: ignore
                 raise exceptions.ValidationError(
                     _("File does not exist."),
                 )
