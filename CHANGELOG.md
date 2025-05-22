@@ -4,6 +4,8 @@ We follow [Semantic Versions](https://semver.org/).
 
 ## Unreleased
 
+## 0.5.0
+
 - Improve `django_adjust_s3_bucket` to take in account different storages
 - Make `_validate_file_existence` use specified storage
 - Add storage setting for `S3UploadURLField`
