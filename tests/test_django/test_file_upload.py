@@ -188,3 +188,39 @@ def test_file_validation_non_s3_file(
     )  # type: ignore
     assert response.status_code == status.HTTP_400_BAD_REQUEST, response.data
     assert response.data["file"][0] == "File does not exist."
+
+
+def test_file_upload_with_wrong_file_name(
+    api_client: test.APIClient,
+    default_user: models.User | None,
+    s3_get_params_url: str,
+) -> None:
+    """Test filename contains escape characters.
+
+    In that case package raises validation error.
+
+    """
+    api_client.force_authenticate(default_user)
+    response: Response = api_client.post(
+        path=s3_get_params_url,
+        data={
+            "config": "django-files",
+            "filename": "te+st.txt",
+            "content_type": "text/plain",
+            "content_length": 5000,
+        },
+    )  # type: ignore
+    assert response.status_code == status.HTTP_200_OK, response.data
+    file_url, _ = saritasa_s3_tools.testing.upload_file_and_verify(
+        filepath=__file__,
+        s3_params=saritasa_s3_tools.client.S3UploadParams(**response.data),
+        is_minio=True,
+    )
+    response = api_client.post(
+        path=reverse_lazy("model-api-list"),
+        data={
+            "file": file_url,
+        },
+    )  # type: ignore
+    assert response.status_code == status.HTTP_400_BAD_REQUEST, response.data
+    assert response.data["file"][0] == "Not a valid string."

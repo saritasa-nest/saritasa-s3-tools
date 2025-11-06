@@ -125,6 +125,10 @@ class S3UploadURLField(serializers.CharField):
             f"{self.storage.bucket_name}/",  # type: ignore
         )[-1].lstrip("/")
 
+        # Raise error if filename contains escape characters
+        if file_url != urllib.parse.unquote_plus(file_url):
+            self.fail("invalid")
+
         # Normalize url
         file_url = urllib.parse.unquote_plus(file_url)
 
