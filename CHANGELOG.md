@@ -4,6 +4,8 @@ We follow [Semantic Versions](https://semver.org/).
 
 ## Unreleased
 
+- Restrict "+" character in filename
+
 ## 0.5.0
 
 - Improve `django_adjust_s3_bucket` to take in account different storages
