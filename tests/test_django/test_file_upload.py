@@ -78,7 +78,7 @@ def test_file_upload_invalid_config_used(
         },
     )  # type: ignore
     assert response.status_code == status.HTTP_200_OK, response.data
-    file_url, file_key = saritasa_s3_tools.testing.upload_file_and_verify(
+    _, _ = saritasa_s3_tools.testing.upload_file_and_verify(
         filepath=__file__,
         s3_params=saritasa_s3_tools.client.S3UploadParams(**response.data),
         is_minio=True,

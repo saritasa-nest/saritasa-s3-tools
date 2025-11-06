@@ -25,7 +25,7 @@ def test_s3_upload_field_with_str_value(
         },
     )  # type: ignore
     assert response.status_code == status.HTTP_200_OK, response.data
-    file_url, file_key = saritasa_s3_tools.testing.upload_file_and_verify(
+    _, file_key = saritasa_s3_tools.testing.upload_file_and_verify(
         filepath=__file__,
         s3_params=saritasa_s3_tools.client.S3UploadParams(**response.data),
         is_minio=True,

@@ -1,9 +1,14 @@
+default_stages: [
+  pre-commit,
+  pre-push,
+]
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v5.0.0
+    rev: v6.0.0
     hooks:
       - id: check-yaml
       - id: check-toml
+      - id: check-xml
       - id: check-json
         exclude: ".*\\.vscode/"
       - id: end-of-file-fixer
@@ -12,23 +17,31 @@ repos:
         args: [--allow-missing-credentials]
       - id: debug-statements
       - id: check-merge-conflict
+        args: [--assume-in-merge]
       - id: detect-private-key
+      - id: check-case-conflict
+      - id: check-illegal-windows-names
+      - id: check-added-large-files
+        args: [--maxkb=1000]
+      - id: file-contents-sorter
+        files: "\\.vscode/(boilerplate-words|project-related-words)\\.txt"
+        args: [--ignore-case]
 
   - repo: https://github.com/python-poetry/poetry
-    rev: 2.1.3
+    rev: 2.2.1
     hooks:
       - id: poetry-check
         args: ["--lock"]
 
   - repo: https://github.com/asottile/add-trailing-comma
-    rev: v3.2.0
+    rev: v4.0.0
     hooks:
     -   id: add-trailing-comma
 
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.12.2
+    rev: v0.14.3
     hooks:
-      - id: ruff
+      - id: ruff-check
         args: [ --fix ]
       - id: ruff-format
 
