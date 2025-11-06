@@ -7,13 +7,13 @@ We use [poetry](https://github.com/python-poetry/poetry) to manage the dependenc
 To install them you would need to run `install` command:
 
 ```bash
-poetry install
+poetry sync
 ```
 
 To activate your `virtualenv` run command.
 
 ```bash
-poetry shell
+source .venv/bin/activate
 ```
 
 ## Base setup
