@@ -7,7 +7,7 @@ description = "High-level concurrency and networking framework on top of asyncio
 optional = true
 python-versions = ">=3.9"
 groups = ["main"]
-markers = "extra == \"all\" or extra == \"async\" or extra == \"testing\""
+markers = "extra == \"async\" or extra == \"all\" or extra == \"testing\""
 files = [
     {file = "anyio-4.11.0-py3-none-any.whl", hash = "sha256:0287e96f4d26d4149305414d4e3bc32f0dcd0862365a4bddea19d7a1ec38c4fc"},
     {file = "anyio-4.11.0.tar.gz", hash = "sha256:82a8d0b81e318cc5ce71a5f1f8b5c4e63619620b63141ef8c995fa0db95a57c4"},
@@ -32,7 +32,7 @@ files = [
     {file = "asgiref-3.8.1-py3-none-any.whl", hash = "sha256:3e1e3ecc849832fe52ccf2cb6686b7a55f82bb1d6aee72a58826471390335e47"},
     {file = "asgiref-3.8.1.tar.gz", hash = "sha256:c343bd80a0bec947a9860adb4c432ffa7db769836c64238fc34bdc3fec84d590"},
 ]
-markers = {main = "extra == \"all\" or extra == \"django\" or extra == \"django-openapi\""}
+markers = {main = "extra == \"django\" or extra == \"all\" or extra == \"django-openapi\""}
 
 [package.extras]
 tests = ["mypy (>=0.800)", "pytest", "pytest-asyncio"]
@@ -63,7 +63,7 @@ description = "Classes Without Boilerplate"
 optional = true
 python-versions = ">=3.7"
 groups = ["main"]
-markers = "extra == \"all\" or extra == \"django-openapi\""
+markers = "extra == \"django-openapi\" or extra == \"all\""
 files = [
     {file = "attrs-24.2.0-py3-none-any.whl", hash = "sha256:81921eb96de3191c8258c199618104dd27ac608d9366f5e35d011eae1867ede2"},
     {file = "attrs-24.2.0.tar.gz", hash = "sha256:5cfb1b9148b5b086569baec03f20d7b6bf3bcacc9a42bebf87ffaaca362f6346"},
@@ -572,7 +572,7 @@ description = "Python package for providing Mozilla's CA Bundle."
 optional = true
 python-versions = ">=3.6"
 groups = ["main"]
-markers = "extra == \"all\" or extra == \"testing\""
+markers = "extra == \"testing\" or extra == \"all\""
 files = [
     {file = "certifi-2024.8.30-py3-none-any.whl", hash = "sha256:922820b53db7a7257ffbda3f597266d435245903d80737e34f8a45ff3e3230d8"},
     {file = "certifi-2024.8.30.tar.gz", hash = "sha256:bec941d2aa8195e248a60b31ff9f0558284cf01a52591ceda73ea9afffd69fd9"},
@@ -743,7 +743,7 @@ files = [
     {file = "django-5.2.8-py3-none-any.whl", hash = "sha256:37e687f7bd73ddf043e2b6b97cfe02fcbb11f2dbb3adccc6a2b18c6daa054d7f"},
     {file = "django-5.2.8.tar.gz", hash = "sha256:23254866a5bb9a2cfa6004e8b809ec6246eba4b58a7589bc2772f1bcc8456c7f"},
 ]
-markers = {main = "extra == \"all\" or extra == \"django\" or extra == \"django-openapi\""}
+markers = {main = "extra == \"django\" or extra == \"all\" or extra == \"django-openapi\""}
 
 [package.dependencies]
 asgiref = ">=3.8.1"
@@ -788,7 +788,7 @@ description = "Support for many storage backends in Django"
 optional = true
 python-versions = ">=3.7"
 groups = ["main"]
-markers = "extra == \"all\" or extra == \"django\""
+markers = "extra == \"django\" or extra == \"all\""
 files = [
     {file = "django_storages-1.14.6-py3-none-any.whl", hash = "sha256:11b7b6200e1cb5ffcd9962bd3673a39c7d6a6109e8096f0e03d46fab3d3aabd9"},
     {file = "django_storages-1.14.6.tar.gz", hash = "sha256:7a25ce8f4214f69ac9c7ce87e2603887f7ae99326c316bc8d2d75375e09341c9"},
@@ -814,7 +814,7 @@ description = "Web APIs for Django, made easy."
 optional = true
 python-versions = ">=3.9"
 groups = ["main"]
-markers = "extra == \"all\" or extra == \"django\" or extra == \"django-openapi\""
+markers = "extra == \"django\" or extra == \"all\" or extra == \"django-openapi\""
 files = [
     {file = "djangorestframework-3.16.1-py3-none-any.whl", hash = "sha256:33a59f47fb9c85ede792cbf88bde71893bcda0667bc573f784649521f1102cec"},
     {file = "djangorestframework-3.16.1.tar.gz", hash = "sha256:166809528b1aced0a17dc66c24492af18049f2c9420dbd0be29422029cfc3ff7"},
@@ -830,7 +830,7 @@ description = "Sane and flexible OpenAPI 3 schema generation for Django REST fra
 optional = true
 python-versions = ">=3.7"
 groups = ["main"]
-markers = "extra == \"all\" or extra == \"django-openapi\""
+markers = "extra == \"django-openapi\" or extra == \"all\""
 files = [
     {file = "drf_spectacular-0.29.0-py3-none-any.whl", hash = "sha256:d1ee7c9535d89848affb4427347f7c4a22c5d22530b8842ef133d7b72e19b41a"},
     {file = "drf_spectacular-0.29.0.tar.gz", hash = "sha256:0a069339ea390ce7f14a75e8b5af4a0860a46e833fd4af027411a3e94fc1a0cc"},
@@ -870,7 +870,7 @@ description = "A versatile test fixtures replacement based on thoughtbot's facto
 optional = true
 python-versions = ">=3.8"
 groups = ["main"]
-markers = "extra == \"all\" or extra == \"factory\""
+markers = "extra == \"factory\" or extra == \"all\""
 files = [
     {file = "factory_boy-3.3.3-py2.py3-none-any.whl", hash = "sha256:1c39e3289f7e667c4285433f305f8d506efc2fe9c73aaea4151ebd5cdea394fc"},
     {file = "factory_boy-3.3.3.tar.gz", hash = "sha256:866862d226128dfac7f2b4160287e899daf54f2612778327dd03d0e2cb1e3d03"},
@@ -890,7 +890,7 @@ description = "Faker is a Python package that generates fake data for you."
 optional = true
 python-versions = ">=3.8"
 groups = ["main"]
-markers = "extra == \"all\" or extra == \"factory\""
+markers = "extra == \"factory\" or extra == \"all\""
 files = [
     {file = "Faker-33.0.0-py3-none-any.whl", hash = "sha256:68e5580cb6b4226710886e595eabc13127149d6e71e9d1db65506a7fbe2c7fce"},
     {file = "faker-33.0.0.tar.gz", hash = "sha256:9b01019c1ddaf2253ca2308c0472116e993f4ad8fc9905f82fa965e0c6f932e9"},
@@ -924,7 +924,7 @@ description = "A pure-Python, bring-your-own-I/O implementation of HTTP/1.1"
 optional = true
 python-versions = ">=3.8"
 groups = ["main"]
-markers = "extra == \"all\" or extra == \"testing\""
+markers = "extra == \"testing\" or extra == \"all\""
 files = [
     {file = "h11-0.16.0-py3-none-any.whl", hash = "sha256:63cf8bbe7522de3bf65932fda1d9c2772064ffb3dae62d55932da54b31cb6c86"},
     {file = "h11-0.16.0.tar.gz", hash = "sha256:4e35b956cf45792e4caa5885e69fba00bdbc6ffafbfa020300e549b208ee5ff1"},
@@ -937,7 +937,7 @@ description = "A minimal low-level HTTP client."
 optional = true
 python-versions = ">=3.8"
 groups = ["main"]
-markers = "extra == \"all\" or extra == \"testing\""
+markers = "extra == \"testing\" or extra == \"all\""
 files = [
     {file = "httpcore-1.0.9-py3-none-any.whl", hash = "sha256:2d400746a40668fc9dec9810239072b40b4484b640a8c38fd654a024c7a1bf55"},
     {file = "httpcore-1.0.9.tar.gz", hash = "sha256:6e34463af53fd2ab5d807f399a9b45ea31c3dfa2276f15a2c3f00afff6e176e8"},
@@ -960,7 +960,7 @@ description = "The next generation HTTP client."
 optional = true
 python-versions = ">=3.8"
 groups = ["main"]
-markers = "extra == \"all\" or extra == \"testing\""
+markers = "extra == \"testing\" or extra == \"all\""
 files = [
     {file = "httpx-0.28.1-py3-none-any.whl", hash = "sha256:d909fcccc110f8c7faf814ca82a9a4d816bc5a6dbfea25d6591d6985b8ba59ad"},
     {file = "httpx-0.28.1.tar.gz", hash = "sha256:75e98c5f16b0f35b567856f597f06ff2270a374470a5c2392242528e3e3e42fc"},
@@ -986,7 +986,7 @@ description = "Python humanize utilities"
 optional = true
 python-versions = ">=3.10"
 groups = ["main"]
-markers = "extra == \"all\" or extra == \"django\""
+markers = "extra == \"django\" or extra == \"all\""
 files = [
     {file = "humanize-4.14.0-py3-none-any.whl", hash = "sha256:d57701248d040ad456092820e6fde56c930f17749956ac47f4f655c0c547bfff"},
     {file = "humanize-4.14.0.tar.gz", hash = "sha256:2fa092705ea640d605c435b1ca82b2866a1b601cdf96f076d70b79a855eba90d"},
@@ -1017,7 +1017,7 @@ description = "Internationalized Domain Names in Applications (IDNA)"
 optional = true
 python-versions = ">=3.6"
 groups = ["main"]
-markers = "extra == \"all\" or extra == \"async\" or extra == \"testing\""
+markers = "extra == \"async\" or extra == \"all\" or extra == \"testing\""
 files = [
     {file = "idna-3.10-py3-none-any.whl", hash = "sha256:946d195a0d259cbba61165e88e65941f16e9b36ea6ddb97f00452bae8b1287d3"},
     {file = "idna-3.10.tar.gz", hash = "sha256:12f65c9b470abda6dc35cf8e63cc574b1c52b11df2c86030af0ac09b01b13ea9"},
@@ -1033,7 +1033,7 @@ description = "A port of Ruby on Rails inflector to Python"
 optional = true
 python-versions = ">=3.5"
 groups = ["main"]
-markers = "extra == \"all\" or extra == \"django-openapi\""
+markers = "extra == \"django-openapi\" or extra == \"all\""
 files = [
     {file = "inflection-0.5.1-py2.py3-none-any.whl", hash = "sha256:f38b2b640938a4f35ade69ac3d053042959b62a0f1076a5bbaa1b9526605a8a2"},
     {file = "inflection-0.5.1.tar.gz", hash = "sha256:1a29730d366e996aaacffb2f1f1cb9593dc38e2ddd30c91250c6dde09ea9b417"},
@@ -1166,7 +1166,7 @@ description = "An implementation of JSON Schema validation for Python"
 optional = true
 python-versions = ">=3.8"
 groups = ["main"]
-markers = "extra == \"all\" or extra == \"django-openapi\""
+markers = "extra == \"django-openapi\" or extra == \"all\""
 files = [
     {file = "jsonschema-4.23.0-py3-none-any.whl", hash = "sha256:fbadb6f8b144a8f8cf9f0b89ba94501d143e50411a1278633f56a7acf7fd5566"},
     {file = "jsonschema-4.23.0.tar.gz", hash = "sha256:d71497fef26351a33265337fa77ffeb82423f3ea21283cd9467bb03999266bc4"},
@@ -1189,7 +1189,7 @@ description = "The JSON Schema meta-schemas and vocabularies, exposed as a Regis
 optional = true
 python-versions = ">=3.9"
 groups = ["main"]
-markers = "extra == \"all\" or extra == \"django-openapi\""
+markers = "extra == \"django-openapi\" or extra == \"all\""
 files = [
     {file = "jsonschema_specifications-2024.10.1-py3-none-any.whl", hash = "sha256:a09a0680616357d9a0ecf05c12ad234479f549239d0f5b55f3deea67475da9bf"},
     {file = "jsonschema_specifications-2024.10.1.tar.gz", hash = "sha256:0f38b83639958ce1152d02a7f062902c41c8fd20d558b0c34344292d417ae272"},
@@ -1412,7 +1412,7 @@ description = "Python Imaging Library (fork)"
 optional = true
 python-versions = ">=3.10"
 groups = ["main"]
-markers = "extra == \"all\" or extra == \"factory\""
+markers = "extra == \"factory\" or extra == \"all\""
 files = [
     {file = "pillow-12.0.0-cp310-cp310-macosx_10_10_x86_64.whl", hash = "sha256:3adfb466bbc544b926d50fe8f4a4e6abd8c6bffd28a26177594e6e9b2b76572b"},
     {file = "pillow-12.0.0-cp310-cp310-macosx_11_0_arm64.whl", hash = "sha256:1ac11e8ea4f611c3c0147424eae514028b5e9077dd99ab91e1bd7bc33ff145e1"},
@@ -1875,7 +1875,7 @@ files = [
     {file = "PyYAML-6.0.2-cp39-cp39-win_amd64.whl", hash = "sha256:39693e1f8320ae4f43943590b49779ffb98acb81f788220ea932a6b6c51004d8"},
     {file = "pyyaml-6.0.2.tar.gz", hash = "sha256:d584d9ec91ad65861cc08d42e834324ef890a082e591037abe114850ff7bbc3e"},
 ]
-markers = {main = "extra == \"all\" or extra == \"django-openapi\""}
+markers = {main = "extra == \"django-openapi\" or extra == \"all\""}
 
 [[package]]
 name = "referencing"
@@ -1884,7 +1884,7 @@ description = "JSON Referencing + Python"
 optional = true
 python-versions = ">=3.8"
 groups = ["main"]
-markers = "extra == \"all\" or extra == \"django-openapi\""
+markers = "extra == \"django-openapi\" or extra == \"all\""
 files = [
     {file = "referencing-0.35.1-py3-none-any.whl", hash = "sha256:eda6d3234d62814d1c64e305c1331c9a3a6132da475ab6382eaa997b21ee75de"},
     {file = "referencing-0.35.1.tar.gz", hash = "sha256:25b42124a6c8b632a425174f24087783efb348a6f1e0008e63cd4466fedf703c"},
@@ -1920,7 +1920,7 @@ description = "Python bindings to Rust's persistent data structures (rpds)"
 optional = true
 python-versions = ">=3.10"
 groups = ["main"]
-markers = "extra == \"all\" or extra == \"django-openapi\""
+markers = "extra == \"django-openapi\" or extra == \"all\""
 files = [
     {file = "rpds_py-0.28.0-cp310-cp310-macosx_10_12_x86_64.whl", hash = "sha256:7b6013db815417eeb56b2d9d7324e64fcd4fa289caeee6e7a78b2e11fc9b438a"},
     {file = "rpds_py-0.28.0-cp310-cp310-macosx_11_0_arm64.whl", hash = "sha256:1a4c6b05c685c0c03f80dabaeb73e74218c49deea965ca63f76a752807397207"},
@@ -2095,7 +2095,7 @@ description = "Sniff out which async library your code is running under"
 optional = true
 python-versions = ">=3.7"
 groups = ["main"]
-markers = "extra == \"all\" or extra == \"async\" or extra == \"testing\""
+markers = "extra == \"async\" or extra == \"all\" or extra == \"testing\""
 files = [
     {file = "sniffio-1.3.1-py3-none-any.whl", hash = "sha256:2f6da418d1f1e0fddd844478f41680e794e6051915791a034ff65e5f100525a2"},
     {file = "sniffio-1.3.1.tar.gz", hash = "sha256:f4324edc670a0f49750a81b895f35c3adb843cca46f0530f79fc1babb23789dc"},
@@ -2112,7 +2112,7 @@ files = [
     {file = "sqlparse-0.5.2-py3-none-any.whl", hash = "sha256:e99bc85c78160918c3e1d9230834ab8d80fc06c59d03f8db2618f65f65dda55e"},
     {file = "sqlparse-0.5.2.tar.gz", hash = "sha256:9e37b35e16d1cc652a2545f0997c1deb23ea28fa1f3eefe609eee3063c3b105f"},
 ]
-markers = {main = "extra == \"all\" or extra == \"django\" or extra == \"django-openapi\""}
+markers = {main = "extra == \"django\" or extra == \"all\" or extra == \"django-openapi\""}
 
 [package.extras]
 dev = ["build", "hatch"]
@@ -2204,7 +2204,7 @@ files = [
     {file = "typing_extensions-4.12.2-py3-none-any.whl", hash = "sha256:04e5ca0351e0f3f85c6853954072df659d0d13fac324d0072316b67d7794700d"},
     {file = "typing_extensions-4.12.2.tar.gz", hash = "sha256:1a7ead55c7e559dd4dee8856e3a88b41225abfe1ce8df57b7c13915fe121ffb8"},
 ]
-markers = {main = "(extra == \"all\" or extra == \"async\" or extra == \"testing\") and python_version < \"3.13\" or python_version == \"3.11\" or extra == \"all\" or extra == \"factory\"", dev = "python_version == \"3.11\"", test = "python_version < \"3.13\""}
+markers = {main = "(extra == \"async\" or extra == \"all\" or extra == \"testing\") and python_version < \"3.13\" or python_version == \"3.11\" or extra == \"factory\" or extra == \"all\"", dev = "python_version == \"3.11\"", test = "python_version < \"3.13\""}
 
 [[package]]
 name = "tzdata"
@@ -2217,7 +2217,7 @@ files = [
     {file = "tzdata-2024.2-py2.py3-none-any.whl", hash = "sha256:a48093786cdcde33cad18c2555e8532f34422074448fbc874186f0abd79565cd"},
     {file = "tzdata-2024.2.tar.gz", hash = "sha256:7d85cc416e9382e69095b7bdf4afd9e3880418a2413feec7069d533d6b4e31cc"},
 ]
-markers = {main = "(extra == \"all\" or extra == \"django\" or extra == \"django-openapi\") and sys_platform == \"win32\"", test = "sys_platform == \"win32\""}
+markers = {main = "(extra == \"django\" or extra == \"all\" or extra == \"django-openapi\") and sys_platform == \"win32\"", test = "sys_platform == \"win32\""}
 
 [[package]]
 name = "uritemplate"
@@ -2226,7 +2226,7 @@ description = "Implementation of RFC 6570 URI Templates"
 optional = true
 python-versions = ">=3.6"
 groups = ["main"]
-markers = "extra == \"all\" or extra == \"django-openapi\""
+markers = "extra == \"django-openapi\" or extra == \"all\""
 files = [
     {file = "uritemplate-4.1.1-py2.py3-none-any.whl", hash = "sha256:830c08b8d99bdd312ea4ead05994a38e8936266f84b9a7878232db50b044e02e"},
     {file = "uritemplate-4.1.1.tar.gz", hash = "sha256:4346edfc5c3b79f694bccd6d6099a322bbeb628dbf2cd86eea55a456ce5124f0"},
