@@ -136,7 +136,7 @@ mypy = "^1.13.0"
 [tool.poetry.group.test.dependencies]
 # Makes it easy to write small tests, yet scales to support complex functional testing
 # https://github.com/pytest-dev/pytest/
-pytest = "^8.3.3"
+pytest = ">=8.3.3,<10.0.0"
 # To prettify pytest output
 # https://github.com/Teemu/pytest-sugar
 pytest-sugar = "^1.0.0"
