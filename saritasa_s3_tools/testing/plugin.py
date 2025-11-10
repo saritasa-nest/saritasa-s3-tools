@@ -19,18 +19,22 @@ def pytest_addoption(parser: pytest.Parser) -> None:
     parser.addini(
         "s3_access_key",
         "Access key for s3.",
+        default="",
     )
     parser.addini(
         "s3_secret_key",
         "Secret key for s3.",
+        default="",
     )
     parser.addini(
         "s3_endpoint_url",
         "Endpoint for s3.",
+        default="",
     )
     parser.addini(
         "s3_region",
         "Region for s3.",
+        default="",
     )
     parser.addini(
         "s3_bucket_name",
@@ -48,14 +52,12 @@ def access_key_getter(
 ]:
     """Set up cred getter."""
     if (
-        s3_access_key := request.config.inicfg.get(
+        s3_access_key := request.config.getini(
             "s3_access_key",
-            "",
         )
     ) and (
-        s3_secret_key := request.config.inicfg.get(
+        s3_secret_key := request.config.getini(
             "s3_secret_key",
-            "",
         )
     ):
         return lambda: botocore.credentials.Credentials(
@@ -79,7 +81,7 @@ def s3_endpoint_url_getter(
     | None
 ):
     """Set up url getter."""
-    if s3_endpoint_url := request.config.inicfg.get("s3_endpoint_url", ""):
+    if s3_endpoint_url := request.config.getini("s3_endpoint_url"):
         return lambda: str(s3_endpoint_url)
     return None  # pragma: no cover
 
@@ -89,7 +91,7 @@ def s3_region(
     request: pytest.FixtureRequest,
 ) -> str:
     """Get s3 region."""
-    return str(request.config.inicfg.get("s3_region", ""))
+    return str(request.config.getini("s3_region"))
 
 
 @pytest.fixture(scope="session")
@@ -174,12 +176,7 @@ def s3_bucket_name(
         filter(
             None,
             (
-                str(
-                    request.config.inicfg.get(
-                        "s3_bucket_name",
-                        "saritasa-s3-tools",
-                    ),
-                ),
+                str(request.config.getini("s3_bucket_name")),
                 worker_input["workerid"],
             ),
         ),
@@ -304,16 +301,13 @@ def django_storage_changer() -> collections.abc.Iterator[
 def django_adjust_s3_bucket(s3_bucket: str) -> None:
     """Set bucket to a test one."""
     from django.conf import settings
-    from django.core.files.storage import (
-        InvalidStorageError,
-        storages,
-    )
-    from storages.backends.s3 import S3Storage
+    from django.core.files import storage
+    from storages.backends import s3
 
     for storage_alias in settings.STORAGES:
-        with contextlib.suppress(InvalidStorageError):
-            storage = storages[storage_alias]
-            if isinstance(storage, S3Storage):
-                storage.bucket_name = s3_bucket  # type: ignore
+        with contextlib.suppress(storage.InvalidStorageError):
+            storage_instance = storage.storages[storage_alias]
+            if isinstance(storage_instance, s3.S3Storage):
+                storage_instance.bucket_name = s3_bucket  # type: ignore
     settings.AWS_STORAGE_BUCKET_NAME = s3_bucket
     return None
