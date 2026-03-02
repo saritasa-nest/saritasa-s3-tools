@@ -4,6 +4,8 @@ We follow [Semantic Versions](https://semver.org/).
 
 ## Unreleased
 
+- Add support for Django 6
+
 ## 0.6.0
 
 - Confirm support for python 3.14

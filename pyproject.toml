@@ -36,6 +36,7 @@ classifiers = [
   "Framework :: Django :: 5.0",
   "Framework :: Django :: 5.1",
   "Framework :: Django :: 5.2",
+  "Framework :: Django :: 6.0",
   "Framework :: Pytest",
 ]
 
@@ -65,7 +66,7 @@ pillow = {version= "<13", optional = true}
 httpx = {version ="<1", optional = true}
 # Django framework
 # https://www.djangoproject.com/
-django = {version ="<6", optional = true}
+django = {version ="<7", optional = true}
 # Storage to AWS S3
 # https://django-storages.readthedocs.io/en/latest/
 django-storages = {extras = ["boto3"], version = "<2", optional = true}
