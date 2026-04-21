@@ -1,7 +1,8 @@
 # saritasa-s3-tools
 
-![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/saritasa-nest/saritasa-s3-tools/checks.yaml)
-[![PyPI](https://img.shields.io/pypi/v/saritasa-s3-tools)](https://pypi.org/project/saritasa-s3-tools/)
+![GitHub last commit](https://img.shields.io/github/last-commit/saritasa-nest/saritasa-s3-tools)
+![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/saritasa-nest/saritasa-s3-tools/run_pre_commit.yaml)
+![PyPI](https://img.shields.io/pypi/v/saritasa-s3-tools)
 ![PyPI - Status](https://img.shields.io/pypi/status/saritasa-s3-tools)
 ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/saritasa-s3-tools)
 ![PyPI - Django Version](https://img.shields.io/pypi/frameworkversions/django/saritasa-s3-tools)
@@ -13,12 +14,12 @@ Extension for boto3 to ease work with s3
 
 ## Table of contents
 
-* [Installation](#installation)
-* [Features](#features)
-* [Django](#django)
-* [Optional dependencies](#optional-dependencies)
-* [Direct upload example](#direct-upload-example)
-* [Pytest](#pytest-plugin)
+- [Installation](#installation)
+- [Features](#features)
+- [Django](#django)
+- [Optional dependencies](#optional-dependencies)
+- [Direct upload example](#direct-upload-example)
+- [Pytest](#pytest-plugin)
 
 ## Installation
 
@@ -32,17 +33,23 @@ or if you are using [poetry](https://python-poetry.org/)
 poetry add saritasa-s3-tools
 ```
 
+or if you are using [uv](https://docs.astral.sh/uv/)
+
+```bash
+uv add saritasa-s3-tools
+```
+
 ## Features
 
-* `S3Client` and `AsyncS3Client` for integrations with s3 buckets. This clients
+- `S3Client` and `AsyncS3Client` for integrations with s3 buckets. This clients
 are extension to boto3 clients with proper typing, support for async and
 method to generate signed urls for file upload.
-* `S3FileTypeConfig` for defining configuration parameters for direct upload to s3.
-[Check out more](saritasa_s3_tools/configs.py#L24)
-* `S3Key` for generating unique keys for s3 upload, used for `S3FileTypeConfig`
-* `S3FileField` and `S3ImageFileField` - [factory-boy](https://github.com/FactoryBoy/factory_boy) fields for generating files and saving it in `s3`
-* `pytest` plugin with fixtures for `boto3`, `S3Client` and `AsyncS3Client` and etc
-* `Django` plugin for setting up models and api
+- `S3FileTypeConfig` for defining configuration parameters for direct upload to s3.
+- `S3Key` for generating unique keys for s3 upload, used for `S3FileTypeConfig`
+- `S3FileField` and `S3ImageFileField` - [factory-boy](https://github.com/FactoryBoy/factory_boy)
+fields for generating files and saving it in `s3`
+- `pytest` plugin with fixtures for `boto3`, `S3Client` and `AsyncS3Client` and etc
+- `Django` plugin for setting up models and api
 
 ## Django
 
@@ -148,19 +155,18 @@ AWS_S3_SIGNATURE_VERSION = "s3v4"
 
 By default we assume `s3v4` version for signature. We recommend that you would
 set `AWS_S3_SIGNATURE_VERSION` to `s3v4`. If you need other versions, set it in
-`AWS_S3_SIGNATURE_VERSION` and update `SARITASA_S3_TOOLS_UPLOAD_PARAMS`
-(defaults are [here](saritasa_s3_tools/constants.py)) setting
+`AWS_S3_SIGNATURE_VERSION` and update `SARITASA_S3_TOOLS_UPLOAD_PARAMS` setting
 to reflect expected fields that would return.
 
 ## Optional dependencies
 
-* `[async]` - Add this to enable async support
-* `[factory]` - Add this to enable factory-boy field `S3FileField` and `S3ImageFileField`
+- `[async]` - Add this to enable async support
+- `[factory]` - Add this to enable factory-boy field `S3FileField` and `S3ImageFileField`
 from `saritasa_s3_tools.factory`
-* `[testing]` - Add this to enable testing helping functions from
+- `[testing]` - Add this to enable testing helping functions from
 `saritasa_s3_tools.testing.shortcuts`
-* `[django]` - Add this to enable [django support](#django)
-* `[django-openapi]` - Add this to enable [drf-spectacular support](#django)
+- `[django]` - Add this to enable [django support](#django)
+- `[django-openapi]` - Add this to enable [drf-spectacular support](#django)
 
 To install all optional dependencies add `[all]`
 
@@ -210,20 +216,20 @@ and create/clean up buckets for testing. Supports `pytest-xdist`.
 
 ### Fixtures
 
-* `access_key_getter`, `s3_endpoint_url_getter`, `s3_region` - are used to
+- `access_key_getter`, `s3_endpoint_url_getter`, `s3_region` - are used to
 configure boto3 session and clients/resources that are used in tests.
 You can override them or set values in ini file for pytest. Plugin will tell
 what you are missing.
-* `aws_session` - Returns `boto3.Session`
-* `aws_config` - Returns `botocore.config.Config`, override if you need
+- `aws_session` - Returns `boto3.Session`
+- `aws_config` - Returns `botocore.config.Config`, override if you need
 customization, None by default.
-* `boto3_resource` - Returns s3 resource or in typing `mypy_boto3_s3.S3ServiceResource`
-* `boto3_client`- Returns s3 client or in typing `mypy_boto3_s3.S3Client`
-* `s3_bucket_name` - Name of bucket for testing, default: `saritasa-s3-tools`
+- `boto3_resource` - Returns s3 resource or in typing `mypy_boto3_s3.S3ServiceResource`
+- `boto3_client`- Returns s3 client or in typing `mypy_boto3_s3.S3Client`
+- `s3_bucket_name` - Name of bucket for testing, default: `saritasa-s3-tools`
 or `s3_bucket_name` from ini file.
-* `s3_bucket_cleaner` - Returns function which cleans all files from bucket
-* `s3_bucket_factory` - Returns manager which creates bucket, and when it's no
+- `s3_bucket_cleaner` - Returns function which cleans all files from bucket
+- `s3_bucket_factory` - Returns manager which creates bucket, and when it's no
 longer needed deletes it
-* `s3_bucket` - Creates bucket via `s3_bucket_factory` and return it's name
-* `s3_client` - Returns `saritasa_s3_tools.S3Client`
-* `async_s3_client` - Returns `saritasa_s3_tools.AsyncS3Client`
+- `s3_bucket` - Creates bucket via `s3_bucket_factory` and return it's name
+- `s3_client` - Returns `saritasa_s3_tools.S3Client`
+- `async_s3_client` - Returns `saritasa_s3_tools.AsyncS3Client`

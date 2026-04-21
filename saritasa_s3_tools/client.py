@@ -3,11 +3,9 @@ import dataclasses
 import warnings
 
 import boto3
-import botocore.client
 import botocore.config
 import botocore.credentials
 import botocore.exceptions
-import botocore.response
 import mypy_boto3_s3
 import mypy_boto3_s3.type_defs
 
@@ -294,7 +292,7 @@ class S3Client:
         except botocore.exceptions.ClientError as error:
             if error.response.get("Error", {}).get("Code") == "404":
                 return False
-            raise error  # pragma: no cover
+            raise  # pragma: no cover
 
     def copy_object(
         self,

@@ -56,7 +56,7 @@ class S3Key:
         path = str(uuid.uuid4())
         ext = pathlib.Path(filename).suffix.lower()
 
-        return "".join((path, ext))
+        return f"{path}{ext}"
 
     def validate(self, key: str) -> bool:
         """Check that input key is matching Key pattern."""

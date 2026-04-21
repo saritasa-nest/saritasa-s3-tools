@@ -1,6 +1,7 @@
 import io
 import pathlib
 
+import anyio
 import pytest
 
 import saritasa_s3_tools
@@ -34,8 +35,8 @@ async def test_upload(
         file_obj=io.BytesIO(),
     )
     file_data.seek(0)
-    with pathlib.Path(__file__).open("rb") as upload_file:
-        assert file_data.read() == upload_file.read()
+    async with await anyio.open_file(__file__, "rb") as upload_file:
+        assert file_data.read() == await upload_file.read()
 
 
 @pytest.mark.usefixtures("anyio_backend")
@@ -43,11 +44,11 @@ async def test_direct_upload(
     async_s3_client: saritasa_s3_tools.AsyncS3Client,
 ) -> None:
     """Test direct file upload in async env."""
-    with pathlib.Path(__file__).open("rb") as upload_file:
+    async with await anyio.open_file(__file__, "rb") as upload_file:
         upload_key = await async_s3_client.async_upload_file(
             filename=pathlib.Path(__file__).name,
             config=saritasa_s3_tools.S3FileTypeConfig.configs["files"],
-            file_obj=upload_file,
+            file_obj=upload_file.wrapped,
         )
     assert await async_s3_client.async_is_file_in_bucket(
         key=upload_key,
@@ -59,11 +60,11 @@ async def test_delete(
     async_s3_client: saritasa_s3_tools.AsyncS3Client,
 ) -> None:
     """Test file deletion."""
-    with pathlib.Path(__file__).open("rb") as upload_file:
+    async with await anyio.open_file(__file__, "rb") as upload_file:
         upload_key = await async_s3_client.async_upload_file(
             filename=pathlib.Path(__file__).name,
             config=saritasa_s3_tools.S3FileTypeConfig.configs["files"],
-            file_obj=upload_file,
+            file_obj=upload_file.wrapped,
         )
     await async_s3_client.async_delete_object(key=upload_key)
     assert not await async_s3_client.async_is_file_in_bucket(
@@ -76,11 +77,11 @@ async def test_copy(
     async_s3_client: saritasa_s3_tools.AsyncS3Client,
 ) -> None:
     """Test file copy."""
-    with pathlib.Path(__file__).open("rb") as upload_file:
+    async with await anyio.open_file(__file__, "rb") as upload_file:
         upload_key = await async_s3_client.async_upload_file(
             filename=pathlib.Path(__file__).name,
             config=saritasa_s3_tools.S3FileTypeConfig.configs["files"],
-            file_obj=upload_file,
+            file_obj=upload_file.wrapped,
         )
     copy_key = saritasa_s3_tools.keys.WithPrefixUUIDFolder("copy")(None)
     await async_s3_client.async_copy_object(
