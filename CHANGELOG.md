@@ -4,6 +4,8 @@ We follow [Semantic Versions](https://semver.org/).
 
 ## Unreleased
 
+## 0.7.0
+
 - Set up docs generation with `mkdocs`
 
 ## 0.6.1
