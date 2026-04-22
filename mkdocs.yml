@@ -1,0 +1,81 @@
+site_name: saritasa-s3-tools
+site_description: Tools For S3 Used By Saritasa
+site_url: https://saritasa-nest.github.io/saritasa-s3-tools/
+repo_url: https://github.com/saritasa-nest/saritasa-s3-tools/
+repo_name: saritasa-s3-tools
+theme:
+  name: material
+  favicon: _static/favicon.png
+  palette:
+    # Palette toggle for automatic mode
+    - media: "(prefers-color-scheme)"
+      primary: custom
+      toggle:
+        icon: material/brightness-auto
+        name: Switch to light mode
+    # Palette toggle for light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: custom
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    # Palette toggle for dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: custom
+      toggle:
+        icon: material/brightness-4
+        name: Switch to system preference
+  features:
+    - search.suggest
+    - search.highlight
+    - search.share
+    - navigation.instant
+    - navigation.instant.progress
+    - navigation.tracking
+    - navigation.path
+    - content.code.annotate
+    - content.code.copy
+    - content.tooltips
+extra_css:
+  - _static/custom_color.css
+plugins:
+  - search
+  - autorefs
+  - mkdocstrings
+markdown_extensions:
+  - admonition
+  - attr_list
+  - pymdownx.highlight:
+      use_pygments: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
+  - pymdownx.emoji
+  - pymdownx.magiclink
+  - toc:
+      permalink: true
+nav:
+  - Home: index.md
+  - Changelog: changelog.md
+  - Contributing: contributing.md
+  - Reference:
+      - Async Client:
+          - Client: reference/async_client/client.md
+      - Django:
+          - DRF Fields: reference/django/drf_fields.md
+          - Model Fields: reference/django/model_fields.md
+          - Serializers: reference/django/serializers.md
+          - Shortcuts: reference/django/shortcuts.md
+          - Views: reference/django/views.md
+      - Testing:
+          - Plugin: reference/testing/plugin.md
+          - Shortcuts: reference/testing/shortcuts.md
+      - Client: reference/client.md
+      - Configs: reference/configs.md
+      - Factory: reference/factory.md
+      - Keys: reference/keys.md
+extra:
+  version:
+    provider: mike

@@ -5,6 +5,9 @@
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
+!.vscode/project-related-words.txt
+!.vscode/boilerplate-words.txt
+!.vscode/cspell.json
 *.code-workspace
 
 # Local History for Visual Studio Code
@@ -74,10 +77,6 @@ pytest.xml
 local_settings.py
 db.sqlite3
 db.sqlite3-journal
-# Local settings
-local.py
-# Media folder
-media/
 
 # PyBuilder
 .pybuilder/
@@ -113,9 +112,8 @@ celerybeat.pid
 *.sage.py
 
 # Environments
+.env
 .venv
-config/settings/.env
-config/settings/.env.tmp
 env/
 venv/
 ENV/
@@ -149,17 +147,7 @@ cython_debug/
 # Ignore idea folder
 .idea
 
-# Ignore tmp folder
 .tmp/
 
-# sql files
-*.sql
-
-# Local invoke config
-.invoke
-
-# pyenv's file for specifying local Python version
-.python-version
-
-# Ignore localstack volume files
-localstack_volume/
+# File in MacOS that stores custom attributes of its containing folder
+.DS_Store

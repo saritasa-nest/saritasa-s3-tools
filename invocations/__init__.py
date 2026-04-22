@@ -1,1 +1,1 @@
-from . import project
+from . import ci, docs, project

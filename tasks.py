@@ -1,9 +1,13 @@
+import os
+
 import invoke
 import saritasa_invocations
 
 import invocations
 
-ns = invoke.Collection(  # type: ignore
+ns = invoke.Collection(
+    invocations.ci,
+    invocations.docs,
     invocations.project,
     saritasa_invocations.docker,
     saritasa_invocations.git,
@@ -22,7 +26,7 @@ ns = invoke.Collection(  # type: ignore
 ns.configure(
     {
         "run": {
-            "pty": True,
+            "pty": os.environ.get("INVOKE_PTY", "true").lower() == "true",
             "echo": True,
         },
         "saritasa_invocations": saritasa_invocations.Config(

@@ -4,6 +4,8 @@ We follow [Semantic Versions](https://semver.org/).
 
 ## Unreleased
 
+- Set up docs generation with `mkdocs`
+
 ## 0.6.1
 
 - Add support for Django 6
@@ -57,3 +59,7 @@ use `django` storage for `s3` setup
 ## 0.1.0
 
 - Beta release
+
+## 0.0.0
+
+- Start of package development
