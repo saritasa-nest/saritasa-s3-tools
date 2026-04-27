@@ -2,62 +2,62 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://saritasa-nest.github.io/saritasa-s3-tools/latest/</loc>
-         <lastmod>2026-04-22</lastmod>
+         <lastmod>2026-04-27</lastmod>
     </url>
     <url>
          <loc>https://saritasa-nest.github.io/saritasa-s3-tools/latest/changelog/</loc>
-         <lastmod>2026-04-22</lastmod>
+         <lastmod>2026-04-27</lastmod>
     </url>
     <url>
          <loc>https://saritasa-nest.github.io/saritasa-s3-tools/latest/contributing/</loc>
-         <lastmod>2026-04-22</lastmod>
+         <lastmod>2026-04-27</lastmod>
     </url>
     <url>
          <loc>https://saritasa-nest.github.io/saritasa-s3-tools/latest/reference/client/</loc>
-         <lastmod>2026-04-22</lastmod>
+         <lastmod>2026-04-27</lastmod>
     </url>
     <url>
          <loc>https://saritasa-nest.github.io/saritasa-s3-tools/latest/reference/configs/</loc>
-         <lastmod>2026-04-22</lastmod>
+         <lastmod>2026-04-27</lastmod>
     </url>
     <url>
          <loc>https://saritasa-nest.github.io/saritasa-s3-tools/latest/reference/factory/</loc>
-         <lastmod>2026-04-22</lastmod>
+         <lastmod>2026-04-27</lastmod>
     </url>
     <url>
          <loc>https://saritasa-nest.github.io/saritasa-s3-tools/latest/reference/keys/</loc>
-         <lastmod>2026-04-22</lastmod>
+         <lastmod>2026-04-27</lastmod>
     </url>
     <url>
          <loc>https://saritasa-nest.github.io/saritasa-s3-tools/latest/reference/async_client/client/</loc>
-         <lastmod>2026-04-22</lastmod>
+         <lastmod>2026-04-27</lastmod>
     </url>
     <url>
          <loc>https://saritasa-nest.github.io/saritasa-s3-tools/latest/reference/django/drf_fields/</loc>
-         <lastmod>2026-04-22</lastmod>
+         <lastmod>2026-04-27</lastmod>
     </url>
     <url>
          <loc>https://saritasa-nest.github.io/saritasa-s3-tools/latest/reference/django/model_fields/</loc>
-         <lastmod>2026-04-22</lastmod>
+         <lastmod>2026-04-27</lastmod>
     </url>
     <url>
          <loc>https://saritasa-nest.github.io/saritasa-s3-tools/latest/reference/django/serializers/</loc>
-         <lastmod>2026-04-22</lastmod>
+         <lastmod>2026-04-27</lastmod>
     </url>
     <url>
          <loc>https://saritasa-nest.github.io/saritasa-s3-tools/latest/reference/django/shortcuts/</loc>
-         <lastmod>2026-04-22</lastmod>
+         <lastmod>2026-04-27</lastmod>
     </url>
     <url>
          <loc>https://saritasa-nest.github.io/saritasa-s3-tools/latest/reference/django/views/</loc>
-         <lastmod>2026-04-22</lastmod>
+         <lastmod>2026-04-27</lastmod>
     </url>
     <url>
          <loc>https://saritasa-nest.github.io/saritasa-s3-tools/latest/reference/testing/plugin/</loc>
-         <lastmod>2026-04-22</lastmod>
+         <lastmod>2026-04-27</lastmod>
     </url>
     <url>
          <loc>https://saritasa-nest.github.io/saritasa-s3-tools/latest/reference/testing/shortcuts/</loc>
-         <lastmod>2026-04-22</lastmod>
+         <lastmod>2026-04-27</lastmod>
     </url>
 </urlset>
