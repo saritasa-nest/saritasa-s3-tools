@@ -5,7 +5,7 @@ dynamic = [
 ]
 description = "Tools For S3 Used By Saritasa"
 authors = [
-    {name = "Saritasa", email = "pypi@saritasa.com"}
+  {name = "Saritasa", email = "pypi@saritasa.com"}
 ]
 maintainers = [
     {name = "Stanislav Khlud", email = "stanislav.khlud@saritasa.com"}
@@ -21,6 +21,7 @@ keywords = [
 license = "MIT"
 readme = "README.md"
 classifiers = [
+<<<<<<< before updating
     "License :: OSI Approved :: MIT License",
     "Natural Language :: English",
     "Intended Audience :: Developers",
@@ -39,6 +40,18 @@ classifiers = [
     "Framework :: Django :: 5.2",
     "Framework :: Django :: 6.0",
     "Framework :: Pytest",
+=======
+  "License :: OSI Approved :: MIT License",
+  "Natural Language :: English",
+  "Intended Audience :: Developers",
+  "Operating System :: OS Independent",
+  "Topic :: Software Development :: Libraries :: Python Modules",
+  "Development Status :: 4 - Beta",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.1199999999999997",
+  "Programming Language :: Python :: 3.13",
+>>>>>>> after updating
 ]
 requires-python = ">=3.11"
 dependencies = [
@@ -99,24 +112,24 @@ all = [
 
 [dependency-groups]
 local = [
-    "ipython>0",
-    # Exports functions to access the IPython debugger, which features tab completion, syntax highlighting, better tracebacks
-    # https://github.com/gotcha/ipdb
-    "ipdb>0",
-    # A framework for managing and maintaining multi-language pre-commit hooks.
-    # https://pre-commit.com/
-    "pre-commit>0",
-    # Collection of invoke commands which used in Saritasa organization
-    # https://github.com/saritasa-nest/saritasa-python-invocations/
-    "saritasa-invocations[env_settings]>0",
-    # A library and CLI app for rendering project templates.
-    # https://copier.readthedocs.io/en/latest/
-    "copier>0",
+  "ipython>0",
+  # Exports functions to access the IPython debugger, which features tab completion, syntax highlighting, better tracebacks
+  # https://github.com/gotcha/ipdb
+  "ipdb>0",
+  # A framework for managing and maintaining multi-language pre-commit hooks.
+  # https://pre-commit.com/
+  "pre-commit>0",
+  # Collection of invoke commands which used in Saritasa organization
+  # https://github.com/saritasa-nest/saritasa-python-invocations/
+  "saritasa-invocations[env_settings]>0",
+  # A library and CLI app for rendering project templates.
+  # https://copier.readthedocs.io/en/latest/
+  "copier>0",
 ]
 linters = [
-    # Mypy is a static type checker for Python.
-    # https://mypy.readthedocs.io/en/stable/
-    "mypy>0",
+  # Mypy is a static type checker for Python.
+  # https://mypy.readthedocs.io/en/stable/
+  "mypy>0",
 ]
 docs = [
   # Project documentation with Markdown.
@@ -167,10 +180,10 @@ test = [
 [project.urls]
 Documentation = "https://saritasa-nest.github.io/saritasa-s3-tools/latest/"
 Repository = "https://github.com/saritasa-nest/saritasa-s3-tools"
-Changelog = "https://saritasa-nest.github.io/saritasa-s3-tools/changelog/"
+Changelog = "https://saritasa-nest.github.io/saritasa-s3-tools/latest/changelog/"
 Releases = "https://github.com/saritasa-nest/saritasa-s3-tools/releases/"
 "Bug Tracker" = "https://github.com/saritasa-nest/saritasa-s3-tools/issues/"
-Contributing ="https://saritasa-nest.github.io/saritasa-s3-tools/contributing/"
+Contributing ="https://saritasa-nest.github.io/saritasa-s3-tools/latest/contributing/"
 
 [project.entry-points.pytest11]
 saritasa_s3_tools_plugin = "saritasa_s3_tools.testing.plugin"
@@ -288,12 +301,20 @@ ignore = [
 force-wrap-aliases = true
 split-on-trailing-comma = true
 section-order = [
+<<<<<<< before updating
     "future",
     "standard-library",
     "third-party",
     "boto3",
     "first-party",
     "local-folder",
+=======
+  "future",
+  "standard-library",
+  "third-party",
+  "first-party",
+  "local-folder",
+>>>>>>> after updating
 ]
 [tool.ruff.lint.isort.sections]
 boto3 = [
