@@ -31,6 +31,10 @@ ns.configure(
         },
         "saritasa_invocations": saritasa_invocations.Config(
             project_name="saritasa-s3-tools",
+            pre_commit=saritasa_invocations.PreCommitSettings(
+                entry="prek",
+                default_hook_stage="pre-push",
+            ),
             docker=saritasa_invocations.DockerSettings(
                 main_containers=(
                     "minio",
