@@ -21,6 +21,21 @@ def test_list_configs(
     )
 
 
+def test_list_configs_using_browsable_api(
+    api_client: test.APIClient,
+    default_user: models.User,
+):
+    """Test that we can list config using the browsable API."""
+    api_client.force_authenticate(default_user)
+    response: Response = api_client.get(
+        path=reverse_lazy("s3-list-configs"),
+        data={
+            "format": "api",
+        },
+    )
+    assert response.status_code == status.HTTP_200_OK
+
+
 def test_retrieve_config(
     api_client: test.APIClient,
     default_user: models.User,

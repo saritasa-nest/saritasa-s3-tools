@@ -4,6 +4,7 @@ addopts
 argnames
 argvalues
 autouse
+browsable
 getfixturevalue
 getini
 isready

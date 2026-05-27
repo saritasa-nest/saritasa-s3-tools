@@ -4,6 +4,9 @@ We follow [Semantic Versions](https://semver.org/).
 
 ## Unreleased
 
+- Fix `AttributeError` when accessing django `list-configs` API using
+  `BrowsableAPIRenderer`
+
 ## 0.7.0
 
 - Set up docs generation with `mkdocs`
