@@ -24,6 +24,15 @@ class S3GetParamsView(viewsets.GenericViewSet):
     filter_backends = ()
     pagination_class = None
 
+    # Required to make BrowsableAPIRenderer` work.
+    # DRF's `BrowsableAPIRenderer` calls `get_queryset` from
+    # `get_filter_form` for every request.
+    # `list_configs` methods returns list of objects,
+    # so there is no clean way to bypass this.
+    # This will work because `filter_backends` is empty for
+    # this viewset.
+    queryset = ()
+
     @decorators.action(
         methods=["POST"],
         url_path="get-params",
