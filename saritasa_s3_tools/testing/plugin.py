@@ -212,9 +212,7 @@ def s3_bucket_factory(
     def _create(
         bucket: str,
     ) -> collections.abc.Generator[
-        mypy_boto3_s3.type_defs.CreateBucketOutputTypeDef,
-        None,
-        None,
+        mypy_boto3_s3.type_defs.CreateBucketOutputTypeDef
     ]:
         with contextlib.suppress(botocore.exceptions.ClientError):
             boto3_client.head_bucket(Bucket=bucket)
@@ -241,11 +239,7 @@ def s3_bucket(
         ],
     ],
     s3_bucket_name: str,
-) -> collections.abc.Generator[
-    str,
-    None,
-    None,
-]:
+) -> collections.abc.Generator[str]:
     """Create s3 bucket."""
     with s3_bucket_factory(s3_bucket_name) as _:
         yield s3_bucket_name
