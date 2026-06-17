@@ -6,6 +6,9 @@ We follow [Semantic Versions](https://semver.org/).
 
 - Fix `AttributeError` when accessing django `list-configs` API using
   `BrowsableAPIRenderer`
+- Extend pytest plugin to support bucket policy and delete on teardown options
+- Add `generate_direct_url` method to client for generating urls for
+  direct file access without auth query params
 
 ## 0.7.0
 

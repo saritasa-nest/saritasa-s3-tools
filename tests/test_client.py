@@ -90,6 +90,22 @@ def test_presigned_url(s3_client: saritasa_s3_tools.S3Client) -> None:
     assert response.is_success, response.content
 
 
+def test_direct_url(s3_client: saritasa_s3_tools.S3Client) -> None:
+    """Test file generation of direct url."""
+    with pathlib.Path(__file__).open("rb") as upload_file:
+        upload_key = s3_client.upload_file(
+            filename=pathlib.Path(__file__).name,
+            config=saritasa_s3_tools.S3FileTypeConfig.configs[
+                "django-anon-files"
+            ],
+            file_obj=upload_file,
+        )
+    direct_url = s3_client.generate_direct_url(key=upload_key)
+    with httpx.Client() as client:
+        response = client.get(direct_url)
+    assert response.is_success, response.content
+
+
 def test_upload_expiration(s3_client: saritasa_s3_tools.S3Client) -> None:
     """Test file upload expiration."""
     s3_params = s3_client.generate_params(
