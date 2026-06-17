@@ -28,19 +28,15 @@ classifiers = [
   "Topic :: Software Development :: Libraries :: Python Modules",
   "Development Status :: 4 - Beta",
   "Programming Language :: Python :: 3",
-  "Programming Language :: Python :: 3.11",
   "Programming Language :: Python :: 3.12",
   "Programming Language :: Python :: 3.13",
   "Programming Language :: Python :: 3.14",
   "Framework :: Django",
-  "Framework :: Django :: 4.2",
-  "Framework :: Django :: 5.0",
-  "Framework :: Django :: 5.1",
   "Framework :: Django :: 5.2",
   "Framework :: Django :: 6.0",
   "Framework :: Pytest",
 ]
-requires-python = ">=3.13"
+requires-python = ">=3.12"
 dependencies = [
   # The AWS SDK for Python
   # https://boto3.amazonaws.com/v1/documentation/api/latest/index.html
@@ -55,11 +51,11 @@ async = [
     # AnyIO is an asynchronous networking and concurrency library
     # that works on top of either asyncio or trio.
     # https://anyio.readthedocs.io/en/stable/
-    "anyio<5",
+    "anyio>4",
 ]
 factory = [
-  "factory-boy<4",
-  "pillow<13",
+  "factory-boy>3",
+  "pillow>12",
 ]
 testing = [
   # HTTPX is a fully featured HTTP client for Python 3, which provides sync and async APIs, and support for both HTTP/1.1 and HTTP/2.
@@ -69,32 +65,32 @@ testing = [
 django = [
   # Django framework
   # https://www.djangoproject.com/
-  "django<7",
+  "django>5.2",
   # Storage to AWS S3
   # https://django-storages.readthedocs.io/en/latest/
-  "django-storages[boto3]<2",
+  "django-storages[boto3]",
   # Django REST Framework
   # https://www.django-rest-framework.org/
-  "djangorestframework<4",
+  "djangorestframework>3",
   # Python humanize functions
   # https://python-humanize.readthedocs.io/en/latest/
-  "humanize<5",
+  "humanize>4",
 ]
 django-openapi = [
   # OpenApi auto specs generator
   # https://drf-spectacular.readthedocs.io/en/latest/
-  "drf-spectacular<1",
+  "drf-spectacular",
 ]
 all = [
-  "anyio<5",
-  "factory-boy<4",
-  "pillow<13",
-  "httpx<1",
-  "django<7",
-  "django-storages[boto3]<2",
-  "djangorestframework<4",
-  "humanize<5",
-  "drf-spectacular<1",
+  "anyio>4",
+  "factory-boy>3",
+  "pillow>12",
+  "httpx",
+  "django>5.2",
+  "django-storages[boto3]>1",
+  "djangorestframework>3",
+  "humanize>4",
+  "drf-spectacular",
 ]
 
 [dependency-groups]
