@@ -1513,6 +1513,10 @@ customization, None by default.</li>
 <li><code>boto3_client</code>- Returns s3 client or in typing <code>mypy_boto3_s3.S3Client</code></li>
 <li><code>s3_bucket_name</code> - Name of bucket for testing, default: <code>saritasa-s3-tools</code>
 or <code>s3_bucket_name</code> from ini file.</li>
+<li><code>s3_bucket_policy</code> - Policy for bucket, default is empty, you can set it up
+to test different permissions.</li>
+<li><code>s3_bucket_delete_on_teardown</code> - If bucket should be deleted on teardown,
+by default <code>False</code> since on new test run bucket is recreated</li>
 <li><code>s3_bucket_cleaner</code> - Returns function which cleans all files from bucket</li>
 <li><code>s3_bucket_factory</code> - Returns manager which creates bucket, and when it's no
 longer needed deletes it</li>
