@@ -4,6 +4,8 @@ We follow [Semantic Versions](https://semver.org/).
 
 ## Unreleased
 
+## 0.8.0
+
 - Fix `AttributeError` when accessing django `list-configs` API using
   `BrowsableAPIRenderer`
 - Extend pytest plugin to support bucket policy and delete on teardown options
