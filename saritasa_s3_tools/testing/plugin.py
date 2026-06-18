@@ -1,5 +1,6 @@
 import collections.abc
 import contextlib
+import json
 import typing
 
 import pytest
@@ -184,6 +185,18 @@ def s3_bucket_name(
 
 
 @pytest.fixture(scope="session")
+def s3_bucket_policy() -> dict[str, typing.Any]:
+    """Get the policy of s3 bucket."""
+    return {}
+
+
+@pytest.fixture(scope="session")
+def s3_bucket_delete_on_teardown() -> bool:
+    """Delete bucket on teardown or not."""
+    return False
+
+
+@pytest.fixture(scope="session")
 def s3_bucket_cleaner(
     boto3_resource: mypy_boto3_s3.ServiceResource,
 ) -> collections.abc.Callable[[str], None]:
@@ -201,7 +214,11 @@ def s3_bucket_factory(
     s3_region: str,
     s3_bucket_cleaner: collections.abc.Callable[[str], None],
 ) -> collections.abc.Callable[
-    [str],
+    [
+        str,
+        dict[str, typing.Any],
+        bool,
+    ],
     contextlib._GeneratorContextManager[
         mypy_boto3_s3.type_defs.CreateBucketOutputTypeDef
     ],
@@ -211,6 +228,8 @@ def s3_bucket_factory(
     @contextlib.contextmanager
     def _create(
         bucket: str,
+        policy: dict[str, typing.Any],
+        delete_on_teardown: bool,
     ) -> collections.abc.Generator[
         mypy_boto3_s3.type_defs.CreateBucketOutputTypeDef
     ]:
@@ -218,14 +237,21 @@ def s3_bucket_factory(
             boto3_client.head_bucket(Bucket=bucket)
             s3_bucket_cleaner(bucket)  # pragma: no cover
             boto3_client.delete_bucket(Bucket=bucket)  # pragma: no cover
-        yield boto3_client.create_bucket(
+        response = boto3_client.create_bucket(
             Bucket=bucket,
             CreateBucketConfiguration={
                 "LocationConstraint": s3_region,  # type: ignore
             },
         )
-        s3_bucket_cleaner(bucket)
-        boto3_client.delete_bucket(Bucket=bucket)
+        if policy:
+            boto3_client.put_bucket_policy(
+                Bucket=bucket,
+                Policy=json.dumps(policy),
+            )
+        yield response
+        if delete_on_teardown:
+            s3_bucket_cleaner(bucket)
+            boto3_client.delete_bucket(Bucket=bucket)
 
     return _create
 
@@ -233,15 +259,21 @@ def s3_bucket_factory(
 @pytest.fixture(scope="session")
 def s3_bucket(
     s3_bucket_factory: collections.abc.Callable[
-        [str],
+        [str, dict[str, typing.Any], bool],
         contextlib._GeneratorContextManager[
             mypy_boto3_s3.type_defs.CreateBucketOutputTypeDef
         ],
     ],
     s3_bucket_name: str,
+    s3_bucket_policy: dict[str, typing.Any],
+    s3_bucket_delete_on_teardown: bool,
 ) -> collections.abc.Generator[str]:
     """Create s3 bucket."""
-    with s3_bucket_factory(s3_bucket_name) as _:
+    with s3_bucket_factory(
+        s3_bucket_name,
+        s3_bucket_policy,
+        s3_bucket_delete_on_teardown,
+    ) as _:
         yield s3_bucket_name
 
 

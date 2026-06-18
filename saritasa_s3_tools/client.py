@@ -254,7 +254,7 @@ class S3Client:
         self,
         key: str,
         bucket: str = "",
-        expiration: int = 0,
+        expiration: int | None = None,
     ) -> str:
         """Generate url for viewing/downloading file."""
         return self.boto3_client.generate_presigned_url(
@@ -263,8 +263,25 @@ class S3Client:
                 "Bucket": bucket or self.default_bucket,
                 "Key": key,
             },
-            ExpiresIn=expiration or self.default_download_expiration,
+            ExpiresIn=expiration
+            if expiration is not None
+            else self.default_download_expiration,
         )
+
+    def generate_direct_url(
+        self,
+        key: str,
+        bucket: str = "",
+    ) -> str:
+        """Generate direct url for viewing/downloading file."""
+        return self.boto3_client.generate_presigned_url(
+            ClientMethod="get_object",
+            Params={
+                "Bucket": bucket or self.default_bucket,
+                "Key": key,
+            },
+            ExpiresIn=0,
+        ).split("?")[0]
 
     def get_file_metadata(
         self,
