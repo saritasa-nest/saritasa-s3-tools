@@ -1,4 +1,5 @@
 import collections.abc
+import mimetypes
 
 from django.core import exceptions
 from django.core.files import utils
@@ -24,11 +25,13 @@ class S3FileFieldMixin:
         # This arg is none because Django tries to init field with no args.
         s3_config: configs.S3FileTypeConfig | None = None,
         validate_key_pattern: bool = True,
+        validate_extensions: bool = True,
         verbose_name: str | None = None,
         **kwargs,
     ) -> None:
         self.s3_config = s3_config
         self.validate_key_pattern = validate_key_pattern
+        self.validate_extensions = validate_extensions
         super().__init__(
             verbose_name=verbose_name,  # type: ignore
             **kwargs,
@@ -41,11 +44,17 @@ class S3FileFieldMixin:
         collections.abc.Callable[[files.FieldFile | str], None],
     ]:
         """Get validators."""
-        validators = super().validators  # type: ignore
-        validators.append(self._validate_file_existence)
+        field_validators = super().validators  # type: ignore
+        field_validators.append(self._validate_file_existence)
         if self.validate_key_pattern:
-            validators.append(self._validate_key)
-        return validators
+            field_validators.append(self._validate_key)
+        if (
+            self.validate_extensions
+            and self.s3_config
+            and self.s3_config.allowed
+        ):
+            field_validators.append(self._validate_mimetype)
+        return field_validators
 
     def generate_filename(
         self,
@@ -111,6 +120,34 @@ class S3FileFieldMixin:
         if not self.s3_config.key.validate(str(value)):
             raise exceptions.ValidationError(
                 _("File's path doesn't match with config's pattern."),
+            )
+
+    def _validate_mimetype(
+        self,
+        value: files.FieldFile | str,
+    ) -> None:
+        """Check that mime type valid for s3 config."""
+        file_name = (
+            value.name if isinstance(value, files.FieldFile) else str(value)
+        )
+
+        if not self.s3_config:
+            raise exceptions.ImproperlyConfigured(  # pragma: no cover
+                "Please set s3_config for field",
+            )
+
+        if (
+            self.s3_config.allowed
+            and mimetypes.guess_type(file_name)[0]
+            not in self.s3_config.allowed
+        ):
+            raise exceptions.ValidationError(
+                _(
+                    "File's mime type doesn't match with "
+                    "config's allowed types: {}.".format(
+                        ", ".join(self.s3_config.allowed),
+                    ),
+                ),
             )
 
 

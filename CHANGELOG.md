@@ -4,6 +4,8 @@ We follow [Semantic Versions](https://semver.org/).
 
 ## Unreleased
 
+- Add mimetype validation for `S3FileFieldMixin` in django module
+
 ## 0.8.0
 
 - Fix `AttributeError` when accessing django `list-configs` API using

@@ -67,7 +67,10 @@ class ModelWithFiles(models.Model):
             key=saritasa_s3_tools.keys.WithPrefixUUIDFolder(
                 "django-images",
             ),
-            allowed=("image/png",),
+            allowed=(
+                "image/png",
+                "image/jpeg",
+            ),
             content_length_range=(5000, 20000000),
         ),
     )
