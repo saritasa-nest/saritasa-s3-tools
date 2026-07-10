@@ -4,6 +4,9 @@ We follow [Semantic Versions](https://semver.org/).
 
 ## Unreleased
 
+- Replace [httpx](https://github.com/encode/httpx) with
+[httpx2](https://github.com/pydantic/httpx2) in docs and tests
+
 ## 0.8.0
 
 - Fix `AttributeError` when accessing django `list-configs` API using

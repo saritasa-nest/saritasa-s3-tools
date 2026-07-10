@@ -1,7 +1,7 @@
 import pathlib
 import xml.etree.ElementTree
 
-import httpx
+import httpx2
 
 from .. import client
 
@@ -9,13 +9,13 @@ from .. import client
 def upload_file(
     filepath: str,
     s3_params: client.S3UploadParams,
-) -> httpx.Response:
+) -> httpx2.Response:
     """Upload file to s3."""
     url = s3_params.url
     params = s3_params.params
     # Test file upload itself
     with (
-        httpx.Client() as client,
+        httpx2.Client() as client,
         pathlib.Path(filepath).open("rb") as upload_file,
     ):
         upload_response = client.post(

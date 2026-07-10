@@ -60,7 +60,7 @@ factory = [
 testing = [
   # HTTPX is a fully featured HTTP client for Python 3, which provides sync and async APIs, and support for both HTTP/1.1 and HTTP/2.
   # https://www.python-httpx.org/
-  "httpx<1",
+  "httpx2>2",
 ]
 django = [
   # Django framework
@@ -85,7 +85,7 @@ all = [
   "anyio>4",
   "factory-boy>3",
   "pillow>12",
-  "httpx",
+  "httpx2>2",
   "django>5.2",
   "django-storages[boto3]>1",
   "djangorestframework>3",
