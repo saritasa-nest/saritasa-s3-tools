@@ -4,7 +4,7 @@ import re
 import time
 import xml.etree.ElementTree
 
-import httpx
+import httpx2
 import pytest
 
 import saritasa_s3_tools
@@ -85,7 +85,7 @@ def test_presigned_url(s3_client: saritasa_s3_tools.S3Client) -> None:
             file_obj=upload_file,
         )
     presigned_url = s3_client.generate_presigned_url(key=upload_key)
-    with httpx.Client() as client:
+    with httpx2.Client() as client:
         response = client.get(presigned_url)
     assert response.is_success, response.content
 
@@ -101,7 +101,7 @@ def test_direct_url(s3_client: saritasa_s3_tools.S3Client) -> None:
             file_obj=upload_file,
         )
     direct_url = s3_client.generate_direct_url(key=upload_key)
-    with httpx.Client() as client:
+    with httpx2.Client() as client:
         response = client.get(direct_url)
     assert response.is_success, response.content
 

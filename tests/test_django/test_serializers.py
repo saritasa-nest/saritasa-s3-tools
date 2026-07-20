@@ -1,6 +1,6 @@
 import http
 
-import httpx
+import httpx2
 from rest_framework import status, test
 from rest_framework.response import Response
 
@@ -36,6 +36,6 @@ def test_s3_upload_field_with_str_value(
         )
     )
     assert signed_file_url
-    with httpx.Client() as client:
+    with httpx2.Client() as client:
         response = client.get(url=signed_file_url)
         assert response.status_code == http.HTTPStatus.OK

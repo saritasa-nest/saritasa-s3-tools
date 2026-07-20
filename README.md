@@ -176,6 +176,7 @@ To install all optional dependencies add `[all]`
 ## Direct upload example
 
 ```python
+import httpx2
 import saritasa_s3_tools
 import pathlib
 import xml.etree.ElementTree
@@ -193,7 +194,7 @@ s3_params = s3_client.generate_params(
     },
 )
 with (
-    httpx.Client() as client,
+    httpx2.Client() as client,
     pathlib.Path(__file__).open("rb") as upload_file,
 ):
     upload_response = client.post(
