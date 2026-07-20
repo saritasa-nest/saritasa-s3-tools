@@ -1221,13 +1221,13 @@
 <span class="normal">30</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">upload_file</span><span class="p">(</span>
     <span class="n">filepath</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="n">s3_params</span><span class="p">:</span> <span class="n">client</span><span class="o">.</span><span class="n">S3UploadParams</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">httpx</span><span class="o">.</span><span class="n">Response</span><span class="p">:</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">httpx2</span><span class="o">.</span><span class="n">Response</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Upload file to s3.&quot;&quot;&quot;</span>
     <span class="n">url</span> <span class="o">=</span> <span class="n">s3_params</span><span class="o">.</span><span class="n">url</span>
     <span class="n">params</span> <span class="o">=</span> <span class="n">s3_params</span><span class="o">.</span><span class="n">params</span>
     <span class="c1"># Test file upload itself</span>
     <span class="k">with</span> <span class="p">(</span>
-        <span class="n">httpx</span><span class="o">.</span><span class="n">Client</span><span class="p">()</span> <span class="k">as</span> <span class="n">client</span><span class="p">,</span>
+        <span class="n">httpx2</span><span class="o">.</span><span class="n">Client</span><span class="p">()</span> <span class="k">as</span> <span class="n">client</span><span class="p">,</span>
         <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="n">filepath</span><span class="p">)</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">&quot;rb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">upload_file</span><span class="p">,</span>
     <span class="p">):</span>
         <span class="n">upload_response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">post</span><span class="p">(</span>

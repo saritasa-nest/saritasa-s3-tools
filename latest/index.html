@@ -1462,7 +1462,8 @@ from <code>saritasa_s3_tools.factory</code></li>
 </ul>
 <p>To install all optional dependencies add <code>[all]</code></p>
 <h2 id="direct-upload-example">Direct upload example<a class="headerlink" href="#direct-upload-example" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">saritasa_s3_tools</span>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">httpx2</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">saritasa_s3_tools</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">pathlib</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">xml.etree.ElementTree</span>
 
@@ -1479,7 +1480,7 @@ from <code>saritasa_s3_tools.factory</code></li>
     <span class="p">},</span>
 <span class="p">)</span>
 <span class="k">with</span> <span class="p">(</span>
-    <span class="n">httpx</span><span class="o">.</span><span class="n">Client</span><span class="p">()</span> <span class="k">as</span> <span class="n">client</span><span class="p">,</span>
+    <span class="n">httpx2</span><span class="o">.</span><span class="n">Client</span><span class="p">()</span> <span class="k">as</span> <span class="n">client</span><span class="p">,</span>
     <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">&quot;rb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">upload_file</span><span class="p">,</span>
 <span class="p">):</span>
     <span class="n">upload_response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">post</span><span class="p">(</span>
