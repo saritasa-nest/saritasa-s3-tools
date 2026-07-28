@@ -39,6 +39,25 @@ class S3FileTypeConfig(metaclass=S3FileTypeConfigMeta):
     expires_in: int = 3600
     success_action_status: int = 201
     # https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Disposition
-    content_disposition: (
-        typing.Literal["attachment"] | typing.Literal["inline"]
-    ) = "attachment"
+    content_disposition: typing.Literal["attachment", "inline"] = "attachment"
+
+    def get_short_description(self) -> str:
+        """Get short description for config."""
+        allowed_types = (
+            ", ".join(self.allowed) if self.allowed else "All types"
+        )
+        content_length_range = (
+            (
+                f"{self.content_length_range[0]}-"
+                f"{self.content_length_range[1]} bytes"
+            )
+            if self.content_length_range
+            else "Any length"
+        )
+        return (
+            f"*Allowed types*: {allowed_types}, "
+            f"*Content length range*: {content_length_range}, "
+            f"*Expires in*: {self.expires_in} seconds, "
+            f"*Success action status*: {self.success_action_status}, "
+            f"*Content disposition*: {self.content_disposition}"
+        )
