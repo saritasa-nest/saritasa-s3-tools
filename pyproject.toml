@@ -108,6 +108,10 @@ local = [
   # A library and CLI app for rendering project templates.
   # https://copier.readthedocs.io/en/latest/
   "copier",
+  # Werkzeug is a comprehensive WSGI web application library.
+  # Required to use runserver_plus
+  # https://werkzeug.palletsprojects.com/en/stable/
+  "Werkzeug",
 ]
 linters = [
   # Mypy is a static type checker for Python.

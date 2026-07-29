@@ -25,7 +25,9 @@ class S3FileTypeConfigField(serializers.ChoiceField):
         current_choices = tuple(
             (
                 config_name,
-                config_name,
+                configs.S3FileTypeConfig.configs[
+                    config_name
+                ].get_short_description(),
             )
             for config_name in configs.S3FileTypeConfig.configs
         )

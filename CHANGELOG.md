@@ -6,6 +6,7 @@ We follow [Semantic Versions](https://semver.org/).
 
 - Replace [httpx](https://github.com/encode/httpx) with
 [httpx2](https://github.com/pydantic/httpx2) in docs and tests
+- Improve docs for get params Django API
 
 ## 0.8.0
 
