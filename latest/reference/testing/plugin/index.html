@@ -1951,8 +1951,7 @@
 <span class="normal">335</span>
 <span class="normal">336</span>
 <span class="normal">337</span>
-<span class="normal">338</span>
-<span class="normal">339</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span><span class="p">(</span><span class="n">scope</span><span class="o">=</span><span class="s2">&quot;session&quot;</span><span class="p">)</span>
+<span class="normal">338</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span><span class="p">(</span><span class="n">scope</span><span class="o">=</span><span class="s2">&quot;session&quot;</span><span class="p">)</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">django_adjust_s3_bucket</span><span class="p">(</span><span class="n">s3_bucket</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Set bucket to a test one.&quot;&quot;&quot;</span>
     <span class="kn">from</span><span class="w"> </span><span class="nn">django.conf</span><span class="w"> </span><span class="kn">import</span> <span class="n">settings</span>
@@ -1965,7 +1964,6 @@
             <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">storage_instance</span><span class="p">,</span> <span class="n">s3</span><span class="o">.</span><span class="n">S3Storage</span><span class="p">):</span>
                 <span class="n">storage_instance</span><span class="o">.</span><span class="n">bucket_name</span> <span class="o">=</span> <span class="n">s3_bucket</span>  <span class="c1"># type: ignore</span>
     <span class="n">settings</span><span class="o">.</span><span class="n">AWS_STORAGE_BUCKET_NAME</span> <span class="o">=</span> <span class="n">s3_bucket</span>
-    <span class="k">return</span> <span class="kc">None</span>
 </code></pre></div></td></tr></table></div>
             </details>
     </div>
