@@ -10,6 +10,8 @@ ns = invoke.Collection(
     invocations.docs,
     invocations.project,
     saritasa_invocations.docker,
+    saritasa_invocations.pytest,
+    saritasa_invocations.uv,
     saritasa_invocations.git,
     saritasa_invocations.github_actions,
     saritasa_invocations.pre_commit,
@@ -17,7 +19,6 @@ ns = invoke.Collection(
     saritasa_invocations.system,
     saritasa_invocations.poetry,
     saritasa_invocations.mypy,
-    saritasa_invocations.pytest,
     saritasa_invocations.django,
     saritasa_invocations.open_api,
 )

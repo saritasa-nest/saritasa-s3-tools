@@ -97,7 +97,6 @@ def test_content_length_validation_lower(
         f"Invalid file size - {humanize.naturalsize(content_length)} of "
         "test.txt. Need between 1.0 kB and 20.0 MB."
     ), response.data
-    return
 
 
 def test_content_type_validation(
@@ -121,7 +120,6 @@ def test_content_type_validation(
         "Invalid file type - `test/pytest` of `test.txt`. "
         "Expected: text/plain."
     ), response.data
-    return
 
 
 @pytest.mark.parametrize(

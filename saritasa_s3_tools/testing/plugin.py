@@ -336,4 +336,3 @@ def django_adjust_s3_bucket(s3_bucket: str) -> None:
             if isinstance(storage_instance, s3.S3Storage):
                 storage_instance.bucket_name = s3_bucket  # type: ignore
     settings.AWS_STORAGE_BUCKET_NAME = s3_bucket
-    return None
