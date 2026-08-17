@@ -34,6 +34,7 @@ classifiers = [
   "Framework :: Django",
   "Framework :: Django :: 5.2",
   "Framework :: Django :: 6.0",
+  "Framework :: Django :: 6.1",
   "Framework :: Pytest",
 ]
 requires-python = ">=3.12"
@@ -48,10 +49,10 @@ dependencies = [
 
 [project.optional-dependencies]
 async = [
-    # AnyIO is an asynchronous networking and concurrency library
-    # that works on top of either asyncio or trio.
-    # https://anyio.readthedocs.io/en/stable/
-    "anyio>4",
+  # AnyIO is an asynchronous networking and concurrency library
+  # that works on top of either asyncio or trio.
+  # https://anyio.readthedocs.io/en/stable/
+  "anyio>4",
 ]
 factory = [
   "factory-boy>3",
