@@ -4,9 +4,12 @@ We follow [Semantic Versions](https://semver.org/).
 
 ## Unreleased
 
+## 0.9.0
+
 - Replace [httpx](https://github.com/encode/httpx) with
 [httpx2](https://github.com/pydantic/httpx2) in docs and tests
 - Improve docs for get params Django API
+- Confirm Django 6.1 support
 
 ## 0.8.0
 
