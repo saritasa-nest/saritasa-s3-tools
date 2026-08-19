@@ -285,6 +285,14 @@ ignore = [
   # https://docs.astral.sh/ruff/rules/missing-return-type-undocumented-public-function
   "ANN201",
 ]
+"**/migrations/*" = [
+  # https://docs.astral.sh/ruff/rules/undocumented-public-class
+  "D101",
+  # https://docs.astral.sh/ruff/rules/line-too-long
+  "E501",
+  # https://docs.astral.sh/ruff/rules/mutable-class-default/
+  "RUF012",
+]
 [tool.ruff.lint.isort]
 force-wrap-aliases = true
 split-on-trailing-comma = true

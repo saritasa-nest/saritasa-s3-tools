@@ -4,6 +4,10 @@ We follow [Semantic Versions](https://semver.org/).
 
 ## Unreleased
 
+- Change default `max_length` from 100 to 512 for `S3FileField` and `S3ImageField`
+  > **NOTE:**  If you already had migrations with default 100, then you need to manually set it in
+  > your models or add length specifications to migrations so that `Django` could pick up changes
+
 ## 0.9.0
 
 - Replace [httpx](https://github.com/encode/httpx) with
