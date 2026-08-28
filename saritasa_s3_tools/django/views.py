@@ -2,9 +2,9 @@ import contextlib
 import dataclasses
 import typing
 
+from django.utils.functional import lazy
 from rest_framework import (
     decorators,
-    exceptions,
     permissions,
     response,
     status,
@@ -43,16 +43,7 @@ class S3GetParamsView(viewsets.GenericViewSet):
         self,
         request: Request,
     ) -> response.Response:
-        """Get parameters for upload to S3 bucket.
-
-        Current endpoint returns all required for s3 upload data,
-        which should be later sent to `url` as `form-data` url with
-        'file'. Workflow: First, you make request to this endpoint. Then send
-        response data to `url` via `POST` as form-data with file included. In
-        response you will get an url which you can use in API for value of file
-        related fields like avatar for example.
-
-        """
+        """Get parameters for upload to S3 bucket."""
         serializer = self.serializer_class(
             context_request=request,
             data=request.data,
@@ -72,51 +63,6 @@ class S3GetParamsView(viewsets.GenericViewSet):
             ).data,
         )
 
-    @decorators.action(
-        methods=["GET"],
-        url_path="list-configs",
-        url_name="list-configs",
-        detail=False,
-    )
-    def list_configs(
-        self,
-        request: Request,
-    ) -> response.Response:
-        """List all configs for s3 upload."""
-        return response.Response(
-            status=status.HTTP_200_OK,
-            data=serializers.S3ConfigSerializer(
-                instance=map(
-                    dataclasses.asdict,
-                    configs.S3FileTypeConfig.configs.values(),
-                ),
-                many=True,
-            ).data,
-        )
-
-    @decorators.action(
-        methods=["GET"],
-        url_path="retrieve-config/(?P<name>[^/.]+)",
-        url_name="retrieve-config",
-        detail=False,
-    )
-    def retrieve_config(
-        self,
-        request: Request,
-        name: str,
-    ) -> response.Response:
-        """Retrieve config for s3 upload."""
-        if name not in configs.S3FileTypeConfig.configs:
-            raise exceptions.NotFound
-        return response.Response(
-            status=status.HTTP_200_OK,
-            data=serializers.S3ConfigSerializer(
-                instance=dataclasses.asdict(
-                    configs.S3FileTypeConfig.configs[name],
-                ),
-            ).data,
-        )
-
     def get_s3_client(self) -> client.S3Client:
         """Get s3 client for params generation."""
         return shortcuts.get_s3_client()
@@ -131,6 +77,53 @@ class S3GetParamsView(viewsets.GenericViewSet):
         }
 
 
+def get_params_endpoint_description() -> str:
+    """Get description for `get_params` endpoint."""
+    description = (
+        "Get parameters for upload to S3 bucket.\n\n"
+        "Current endpoint returns all required for s3 upload data, which "
+        "should be later sent to `url` as `form-data` url with 'file'. "
+        "Workflow: "
+        "First, you make request to this endpoint. "
+        "Then send response data to `url` via `POST` as form-data with file "
+        "included. "
+        "In response you will get an url which you can use in API "
+        "for value of file related fields like avatar for example.\n\n"
+        "---\n\n"
+        "**Available configs**:\n\n"
+        f"{get_formatted_s3_configs()}"
+    )
+    return description
+
+
+def get_formatted_s3_configs() -> str:
+    """Get formatted S3 configs for endpoint description."""
+    formatted_s3_configs: list[str] = []
+    for name, config in configs.S3FileTypeConfig.configs.items():
+        allowed_types = (
+            ", ".join(config.allowed) if config.allowed else "All types"
+        )
+        content_length_range = (
+            (
+                f"{config.content_length_range[0]}-"
+                f"{config.content_length_range[1]} bytes"
+            )
+            if config.content_length_range
+            else "Any length"
+        )
+        formatted_s3_configs.append(
+            f"`{name}`\n\n"
+            f"| Parameter | Value |\n"
+            f"|:---|:---|\n"
+            f"| Allowed | {allowed_types} |\n"
+            f"| Content length range | {content_length_range} |\n"
+            f"| Expires in | {config.expires_in} seconds |\n"
+            f"| Success action status | {config.success_action_status} |\n"
+            f"| Content disposition | {config.content_disposition} |",
+        )
+    return "\n\n".join(formatted_s3_configs)
+
+
 with contextlib.suppress(ImportError):
     import drf_spectacular.utils
 
@@ -138,19 +131,8 @@ with contextlib.suppress(ImportError):
         get_params=drf_spectacular.utils.extend_schema(
             request=serializers.S3RequestParamsSerializer,
             responses=serializers.S3UploadSerializer,
-        ),
-        list_configs=drf_spectacular.utils.extend_schema(
-            responses=serializers.S3ConfigSerializer(many=True),
-        ),
-        retrieve_config=drf_spectacular.utils.extend_schema(
-            parameters=[
-                drf_spectacular.utils.OpenApiParameter(
-                    name="name",
-                    type=str,
-                    required=True,
-                    location=drf_spectacular.utils.OpenApiParameter.PATH,
-                ),
-            ],
-            responses=serializers.S3ConfigSerializer(),
+            # Generate the description lazily to include the S3 configs after
+            # the initial import of this module to ensure they were registered.
+            description=lazy(get_params_endpoint_description, str)(),
         ),
     )(S3GetParamsView)
