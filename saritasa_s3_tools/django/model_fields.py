@@ -29,6 +29,7 @@ class S3FileFieldMixin:
     ) -> None:
         self.s3_config = s3_config
         self.validate_key_pattern = validate_key_pattern
+        kwargs.setdefault("max_length", 512)
         super().__init__(
             verbose_name=verbose_name,  # type: ignore
             **kwargs,
