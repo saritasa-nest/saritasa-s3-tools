@@ -1286,8 +1286,8 @@
 
               <details class="mkdocstrings-source">
                 <summary>Source code in <code>saritasa_s3_tools/django/model_fields.py</code></summary>
-                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">117</span>
-<span class="normal">118</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">S3FileField</span><span class="p">(</span><span class="n">S3FileFieldMixin</span><span class="p">,</span> <span class="n">models</span><span class="o">.</span><span class="n">FileField</span><span class="p">):</span>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">118</span>
+<span class="normal">119</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">S3FileField</span><span class="p">(</span><span class="n">S3FileFieldMixin</span><span class="p">,</span> <span class="n">models</span><span class="o">.</span><span class="n">FileField</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;FileField with S3 capabilities.&quot;&quot;&quot;</span>
 </code></pre></div></td></tr></table></div>
               </details>
@@ -1439,7 +1439,8 @@
 <span class="normal">111</span>
 <span class="normal">112</span>
 <span class="normal">113</span>
-<span class="normal">114</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">S3FileFieldMixin</span><span class="p">:</span>
+<span class="normal">114</span>
+<span class="normal">115</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">S3FileFieldMixin</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Mixin which adds support for s3 configuration.</span>
 
 <span class="sd">    This mixin will upload to proper path by using key generator from config.</span>
@@ -1456,6 +1457,7 @@
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">s3_config</span> <span class="o">=</span> <span class="n">s3_config</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">validate_key_pattern</span> <span class="o">=</span> <span class="n">validate_key_pattern</span>
+        <span class="n">kwargs</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s2">&quot;max_length&quot;</span><span class="p">,</span> <span class="mi">512</span><span class="p">)</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
             <span class="n">verbose_name</span><span class="o">=</span><span class="n">verbose_name</span><span class="p">,</span>  <span class="c1"># type: ignore</span>
             <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
@@ -1571,8 +1573,7 @@
 
             <details class="mkdocstrings-source">
               <summary>Source code in <code>saritasa_s3_tools/django/model_fields.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">50</span>
-<span class="normal">51</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">51</span>
 <span class="normal">52</span>
 <span class="normal">53</span>
 <span class="normal">54</span>
@@ -1586,7 +1587,8 @@
 <span class="normal">62</span>
 <span class="normal">63</span>
 <span class="normal">64</span>
-<span class="normal">65</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">generate_filename</span><span class="p">(</span>
+<span class="normal">65</span>
+<span class="normal">66</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">generate_filename</span><span class="p">(</span>
     <span class="bp">self</span><span class="p">,</span>
     <span class="n">instance</span><span class="p">:</span> <span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">,</span>
     <span class="n">filename</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
@@ -1624,8 +1626,7 @@
 
             <details class="mkdocstrings-source">
               <summary>Source code in <code>saritasa_s3_tools/django/model_fields.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">37</span>
-<span class="normal">38</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">38</span>
 <span class="normal">39</span>
 <span class="normal">40</span>
 <span class="normal">41</span>
@@ -1635,7 +1636,8 @@
 <span class="normal">45</span>
 <span class="normal">46</span>
 <span class="normal">47</span>
-<span class="normal">48</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@cached_property</span>
+<span class="normal">48</span>
+<span class="normal">49</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@cached_property</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">validators</span><span class="p">(</span>
     <span class="bp">self</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">collections</span><span class="o">.</span><span class="n">abc</span><span class="o">.</span><span class="n">Sequence</span><span class="p">[</span>
@@ -1689,8 +1691,8 @@
 
               <details class="mkdocstrings-source">
                 <summary>Source code in <code>saritasa_s3_tools/django/model_fields.py</code></summary>
-                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">121</span>
-<span class="normal">122</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">S3ImageField</span><span class="p">(</span><span class="n">S3FileFieldMixin</span><span class="p">,</span> <span class="n">models</span><span class="o">.</span><span class="n">ImageField</span><span class="p">):</span>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">122</span>
+<span class="normal">123</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">S3ImageField</span><span class="p">(</span><span class="n">S3FileFieldMixin</span><span class="p">,</span> <span class="n">models</span><span class="o">.</span><span class="n">ImageField</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;FileField with S3 capabilities.&quot;&quot;&quot;</span>
 </code></pre></div></td></tr></table></div>
               </details>
