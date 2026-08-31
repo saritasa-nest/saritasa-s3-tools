@@ -1562,40 +1562,40 @@
 <span class="normal">61</span>
 <span class="normal">62</span>
 <span class="normal">63</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">S3Key</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Base class for s3 keys.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Base class for s3 keys."""</span>
 
-    <span class="n">uuid_regex</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;[\d|\w]</span><span class="si">{8}</span><span class="s2">-[\d|\w]</span><span class="si">{4}</span><span class="s2">-[\d|\w]</span><span class="si">{4}</span><span class="s2">-[\d|\w]</span><span class="si">{4}</span><span class="s2">-[\d|\w]</span><span class="si">{12}</span><span class="s2">&quot;</span>
+    <span class="n">uuid_regex</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">"[\d|\w]</span><span class="si">{8}</span><span class="s2">-[\d|\w]</span><span class="si">{4}</span><span class="s2">-[\d|\w]</span><span class="si">{4}</span><span class="s2">-[\d|\w]</span><span class="si">{4}</span><span class="s2">-[\d|\w]</span><span class="si">{12}</span><span class="s2">"</span>
 
     <span class="nd">@abc</span><span class="o">.</span><span class="n">abstractmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Abstract method for calling keys.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Abstract method for calling keys."""</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">remove_special_characters</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Remove characters from filename that are not allowed in some OS.&quot;&quot;&quot;</span>
-        <span class="n">special_characters</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;&lt;&gt;:</span><span class="se">\&quot;</span><span class="s2">/</span><span class="se">\\</span><span class="s2">|?*&quot;</span>
+<span class="w">        </span><span class="sd">"""Remove characters from filename that are not allowed in some OS."""</span>
+        <span class="n">special_characters</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">"&lt;&gt;:</span><span class="se">\"</span><span class="s2">/</span><span class="se">\\</span><span class="s2">|?*"</span>
         <span class="k">return</span> <span class="n">filename</span><span class="o">.</span><span class="n">translate</span><span class="p">({</span><span class="nb">ord</span><span class="p">(</span><span class="n">i</span><span class="p">):</span> <span class="kc">None</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">special_characters</span><span class="p">})</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">normalize_string_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Normalize string value.</span>
+<span class="w">        </span><span class="sd">"""Normalize string value.</span>
 
 <span class="sd">        1. Remove leading and trailing whitespaces.</span>
 <span class="sd">        2. Replace all space characters with the Space char.</span>
 <span class="sd">        3. Normalize Unicode string using `NFKC` form. See the details:</span>
 <span class="sd">        https://docs.python.org/3/library/unicodedata.html#unicodedata.normalize</span>
 
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">cleaned</span> <span class="o">=</span> <span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">value</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">())</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
-        <span class="k">return</span> <span class="n">unicodedata</span><span class="o">.</span><span class="n">normalize</span><span class="p">(</span><span class="s2">&quot;NFKC&quot;</span><span class="p">,</span> <span class="n">cleaned</span><span class="p">)</span>
+<span class="sd">        """</span>
+        <span class="n">cleaned</span> <span class="o">=</span> <span class="s2">" "</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">value</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">())</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">unicodedata</span><span class="o">.</span><span class="n">normalize</span><span class="p">(</span><span class="s2">"NFKC"</span><span class="p">,</span> <span class="n">cleaned</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">clean_filename</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Remove `garbage` characters that cause problems with file names.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Remove `garbage` characters that cause problems with file names."""</span>
         <span class="n">cleaned</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">remove_special_characters</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
         <span class="n">normalized</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">normalize_string_value</span><span class="p">(</span><span class="n">cleaned</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="n">normalized</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">get_random_filename</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get random filename.</span>
+<span class="w">        </span><span class="sd">"""Get random filename.</span>
 
 <span class="sd">        Generation random filename that contains unique identifier and</span>
 <span class="sd">        filename extension like: ``photo.jpg``.</span>
@@ -1608,14 +1608,14 @@
 <span class="sd">        -------</span>
 <span class="sd">            new_filename (str): ``9841422d-c041-45a5-b7b3-467179f4f127.ext``.</span>
 
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">path</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">uuid</span><span class="o">.</span><span class="n">uuid4</span><span class="p">())</span>
         <span class="n">ext</span> <span class="o">=</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span><span class="o">.</span><span class="n">suffix</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
 
-        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">path</span><span class="si">}{</span><span class="n">ext</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">path</span><span class="si">}{</span><span class="n">ext</span><span class="si">}</span><span class="s2">"</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">validate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Check that input key is matching Key pattern.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Check that input key is matching Key pattern."""</span>
         <span class="k">return</span> <span class="kc">True</span>  <span class="c1"># pragma: no cover</span>
 </code></pre></div></td></tr></table></div>
               </details>
@@ -1657,7 +1657,7 @@
 <span class="normal">14</span>
 <span class="normal">15</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@abc</span><span class="o">.</span><span class="n">abstractmethod</span>
 <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Abstract method for calling keys.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Abstract method for calling keys."""</span>
 </code></pre></div></td></tr></table></div>
             </details>
     </div>
@@ -1686,7 +1686,7 @@
 <span class="normal">37</span>
 <span class="normal">38</span>
 <span class="normal">39</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">clean_filename</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Remove `garbage` characters that cause problems with file names.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Remove `garbage` characters that cause problems with file names."""</span>
     <span class="n">cleaned</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">remove_special_characters</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
     <span class="n">normalized</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">normalize_string_value</span><span class="p">(</span><span class="n">cleaned</span><span class="p">)</span>
 
@@ -1740,7 +1740,7 @@ filename extension like: <code>photo.jpg</code>.</p>
 <span class="normal">57</span>
 <span class="normal">58</span>
 <span class="normal">59</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">get_random_filename</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get random filename.</span>
+<span class="w">    </span><span class="sd">"""Get random filename.</span>
 
 <span class="sd">    Generation random filename that contains unique identifier and</span>
 <span class="sd">    filename extension like: ``photo.jpg``.</span>
@@ -1753,11 +1753,11 @@ filename extension like: <code>photo.jpg</code>.</p>
 <span class="sd">    -------</span>
 <span class="sd">        new_filename (str): ``9841422d-c041-45a5-b7b3-467179f4f127.ext``.</span>
 
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">path</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">uuid</span><span class="o">.</span><span class="n">uuid4</span><span class="p">())</span>
     <span class="n">ext</span> <span class="o">=</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span><span class="o">.</span><span class="n">suffix</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
 
-    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">path</span><span class="si">}{</span><span class="n">ext</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="k">return</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">path</span><span class="si">}{</span><span class="n">ext</span><span class="si">}</span><span class="s2">"</span>
 </code></pre></div></td></tr></table></div>
             </details>
     </div>
@@ -1797,16 +1797,16 @@ filename extension like: <code>photo.jpg</code>.</p>
 <span class="normal">30</span>
 <span class="normal">31</span>
 <span class="normal">32</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">normalize_string_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Normalize string value.</span>
+<span class="w">    </span><span class="sd">"""Normalize string value.</span>
 
 <span class="sd">    1. Remove leading and trailing whitespaces.</span>
 <span class="sd">    2. Replace all space characters with the Space char.</span>
 <span class="sd">    3. Normalize Unicode string using `NFKC` form. See the details:</span>
 <span class="sd">    https://docs.python.org/3/library/unicodedata.html#unicodedata.normalize</span>
 
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">cleaned</span> <span class="o">=</span> <span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">value</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">())</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
-    <span class="k">return</span> <span class="n">unicodedata</span><span class="o">.</span><span class="n">normalize</span><span class="p">(</span><span class="s2">&quot;NFKC&quot;</span><span class="p">,</span> <span class="n">cleaned</span><span class="p">)</span>
+<span class="sd">    """</span>
+    <span class="n">cleaned</span> <span class="o">=</span> <span class="s2">" "</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">value</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">())</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">unicodedata</span><span class="o">.</span><span class="n">normalize</span><span class="p">(</span><span class="s2">"NFKC"</span><span class="p">,</span> <span class="n">cleaned</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
             </details>
     </div>
@@ -1833,8 +1833,8 @@ filename extension like: <code>photo.jpg</code>.</p>
 <span class="normal">18</span>
 <span class="normal">19</span>
 <span class="normal">20</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">remove_special_characters</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Remove characters from filename that are not allowed in some OS.&quot;&quot;&quot;</span>
-    <span class="n">special_characters</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;&lt;&gt;:</span><span class="se">\&quot;</span><span class="s2">/</span><span class="se">\\</span><span class="s2">|?*&quot;</span>
+<span class="w">    </span><span class="sd">"""Remove characters from filename that are not allowed in some OS."""</span>
+    <span class="n">special_characters</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">"&lt;&gt;:</span><span class="se">\"</span><span class="s2">/</span><span class="se">\\</span><span class="s2">|?*"</span>
     <span class="k">return</span> <span class="n">filename</span><span class="o">.</span><span class="n">translate</span><span class="p">({</span><span class="nb">ord</span><span class="p">(</span><span class="n">i</span><span class="p">):</span> <span class="kc">None</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">special_characters</span><span class="p">})</span>
 </code></pre></div></td></tr></table></div>
             </details>
@@ -1861,7 +1861,7 @@ filename extension like: <code>photo.jpg</code>.</p>
               <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">61</span>
 <span class="normal">62</span>
 <span class="normal">63</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">validate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Check that input key is matching Key pattern.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Check that input key is matching Key pattern."""</span>
     <span class="k">return</span> <span class="kc">True</span>  <span class="c1"># pragma: no cover</span>
 </code></pre></div></td></tr></table></div>
             </details>
@@ -1933,27 +1933,27 @@ filename extension like: <code>photo.jpg</code>.</p>
 <span class="normal">88</span>
 <span class="normal">89</span>
 <span class="normal">90</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">WithPrefixUUIDFileName</span><span class="p">(</span><span class="n">S3Key</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generate S3 key with prefix folder and uuid filename.</span>
+<span class="w">    </span><span class="sd">"""Generate S3 key with prefix folder and uuid filename.</span>
 
 <span class="sd">    Example:</span>
 <span class="sd">    -------</span>
 <span class="sd">        prefix/{UUID.extension}</span>
 
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prefix</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">prefix</span> <span class="o">=</span> <span class="n">prefix</span><span class="o">.</span><span class="n">removesuffix</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">prefix</span> <span class="o">=</span> <span class="n">prefix</span><span class="o">.</span><span class="n">removesuffix</span><span class="p">(</span><span class="s2">"/"</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return prefixed S3 key.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Return prefixed S3 key."""</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">filename</span><span class="p">:</span>
-            <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">prefix</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">uuid</span><span class="o">.</span><span class="n">uuid4</span><span class="p">()</span><span class="si">}</span><span class="s2">.incorrect&quot;</span>
-        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">prefix</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">get_random_filename</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="k">return</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">prefix</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">uuid</span><span class="o">.</span><span class="n">uuid4</span><span class="p">()</span><span class="si">}</span><span class="s2">.incorrect"</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">prefix</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">get_random_filename</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">validate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Check that input key is matching Key pattern.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Check that input key is matching Key pattern."""</span>
         <span class="k">return</span> <span class="nb">bool</span><span class="p">(</span>
-            <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">pattern</span><span class="o">=</span><span class="sa">rf</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">prefix</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">uuid_regex</span><span class="si">}</span><span class="s2">\..+&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">match</span><span class="p">(</span>
+            <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">pattern</span><span class="o">=</span><span class="sa">rf</span><span class="s2">"</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">prefix</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">uuid_regex</span><span class="si">}</span><span class="s2">\..+"</span><span class="p">)</span><span class="o">.</span><span class="n">match</span><span class="p">(</span>
                 <span class="n">key</span><span class="p">,</span>
             <span class="p">),</span>
         <span class="p">)</span>
@@ -1994,10 +1994,10 @@ filename extension like: <code>photo.jpg</code>.</p>
 <span class="normal">80</span>
 <span class="normal">81</span>
 <span class="normal">82</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return prefixed S3 key.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Return prefixed S3 key."""</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">filename</span><span class="p">:</span>
-        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">prefix</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">uuid</span><span class="o">.</span><span class="n">uuid4</span><span class="p">()</span><span class="si">}</span><span class="s2">.incorrect&quot;</span>
-    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">prefix</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">get_random_filename</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">prefix</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">uuid</span><span class="o">.</span><span class="n">uuid4</span><span class="p">()</span><span class="si">}</span><span class="s2">.incorrect"</span>
+    <span class="k">return</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">prefix</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">get_random_filename</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span>
 </code></pre></div></td></tr></table></div>
             </details>
     </div>
@@ -2027,9 +2027,9 @@ filename extension like: <code>photo.jpg</code>.</p>
 <span class="normal">88</span>
 <span class="normal">89</span>
 <span class="normal">90</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">validate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Check that input key is matching Key pattern.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Check that input key is matching Key pattern."""</span>
     <span class="k">return</span> <span class="nb">bool</span><span class="p">(</span>
-        <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">pattern</span><span class="o">=</span><span class="sa">rf</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">prefix</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">uuid_regex</span><span class="si">}</span><span class="s2">\..+&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">match</span><span class="p">(</span>
+        <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">pattern</span><span class="o">=</span><span class="sa">rf</span><span class="s2">"</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">prefix</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">uuid_regex</span><span class="si">}</span><span class="s2">\..+"</span><span class="p">)</span><span class="o">.</span><span class="n">match</span><span class="p">(</span>
             <span class="n">key</span><span class="p">,</span>
         <span class="p">),</span>
     <span class="p">)</span>
@@ -2105,28 +2105,28 @@ filename extension like: <code>photo.jpg</code>.</p>
 <span class="normal">117</span>
 <span class="normal">118</span>
 <span class="normal">119</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">WithPrefixUUIDFolder</span><span class="p">(</span><span class="n">S3Key</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generate S3 key with prefix folder and uuid folder.</span>
+<span class="w">    </span><span class="sd">"""Generate S3 key with prefix folder and uuid folder.</span>
 
 <span class="sd">    Example:</span>
 <span class="sd">    -------</span>
 <span class="sd">        prefix/{UUID}/filename</span>
 
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prefix</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">prefix</span> <span class="o">=</span> <span class="n">prefix</span><span class="o">.</span><span class="n">removesuffix</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">prefix</span> <span class="o">=</span> <span class="n">prefix</span><span class="o">.</span><span class="n">removesuffix</span><span class="p">(</span><span class="s2">"/"</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Create key for destination using filename.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Create key for destination using filename."""</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">filename</span><span class="p">:</span>
-            <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">prefix</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">uuid</span><span class="o">.</span><span class="n">uuid4</span><span class="p">()</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">uuid</span><span class="o">.</span><span class="n">uuid4</span><span class="p">()</span><span class="si">}</span><span class="s2">.incorrect&quot;</span>
-        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">prefix</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">uuid</span><span class="o">.</span><span class="n">uuid4</span><span class="p">()</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">clean_filename</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="k">return</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">prefix</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">uuid</span><span class="o">.</span><span class="n">uuid4</span><span class="p">()</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">uuid</span><span class="o">.</span><span class="n">uuid4</span><span class="p">()</span><span class="si">}</span><span class="s2">.incorrect"</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">prefix</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">uuid</span><span class="o">.</span><span class="n">uuid4</span><span class="p">()</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">clean_filename</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">validate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Check that input key is matching Key pattern.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Check that input key is matching Key pattern."""</span>
         <span class="k">return</span> <span class="nb">bool</span><span class="p">(</span>
             <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span>
-                <span class="n">pattern</span><span class="o">=</span><span class="sa">rf</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">prefix</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">uuid_regex</span><span class="si">}</span><span class="s2">/.+\..+&quot;</span><span class="p">,</span>
+                <span class="n">pattern</span><span class="o">=</span><span class="sa">rf</span><span class="s2">"</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">prefix</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">uuid_regex</span><span class="si">}</span><span class="s2">/.+\..+"</span><span class="p">,</span>
             <span class="p">)</span><span class="o">.</span><span class="n">match</span><span class="p">(</span>
                 <span class="n">key</span><span class="p">,</span>
             <span class="p">),</span>
@@ -2168,10 +2168,10 @@ filename extension like: <code>photo.jpg</code>.</p>
 <span class="normal">107</span>
 <span class="normal">108</span>
 <span class="normal">109</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create key for destination using filename.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Create key for destination using filename."""</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">filename</span><span class="p">:</span>
-        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">prefix</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">uuid</span><span class="o">.</span><span class="n">uuid4</span><span class="p">()</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">uuid</span><span class="o">.</span><span class="n">uuid4</span><span class="p">()</span><span class="si">}</span><span class="s2">.incorrect&quot;</span>
-    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">prefix</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">uuid</span><span class="o">.</span><span class="n">uuid4</span><span class="p">()</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">clean_filename</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">prefix</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">uuid</span><span class="o">.</span><span class="n">uuid4</span><span class="p">()</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">uuid</span><span class="o">.</span><span class="n">uuid4</span><span class="p">()</span><span class="si">}</span><span class="s2">.incorrect"</span>
+    <span class="k">return</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">prefix</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">uuid</span><span class="o">.</span><span class="n">uuid4</span><span class="p">()</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">clean_filename</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span>
 </code></pre></div></td></tr></table></div>
             </details>
     </div>
@@ -2203,10 +2203,10 @@ filename extension like: <code>photo.jpg</code>.</p>
 <span class="normal">117</span>
 <span class="normal">118</span>
 <span class="normal">119</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">validate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Check that input key is matching Key pattern.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Check that input key is matching Key pattern."""</span>
     <span class="k">return</span> <span class="nb">bool</span><span class="p">(</span>
         <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span>
-            <span class="n">pattern</span><span class="o">=</span><span class="sa">rf</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">prefix</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">uuid_regex</span><span class="si">}</span><span class="s2">/.+\..+&quot;</span><span class="p">,</span>
+            <span class="n">pattern</span><span class="o">=</span><span class="sa">rf</span><span class="s2">"</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">prefix</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">uuid_regex</span><span class="si">}</span><span class="s2">/.+\..+"</span><span class="p">,</span>
         <span class="p">)</span><span class="o">.</span><span class="n">match</span><span class="p">(</span>
             <span class="n">key</span><span class="p">,</span>
         <span class="p">),</span>

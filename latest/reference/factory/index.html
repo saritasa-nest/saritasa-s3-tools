@@ -1250,7 +1250,7 @@
 <span class="normal">78</span>
 <span class="normal">79</span>
 <span class="normal">80</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">S3FileField</span><span class="p">(</span><span class="n">factory</span><span class="o">.</span><span class="n">LazyAttribute</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generate file and upload to s3.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Generate file and upload to s3."""</span>
 
     <span class="n">_boto3_client</span><span class="p">:</span> <span class="n">mypy_boto3_s3</span><span class="o">.</span><span class="n">S3Client</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
 
@@ -1261,8 +1261,8 @@
         <span class="n">bucket</span><span class="p">:</span> <span class="n">BucketGetter</span> <span class="o">|</span> <span class="nb">str</span><span class="p">,</span>
         <span class="n">access_key_getter</span><span class="p">:</span> <span class="n">client</span><span class="o">.</span><span class="n">AccessKeyGetter</span><span class="p">,</span>
         <span class="n">s3_endpoint_url_getter</span><span class="p">:</span> <span class="n">client</span><span class="o">.</span><span class="n">S3EndpointUrlGetter</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">filename</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;example.txt&quot;</span><span class="p">,</span>
-        <span class="n">data</span><span class="p">:</span> <span class="nb">bytes</span> <span class="o">=</span> <span class="sa">b</span><span class="s2">&quot;Test&quot;</span><span class="p">,</span>
+        <span class="n">filename</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"example.txt"</span><span class="p">,</span>
+        <span class="n">data</span><span class="p">:</span> <span class="nb">bytes</span> <span class="o">=</span> <span class="sa">b</span><span class="s2">"Test"</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">access_key_getter</span> <span class="o">=</span> <span class="n">access_key_getter</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">s3_endpoint_url_getter</span> <span class="o">=</span> <span class="n">s3_endpoint_url_getter</span>
@@ -1286,7 +1286,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_boto3_client</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_get_s3_client</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">client</span><span class="o">.</span><span class="n">S3Client</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set up s3 client.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Set up s3 client."""</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">bucket</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
             <span class="n">bucket</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">bucket</span>
         <span class="k">if</span> <span class="nb">callable</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">bucket</span><span class="p">):</span>
@@ -1297,7 +1297,7 @@
         <span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_generate_file_data</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Generate data for file.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Generate data for file."""</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_generate</span><span class="p">(</span>
@@ -1305,7 +1305,7 @@
         <span class="o">*</span><span class="n">args</span><span class="p">,</span>  <span class="c1"># noqa: ANN002</span>
         <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Generate file and upload it to s3.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Generate file and upload it to s3."""</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_s3_client</span><span class="p">()</span><span class="o">.</span><span class="n">upload_file</span><span class="p">(</span>
             <span class="n">filename</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">filename</span><span class="p">,</span>
             <span class="n">file_obj</span><span class="o">=</span><span class="n">io</span><span class="o">.</span><span class="n">BytesIO</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_generate_file_data</span><span class="p">()),</span>
@@ -1404,7 +1404,7 @@
 <span class="normal">121</span>
 <span class="normal">122</span>
 <span class="normal">123</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">S3ImageFileField</span><span class="p">(</span><span class="n">S3FileField</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generate image file and upload to s3.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Generate image file and upload to s3."""</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
@@ -1413,9 +1413,9 @@
         <span class="n">bucket</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
         <span class="n">access_key_getter</span><span class="p">:</span> <span class="n">client</span><span class="o">.</span><span class="n">AccessKeyGetter</span><span class="p">,</span>
         <span class="n">s3_endpoint_url_getter</span><span class="p">:</span> <span class="n">client</span><span class="o">.</span><span class="n">S3EndpointUrlGetter</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">filename</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;example.jpg&quot;</span><span class="p">,</span>
-        <span class="n">data</span><span class="p">:</span> <span class="nb">bytes</span> <span class="o">=</span> <span class="sa">b</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
-        <span class="n">color</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="n">filename</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"example.jpg"</span><span class="p">,</span>
+        <span class="n">data</span><span class="p">:</span> <span class="nb">bytes</span> <span class="o">=</span> <span class="sa">b</span><span class="s2">""</span><span class="p">,</span>
+        <span class="n">color</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">""</span><span class="p">,</span>
         <span class="n">width</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
         <span class="n">height</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
@@ -1433,7 +1433,7 @@
         <span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_generate_file_data</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Generate image data for file.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Generate image data for file."""</span>
         <span class="n">width</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">width</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">height</span> <span class="ow">or</span> <span class="mi">100</span>
         <span class="n">height</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">height</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">width</span> <span class="ow">or</span> <span class="mi">100</span>
         <span class="n">color</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">color</span> <span class="ow">or</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span>  <span class="c1"># noqa: S311</span>
@@ -1441,8 +1441,8 @@
         <span class="p">)</span>
 
         <span class="n">thumb_io</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">BytesIO</span><span class="p">()</span>
-        <span class="k">with</span> <span class="n">PIL</span><span class="o">.</span><span class="n">Image</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s2">&quot;RGB&quot;</span><span class="p">,</span> <span class="p">(</span><span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">),</span> <span class="n">color</span><span class="p">)</span> <span class="k">as</span> <span class="n">thumb</span><span class="p">:</span>
-            <span class="n">thumb</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">thumb_io</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;JPEG&quot;</span><span class="p">)</span>
+        <span class="k">with</span> <span class="n">PIL</span><span class="o">.</span><span class="n">Image</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s2">"RGB"</span><span class="p">,</span> <span class="p">(</span><span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">),</span> <span class="n">color</span><span class="p">)</span> <span class="k">as</span> <span class="n">thumb</span><span class="p">:</span>
+            <span class="n">thumb</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">thumb_io</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s2">"JPEG"</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">thumb_io</span><span class="o">.</span><span class="n">getvalue</span><span class="p">()</span>
 </code></pre></div></td></tr></table></div>
               </details>

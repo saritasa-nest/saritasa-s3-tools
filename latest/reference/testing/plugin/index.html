@@ -1617,21 +1617,21 @@
 <span class="normal">68</span>
 <span class="normal">69</span>
 <span class="normal">70</span>
-<span class="normal">71</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span><span class="p">(</span><span class="n">scope</span><span class="o">=</span><span class="s2">&quot;session&quot;</span><span class="p">)</span>
+<span class="normal">71</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span><span class="p">(</span><span class="n">scope</span><span class="o">=</span><span class="s2">"session"</span><span class="p">)</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">access_key_getter</span><span class="p">(</span>
     <span class="n">request</span><span class="p">:</span> <span class="n">pytest</span><span class="o">.</span><span class="n">FixtureRequest</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">collections</span><span class="o">.</span><span class="n">abc</span><span class="o">.</span><span class="n">Callable</span><span class="p">[</span>
     <span class="p">[],</span>
     <span class="n">botocore</span><span class="o">.</span><span class="n">credentials</span><span class="o">.</span><span class="n">Credentials</span><span class="p">,</span>
 <span class="p">]:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Set up cred getter.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Set up cred getter."""</span>
     <span class="k">if</span> <span class="p">(</span>
         <span class="n">s3_access_key</span> <span class="o">:=</span> <span class="n">request</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">getini</span><span class="p">(</span>
-            <span class="s2">&quot;s3_access_key&quot;</span><span class="p">,</span>
+            <span class="s2">"s3_access_key"</span><span class="p">,</span>
         <span class="p">)</span>
     <span class="p">)</span> <span class="ow">and</span> <span class="p">(</span>
         <span class="n">s3_secret_key</span> <span class="o">:=</span> <span class="n">request</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">getini</span><span class="p">(</span>
-            <span class="s2">&quot;s3_secret_key&quot;</span><span class="p">,</span>
+            <span class="s2">"s3_secret_key"</span><span class="p">,</span>
         <span class="p">)</span>
     <span class="p">):</span>
         <span class="k">return</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">botocore</span><span class="o">.</span><span class="n">credentials</span><span class="o">.</span><span class="n">Credentials</span><span class="p">(</span>
@@ -1639,8 +1639,8 @@
             <span class="n">secret_key</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">s3_secret_key</span><span class="p">),</span>
         <span class="p">)</span>
     <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span>  <span class="c1"># pragma: no cover</span>
-        <span class="s2">&quot;Please set up `access_key_getter` fixture or &quot;</span>
-        <span class="s2">&quot;set `s3_access_key` and `s3_secret_key` in `.ini` file.&quot;</span><span class="p">,</span>
+        <span class="s2">"Please set up `access_key_getter` fixture or "</span>
+        <span class="s2">"set `s3_access_key` and `s3_secret_key` in `.ini` file."</span><span class="p">,</span>
     <span class="p">)</span>
 </code></pre></div></td></tr></table></div>
             </details>
@@ -1673,12 +1673,12 @@
 <span class="normal">298</span>
 <span class="normal">299</span>
 <span class="normal">300</span>
-<span class="normal">301</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span><span class="p">(</span><span class="n">scope</span><span class="o">=</span><span class="s2">&quot;session&quot;</span><span class="p">)</span>
+<span class="normal">301</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span><span class="p">(</span><span class="n">scope</span><span class="o">=</span><span class="s2">"session"</span><span class="p">)</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">async_s3_client</span><span class="p">(</span>
     <span class="n">boto3_client</span><span class="p">:</span> <span class="n">mypy_boto3_s3</span><span class="o">.</span><span class="n">S3Client</span><span class="p">,</span>
     <span class="n">s3_bucket</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">saritasa_s3_tools</span><span class="o">.</span><span class="n">AsyncS3Client</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Set up async s3 client.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Set up async s3 client."""</span>
     <span class="k">return</span> <span class="n">saritasa_s3_tools</span><span class="o">.</span><span class="n">AsyncS3Client</span><span class="p">(</span>
         <span class="n">boto3_client</span><span class="o">=</span><span class="n">boto3_client</span><span class="p">,</span>
         <span class="n">default_bucket</span><span class="o">=</span><span class="n">s3_bucket</span><span class="p">,</span>
@@ -1708,9 +1708,9 @@
               <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">113</span>
 <span class="normal">114</span>
 <span class="normal">115</span>
-<span class="normal">116</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span><span class="p">(</span><span class="n">scope</span><span class="o">=</span><span class="s2">&quot;session&quot;</span><span class="p">)</span>
+<span class="normal">116</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span><span class="p">(</span><span class="n">scope</span><span class="o">=</span><span class="s2">"session"</span><span class="p">)</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">aws_config</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">botocore</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">Config</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get aws config.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Get aws config."""</span>
     <span class="k">return</span> <span class="kc">None</span>
 </code></pre></div></td></tr></table></div>
             </details>
@@ -1746,7 +1746,7 @@
 <span class="normal">107</span>
 <span class="normal">108</span>
 <span class="normal">109</span>
-<span class="normal">110</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span><span class="p">(</span><span class="n">scope</span><span class="o">=</span><span class="s2">&quot;session&quot;</span><span class="p">)</span>
+<span class="normal">110</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span><span class="p">(</span><span class="n">scope</span><span class="o">=</span><span class="s2">"session"</span><span class="p">)</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">aws_session</span><span class="p">(</span>
     <span class="n">access_key_getter</span><span class="p">:</span> <span class="n">collections</span><span class="o">.</span><span class="n">abc</span><span class="o">.</span><span class="n">Callable</span><span class="p">[</span>
         <span class="p">[],</span>
@@ -1754,7 +1754,7 @@
     <span class="p">],</span>
     <span class="n">s3_region</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">boto3</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">Session</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get aws session.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Get aws session."""</span>
     <span class="k">return</span> <span class="n">saritasa_s3_tools</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">get_boto3_session</span><span class="p">(</span>
         <span class="n">access_key_getter</span><span class="o">=</span><span class="n">access_key_getter</span><span class="p">,</span>
         <span class="n">region</span><span class="o">=</span><span class="n">s3_region</span><span class="p">,</span>
@@ -1786,11 +1786,11 @@
 <span class="normal">158</span>
 <span class="normal">159</span>
 <span class="normal">160</span>
-<span class="normal">161</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span><span class="p">(</span><span class="n">scope</span><span class="o">=</span><span class="s2">&quot;session&quot;</span><span class="p">)</span>
+<span class="normal">161</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span><span class="p">(</span><span class="n">scope</span><span class="o">=</span><span class="s2">"session"</span><span class="p">)</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">boto3_client</span><span class="p">(</span>
     <span class="n">boto3_resource</span><span class="p">:</span> <span class="n">mypy_boto3_s3</span><span class="o">.</span><span class="n">S3ServiceResource</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">mypy_boto3_s3</span><span class="o">.</span><span class="n">S3Client</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Prepare boto3 client.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Prepare boto3 client."""</span>
     <span class="k">return</span> <span class="n">boto3_resource</span><span class="o">.</span><span class="n">meta</span><span class="o">.</span><span class="n">client</span>
 </code></pre></div></td></tr></table></div>
             </details>
@@ -1822,15 +1822,15 @@
 <span class="normal">124</span>
 <span class="normal">125</span>
 <span class="normal">126</span>
-<span class="normal">127</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span><span class="p">(</span><span class="n">scope</span><span class="o">=</span><span class="s2">&quot;session&quot;</span><span class="p">)</span>
+<span class="normal">127</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span><span class="p">(</span><span class="n">scope</span><span class="o">=</span><span class="s2">"session"</span><span class="p">)</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">boto3_resource</span><span class="p">(</span>
     <span class="n">request</span><span class="p">:</span> <span class="n">pytest</span><span class="o">.</span><span class="n">FixtureRequest</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">mypy_boto3_s3</span><span class="o">.</span><span class="n">S3ServiceResource</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Prepare boto3 resource.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Prepare boto3 resource."""</span>
     <span class="k">try</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">request</span><span class="o">.</span><span class="n">getfixturevalue</span><span class="p">(</span><span class="s2">&quot;boto3_resource_from_django&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">request</span><span class="o">.</span><span class="n">getfixturevalue</span><span class="p">(</span><span class="s2">"boto3_resource_from_django"</span><span class="p">)</span>
     <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>  <span class="c1"># pragma: no cover</span>
-        <span class="k">return</span> <span class="n">request</span><span class="o">.</span><span class="n">getfixturevalue</span><span class="p">(</span><span class="s2">&quot;boto3_resource_from_config&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">request</span><span class="o">.</span><span class="n">getfixturevalue</span><span class="p">(</span><span class="s2">"boto3_resource_from_config"</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
             </details>
     </div>
@@ -1868,7 +1868,7 @@
 <span class="normal">150</span>
 <span class="normal">151</span>
 <span class="normal">152</span>
-<span class="normal">153</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span><span class="p">(</span><span class="n">scope</span><span class="o">=</span><span class="s2">&quot;session&quot;</span><span class="p">)</span>
+<span class="normal">153</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span><span class="p">(</span><span class="n">scope</span><span class="o">=</span><span class="s2">"session"</span><span class="p">)</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">boto3_resource_from_config</span><span class="p">(</span>
     <span class="n">aws_session</span><span class="p">:</span> <span class="n">boto3</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">Session</span><span class="p">,</span>
     <span class="n">aws_config</span><span class="p">:</span> <span class="n">botocore</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">Config</span><span class="p">,</span>
@@ -1878,7 +1878,7 @@
     <span class="p">]</span>
     <span class="o">|</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">mypy_boto3_s3</span><span class="o">.</span><span class="n">S3ServiceResource</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Prepare boto3 resource.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Prepare boto3 resource."""</span>
     <span class="k">return</span> <span class="n">saritasa_s3_tools</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">get_boto3_s3_resource</span><span class="p">(</span>
         <span class="n">session</span><span class="o">=</span><span class="n">aws_session</span><span class="p">,</span>
         <span class="n">s3_endpoint_url_getter</span><span class="o">=</span><span class="n">s3_endpoint_url_getter</span><span class="p">,</span>
@@ -1911,9 +1911,9 @@
 <span class="normal">132</span>
 <span class="normal">133</span>
 <span class="normal">134</span>
-<span class="normal">135</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span><span class="p">(</span><span class="n">scope</span><span class="o">=</span><span class="s2">&quot;session&quot;</span><span class="p">)</span>
+<span class="normal">135</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span><span class="p">(</span><span class="n">scope</span><span class="o">=</span><span class="s2">"session"</span><span class="p">)</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">boto3_resource_from_django</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">mypy_boto3_s3</span><span class="o">.</span><span class="n">S3ServiceResource</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get boto3 resource for django storage.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Get boto3 resource for django storage."""</span>
     <span class="kn">from</span><span class="w"> </span><span class="nn">django.core.files.storage</span><span class="w"> </span><span class="kn">import</span> <span class="n">default_storage</span>
 
     <span class="k">return</span> <span class="n">default_storage</span><span class="o">.</span><span class="n">connection</span>  <span class="c1"># type: ignore</span>
@@ -1951,9 +1951,9 @@
 <span class="normal">335</span>
 <span class="normal">336</span>
 <span class="normal">337</span>
-<span class="normal">338</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span><span class="p">(</span><span class="n">scope</span><span class="o">=</span><span class="s2">&quot;session&quot;</span><span class="p">)</span>
+<span class="normal">338</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span><span class="p">(</span><span class="n">scope</span><span class="o">=</span><span class="s2">"session"</span><span class="p">)</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">django_adjust_s3_bucket</span><span class="p">(</span><span class="n">s3_bucket</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Set bucket to a test one.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Set bucket to a test one."""</span>
     <span class="kn">from</span><span class="w"> </span><span class="nn">django.conf</span><span class="w"> </span><span class="kn">import</span> <span class="n">settings</span>
     <span class="kn">from</span><span class="w"> </span><span class="nn">django.core.files</span><span class="w"> </span><span class="kn">import</span> <span class="n">storage</span>
     <span class="kn">from</span><span class="w"> </span><span class="nn">storages.backends</span><span class="w"> </span><span class="kn">import</span> <span class="n">s3</span>
@@ -2012,7 +2012,7 @@
         <span class="kc">None</span><span class="p">,</span>
     <span class="p">]</span>
 <span class="p">]:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Temporary change default storage settings.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Temporary change default storage settings."""</span>
     <span class="kn">from</span><span class="w"> </span><span class="nn">django.core.files.storage</span><span class="w"> </span><span class="kn">import</span> <span class="n">default_storage</span>
 
     <span class="n">old_settings</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">typing</span><span class="o">.</span><span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
@@ -2074,31 +2074,31 @@
 <span class="normal">42</span>
 <span class="normal">43</span>
 <span class="normal">44</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">pytest_addoption</span><span class="p">(</span><span class="n">parser</span><span class="p">:</span> <span class="n">pytest</span><span class="o">.</span><span class="n">Parser</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Set up cmd args.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Set up cmd args."""</span>
     <span class="n">parser</span><span class="o">.</span><span class="n">addini</span><span class="p">(</span>
-        <span class="s2">&quot;s3_access_key&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;Access key for s3.&quot;</span><span class="p">,</span>
-        <span class="n">default</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="s2">"s3_access_key"</span><span class="p">,</span>
+        <span class="s2">"Access key for s3."</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="s2">""</span><span class="p">,</span>
     <span class="p">)</span>
     <span class="n">parser</span><span class="o">.</span><span class="n">addini</span><span class="p">(</span>
-        <span class="s2">&quot;s3_secret_key&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;Secret key for s3.&quot;</span><span class="p">,</span>
-        <span class="n">default</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="s2">"s3_secret_key"</span><span class="p">,</span>
+        <span class="s2">"Secret key for s3."</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="s2">""</span><span class="p">,</span>
     <span class="p">)</span>
     <span class="n">parser</span><span class="o">.</span><span class="n">addini</span><span class="p">(</span>
-        <span class="s2">&quot;s3_endpoint_url&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;Endpoint for s3.&quot;</span><span class="p">,</span>
-        <span class="n">default</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="s2">"s3_endpoint_url"</span><span class="p">,</span>
+        <span class="s2">"Endpoint for s3."</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="s2">""</span><span class="p">,</span>
     <span class="p">)</span>
     <span class="n">parser</span><span class="o">.</span><span class="n">addini</span><span class="p">(</span>
-        <span class="s2">&quot;s3_region&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;Region for s3.&quot;</span><span class="p">,</span>
-        <span class="n">default</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="s2">"s3_region"</span><span class="p">,</span>
+        <span class="s2">"Region for s3."</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="s2">""</span><span class="p">,</span>
     <span class="p">)</span>
     <span class="n">parser</span><span class="o">.</span><span class="n">addini</span><span class="p">(</span>
-        <span class="s2">&quot;s3_bucket_name&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;Bucket for s3.&quot;</span><span class="p">,</span>
-        <span class="n">default</span><span class="o">=</span><span class="s2">&quot;saritasa-s3-tools&quot;</span><span class="p">,</span>
+        <span class="s2">"s3_bucket_name"</span><span class="p">,</span>
+        <span class="s2">"Bucket for s3."</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="s2">"saritasa-s3-tools"</span><span class="p">,</span>
     <span class="p">)</span>
 </code></pre></div></td></tr></table></div>
             </details>
@@ -2140,7 +2140,7 @@
 <span class="normal">274</span>
 <span class="normal">275</span>
 <span class="normal">276</span>
-<span class="normal">277</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span><span class="p">(</span><span class="n">scope</span><span class="o">=</span><span class="s2">&quot;session&quot;</span><span class="p">)</span>
+<span class="normal">277</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span><span class="p">(</span><span class="n">scope</span><span class="o">=</span><span class="s2">"session"</span><span class="p">)</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">s3_bucket</span><span class="p">(</span>
     <span class="n">s3_bucket_factory</span><span class="p">:</span> <span class="n">collections</span><span class="o">.</span><span class="n">abc</span><span class="o">.</span><span class="n">Callable</span><span class="p">[</span>
         <span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">typing</span><span class="o">.</span><span class="n">Any</span><span class="p">],</span> <span class="nb">bool</span><span class="p">],</span>
@@ -2152,7 +2152,7 @@
     <span class="n">s3_bucket_policy</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">typing</span><span class="o">.</span><span class="n">Any</span><span class="p">],</span>
     <span class="n">s3_bucket_delete_on_teardown</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">collections</span><span class="o">.</span><span class="n">abc</span><span class="o">.</span><span class="n">Generator</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create s3 bucket.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Create s3 bucket."""</span>
     <span class="k">with</span> <span class="n">s3_bucket_factory</span><span class="p">(</span>
         <span class="n">s3_bucket_name</span><span class="p">,</span>
         <span class="n">s3_bucket_policy</span><span class="p">,</span>
@@ -2190,11 +2190,11 @@
 <span class="normal">205</span>
 <span class="normal">206</span>
 <span class="normal">207</span>
-<span class="normal">208</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span><span class="p">(</span><span class="n">scope</span><span class="o">=</span><span class="s2">&quot;session&quot;</span><span class="p">)</span>
+<span class="normal">208</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span><span class="p">(</span><span class="n">scope</span><span class="o">=</span><span class="s2">"session"</span><span class="p">)</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">s3_bucket_cleaner</span><span class="p">(</span>
     <span class="n">boto3_resource</span><span class="p">:</span> <span class="n">mypy_boto3_s3</span><span class="o">.</span><span class="n">ServiceResource</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">collections</span><span class="o">.</span><span class="n">abc</span><span class="o">.</span><span class="n">Callable</span><span class="p">[[</span><span class="nb">str</span><span class="p">],</span> <span class="kc">None</span><span class="p">]:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get bucket cleaner.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Get bucket cleaner."""</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_clean</span><span class="p">(</span><span class="n">bucket</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">boto3_resource</span><span class="o">.</span><span class="n">Bucket</span><span class="p">(</span><span class="n">bucket</span><span class="p">)</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">()</span><span class="o">.</span><span class="n">delete</span><span class="p">()</span>
@@ -2225,9 +2225,9 @@
               <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">193</span>
 <span class="normal">194</span>
 <span class="normal">195</span>
-<span class="normal">196</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span><span class="p">(</span><span class="n">scope</span><span class="o">=</span><span class="s2">&quot;session&quot;</span><span class="p">)</span>
+<span class="normal">196</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span><span class="p">(</span><span class="n">scope</span><span class="o">=</span><span class="s2">"session"</span><span class="p">)</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">s3_bucket_delete_on_teardown</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Delete bucket on teardown or not.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Delete bucket on teardown or not."""</span>
     <span class="k">return</span> <span class="kc">False</span>
 </code></pre></div></td></tr></table></div>
             </details>
@@ -2296,7 +2296,7 @@
 <span class="normal">253</span>
 <span class="normal">254</span>
 <span class="normal">255</span>
-<span class="normal">256</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span><span class="p">(</span><span class="n">scope</span><span class="o">=</span><span class="s2">&quot;session&quot;</span><span class="p">)</span>
+<span class="normal">256</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span><span class="p">(</span><span class="n">scope</span><span class="o">=</span><span class="s2">"session"</span><span class="p">)</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">s3_bucket_factory</span><span class="p">(</span>
     <span class="n">boto3_client</span><span class="p">:</span> <span class="n">mypy_boto3_s3</span><span class="o">.</span><span class="n">S3Client</span><span class="p">,</span>
     <span class="n">s3_region</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
@@ -2311,7 +2311,7 @@
         <span class="n">mypy_boto3_s3</span><span class="o">.</span><span class="n">type_defs</span><span class="o">.</span><span class="n">CreateBucketOutputTypeDef</span>
     <span class="p">],</span>
 <span class="p">]:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get factory for generating s3 buckets.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Get factory for generating s3 buckets."""</span>
 
     <span class="nd">@contextlib</span><span class="o">.</span><span class="n">contextmanager</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">_create</span><span class="p">(</span>
@@ -2328,7 +2328,7 @@
         <span class="n">response</span> <span class="o">=</span> <span class="n">boto3_client</span><span class="o">.</span><span class="n">create_bucket</span><span class="p">(</span>
             <span class="n">Bucket</span><span class="o">=</span><span class="n">bucket</span><span class="p">,</span>
             <span class="n">CreateBucketConfiguration</span><span class="o">=</span><span class="p">{</span>
-                <span class="s2">&quot;LocationConstraint&quot;</span><span class="p">:</span> <span class="n">s3_region</span><span class="p">,</span>  <span class="c1"># type: ignore</span>
+                <span class="s2">"LocationConstraint"</span><span class="p">:</span> <span class="n">s3_region</span><span class="p">,</span>  <span class="c1"># type: ignore</span>
             <span class="p">},</span>
         <span class="p">)</span>
         <span class="k">if</span> <span class="n">policy</span><span class="p">:</span>
@@ -2384,24 +2384,24 @@
 <span class="normal">181</span>
 <span class="normal">182</span>
 <span class="normal">183</span>
-<span class="normal">184</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span><span class="p">(</span><span class="n">scope</span><span class="o">=</span><span class="s2">&quot;session&quot;</span><span class="p">)</span>
+<span class="normal">184</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span><span class="p">(</span><span class="n">scope</span><span class="o">=</span><span class="s2">"session"</span><span class="p">)</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">s3_bucket_name</span><span class="p">(</span>
     <span class="n">request</span><span class="p">:</span> <span class="n">pytest</span><span class="o">.</span><span class="n">FixtureRequest</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get the name of s3 bucket.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Get the name of s3 bucket."""</span>
     <span class="n">worker_input</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span>
         <span class="n">request</span><span class="o">.</span><span class="n">config</span><span class="p">,</span>
-        <span class="s2">&quot;workerinput&quot;</span><span class="p">,</span>
+        <span class="s2">"workerinput"</span><span class="p">,</span>
         <span class="p">{</span>
-            <span class="s2">&quot;workerid&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+            <span class="s2">"workerid"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
         <span class="p">},</span>
     <span class="p">)</span>
-    <span class="k">return</span> <span class="s2">&quot;-&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+    <span class="k">return</span> <span class="s2">"-"</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
         <span class="nb">filter</span><span class="p">(</span>
             <span class="kc">None</span><span class="p">,</span>
             <span class="p">(</span>
-                <span class="nb">str</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">getini</span><span class="p">(</span><span class="s2">&quot;s3_bucket_name&quot;</span><span class="p">)),</span>
-                <span class="n">worker_input</span><span class="p">[</span><span class="s2">&quot;workerid&quot;</span><span class="p">],</span>
+                <span class="nb">str</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">getini</span><span class="p">(</span><span class="s2">"s3_bucket_name"</span><span class="p">)),</span>
+                <span class="n">worker_input</span><span class="p">[</span><span class="s2">"workerid"</span><span class="p">],</span>
             <span class="p">),</span>
         <span class="p">),</span>
     <span class="p">)</span>
@@ -2430,9 +2430,9 @@
               <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">187</span>
 <span class="normal">188</span>
 <span class="normal">189</span>
-<span class="normal">190</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span><span class="p">(</span><span class="n">scope</span><span class="o">=</span><span class="s2">&quot;session&quot;</span><span class="p">)</span>
+<span class="normal">190</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span><span class="p">(</span><span class="n">scope</span><span class="o">=</span><span class="s2">"session"</span><span class="p">)</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">s3_bucket_policy</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">typing</span><span class="o">.</span><span class="n">Any</span><span class="p">]:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get the policy of s3 bucket.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Get the policy of s3 bucket."""</span>
     <span class="k">return</span> <span class="p">{}</span>
 </code></pre></div></td></tr></table></div>
             </details>
@@ -2465,12 +2465,12 @@
 <span class="normal">286</span>
 <span class="normal">287</span>
 <span class="normal">288</span>
-<span class="normal">289</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span><span class="p">(</span><span class="n">scope</span><span class="o">=</span><span class="s2">&quot;session&quot;</span><span class="p">)</span>
+<span class="normal">289</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span><span class="p">(</span><span class="n">scope</span><span class="o">=</span><span class="s2">"session"</span><span class="p">)</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">s3_client</span><span class="p">(</span>
     <span class="n">boto3_client</span><span class="p">:</span> <span class="n">mypy_boto3_s3</span><span class="o">.</span><span class="n">S3Client</span><span class="p">,</span>
     <span class="n">s3_bucket</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">saritasa_s3_tools</span><span class="o">.</span><span class="n">S3Client</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Set up s3 client.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Set up s3 client."""</span>
     <span class="k">return</span> <span class="n">saritasa_s3_tools</span><span class="o">.</span><span class="n">S3Client</span><span class="p">(</span>
         <span class="n">boto3_client</span><span class="o">=</span><span class="n">boto3_client</span><span class="p">,</span>
         <span class="n">default_bucket</span><span class="o">=</span><span class="n">s3_bucket</span><span class="p">,</span>
@@ -2510,7 +2510,7 @@
 <span class="normal">84</span>
 <span class="normal">85</span>
 <span class="normal">86</span>
-<span class="normal">87</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span><span class="p">(</span><span class="n">scope</span><span class="o">=</span><span class="s2">&quot;session&quot;</span><span class="p">)</span>
+<span class="normal">87</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span><span class="p">(</span><span class="n">scope</span><span class="o">=</span><span class="s2">"session"</span><span class="p">)</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">s3_endpoint_url_getter</span><span class="p">(</span>
     <span class="n">request</span><span class="p">:</span> <span class="n">pytest</span><span class="o">.</span><span class="n">FixtureRequest</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="p">(</span>
@@ -2520,8 +2520,8 @@
     <span class="p">]</span>
     <span class="o">|</span> <span class="kc">None</span>
 <span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Set up url getter.&quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="n">s3_endpoint_url</span> <span class="o">:=</span> <span class="n">request</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">getini</span><span class="p">(</span><span class="s2">&quot;s3_endpoint_url&quot;</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Set up url getter."""</span>
+    <span class="k">if</span> <span class="n">s3_endpoint_url</span> <span class="o">:=</span> <span class="n">request</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">getini</span><span class="p">(</span><span class="s2">"s3_endpoint_url"</span><span class="p">):</span>
         <span class="k">return</span> <span class="k">lambda</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">s3_endpoint_url</span><span class="p">)</span>
     <span class="k">return</span> <span class="kc">None</span>  <span class="c1"># pragma: no cover</span>
 </code></pre></div></td></tr></table></div>
@@ -2551,12 +2551,12 @@
 <span class="normal">92</span>
 <span class="normal">93</span>
 <span class="normal">94</span>
-<span class="normal">95</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span><span class="p">(</span><span class="n">scope</span><span class="o">=</span><span class="s2">&quot;session&quot;</span><span class="p">)</span>
+<span class="normal">95</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span><span class="p">(</span><span class="n">scope</span><span class="o">=</span><span class="s2">"session"</span><span class="p">)</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">s3_region</span><span class="p">(</span>
     <span class="n">request</span><span class="p">:</span> <span class="n">pytest</span><span class="o">.</span><span class="n">FixtureRequest</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get s3 region.&quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">getini</span><span class="p">(</span><span class="s2">&quot;s3_region&quot;</span><span class="p">))</span>
+<span class="w">    </span><span class="sd">"""Get s3 region."""</span>
+    <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">getini</span><span class="p">(</span><span class="s2">"s3_region"</span><span class="p">))</span>
 </code></pre></div></td></tr></table></div>
             </details>
     </div>

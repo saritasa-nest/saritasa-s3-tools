@@ -1489,7 +1489,7 @@
 <span class="normal">127</span>
 <span class="normal">128</span>
 <span class="normal">129</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">AsyncS3Client</span><span class="p">(</span><span class="n">client</span><span class="o">.</span><span class="n">S3Client</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Async Client for interacting with s3 based on boto3 client.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Async Client for interacting with s3 based on boto3 client."""</span>
 
     <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">run_sync_as_async</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
@@ -1497,7 +1497,7 @@
         <span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="n">ParamT</span><span class="o">.</span><span class="n">args</span><span class="p">,</span>
         <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">ParamT</span><span class="o">.</span><span class="n">kwargs</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ReturnT</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Make sync function run in async env.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Make sync function run in async env."""</span>
         <span class="k">return</span> <span class="k">await</span> <span class="n">anyio</span><span class="o">.</span><span class="n">to_thread</span><span class="o">.</span><span class="n">run_sync</span><span class="p">(</span>  <span class="c1"># type: ignore</span>
             <span class="n">functools</span><span class="o">.</span><span class="n">partial</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">),</span>
         <span class="p">)</span>
@@ -1507,11 +1507,11 @@
         <span class="n">filename</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
         <span class="n">config</span><span class="p">:</span> <span class="n">configs</span><span class="o">.</span><span class="n">S3FileTypeConfig</span><span class="p">,</span>
         <span class="n">content_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-        <span class="n">bucket</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
-        <span class="n">upload_folder</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="n">bucket</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">""</span><span class="p">,</span>
+        <span class="n">upload_folder</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">""</span><span class="p">,</span>
         <span class="n">extra_metadata</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">client</span><span class="o">.</span><span class="n">S3UploadParams</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Generate params for s3 upload in async env.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Generate params for s3 upload in async env."""</span>
         <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">run_sync_as_async</span><span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">generate_params</span><span class="p">,</span>
             <span class="n">filename</span><span class="o">=</span><span class="n">filename</span><span class="p">,</span>
@@ -1527,9 +1527,9 @@
         <span class="n">filename</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
         <span class="n">config</span><span class="p">:</span> <span class="n">configs</span><span class="o">.</span><span class="n">S3FileTypeConfig</span><span class="p">,</span>
         <span class="n">file_obj</span><span class="p">:</span> <span class="n">mypy_boto3_s3</span><span class="o">.</span><span class="n">type_defs</span><span class="o">.</span><span class="n">FileobjTypeDef</span><span class="p">,</span>
-        <span class="n">bucket</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="n">bucket</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">""</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Upload file to s3 in async env.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Upload file to s3 in async env."""</span>
         <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">run_sync_as_async</span><span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">upload_file</span><span class="p">,</span>
             <span class="n">filename</span><span class="o">=</span><span class="n">filename</span><span class="p">,</span>
@@ -1542,9 +1542,9 @@
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
         <span class="n">file_obj</span><span class="p">:</span> <span class="n">mypy_boto3_s3</span><span class="o">.</span><span class="n">type_defs</span><span class="o">.</span><span class="n">FileobjTypeDef</span><span class="p">,</span>
-        <span class="n">bucket</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="n">bucket</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">""</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">mypy_boto3_s3</span><span class="o">.</span><span class="n">type_defs</span><span class="o">.</span><span class="n">FileobjTypeDef</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Download file from s3 in async env.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Download file from s3 in async env."""</span>
         <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">run_sync_as_async</span><span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">download_file</span><span class="p">,</span>
             <span class="n">file_obj</span><span class="o">=</span><span class="n">file_obj</span><span class="p">,</span>
@@ -1555,9 +1555,9 @@
     <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">async_get_file_metadata</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-        <span class="n">bucket</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="n">bucket</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">""</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">mypy_boto3_s3</span><span class="o">.</span><span class="n">type_defs</span><span class="o">.</span><span class="n">HeadObjectOutputTypeDef</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get file&#39;s metadata in async env.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Get file's metadata in async env."""</span>
         <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">run_sync_as_async</span><span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">get_file_metadata</span><span class="p">,</span>
             <span class="n">bucket</span><span class="o">=</span><span class="n">bucket</span><span class="p">,</span>
@@ -1567,9 +1567,9 @@
     <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">async_is_file_in_bucket</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-        <span class="n">bucket</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="n">bucket</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">""</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Check if file is in bucket in async env.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Check if file is in bucket in async env."""</span>
         <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">run_sync_as_async</span><span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">is_file_in_bucket</span><span class="p">,</span>
             <span class="n">bucket</span><span class="o">=</span><span class="n">bucket</span><span class="p">,</span>
@@ -1580,10 +1580,10 @@
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
         <span class="n">source_key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-        <span class="n">bucket</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
-        <span class="n">source_bucket</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="n">bucket</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">""</span><span class="p">,</span>
+        <span class="n">source_bucket</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">""</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Copy file object from copy source to key path in async env.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Copy file object from copy source to key path in async env."""</span>
         <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">run_sync_as_async</span><span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">copy_object</span><span class="p">,</span>
             <span class="n">key</span><span class="o">=</span><span class="n">key</span><span class="p">,</span>
@@ -1595,9 +1595,9 @@
     <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">async_delete_object</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-        <span class="n">bucket</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="n">bucket</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">""</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Delete file object from s3 bucket is async env.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Delete file object from s3 bucket is async env."""</span>
         <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">run_sync_as_async</span><span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">delete_object</span><span class="p">,</span>
             <span class="n">key</span><span class="o">=</span><span class="n">key</span><span class="p">,</span>
@@ -1623,7 +1623,7 @@
 
 
 <h3 id="saritasa_s3_tools.async_client.client.AsyncS3Client.async_copy_object" class="doc doc-heading">
-            <code class="highlight language-python"><span class="n">async_copy_object</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">source_key</span><span class="p">,</span> <span class="n">bucket</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">source_bucket</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span></code>
+            <code class="highlight language-python"><span class="n">async_copy_object</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">source_key</span><span class="p">,</span> <span class="n">bucket</span><span class="o">=</span><span class="s1">''</span><span class="p">,</span> <span class="n">source_bucket</span><span class="o">=</span><span class="s1">''</span><span class="p">)</span></code>
 
   <span class="doc doc-labels">
       <small class="doc doc-label doc-label-async"><code>async</code></small>
@@ -1657,10 +1657,10 @@
     <span class="bp">self</span><span class="p">,</span>
     <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="n">source_key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-    <span class="n">bucket</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
-    <span class="n">source_bucket</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+    <span class="n">bucket</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">""</span><span class="p">,</span>
+    <span class="n">source_bucket</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">""</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Copy file object from copy source to key path in async env.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Copy file object from copy source to key path in async env."""</span>
     <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">run_sync_as_async</span><span class="p">(</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">copy_object</span><span class="p">,</span>
         <span class="n">key</span><span class="o">=</span><span class="n">key</span><span class="p">,</span>
@@ -1678,7 +1678,7 @@
 
 
 <h3 id="saritasa_s3_tools.async_client.client.AsyncS3Client.async_delete_object" class="doc doc-heading">
-            <code class="highlight language-python"><span class="n">async_delete_object</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">bucket</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span></code>
+            <code class="highlight language-python"><span class="n">async_delete_object</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">bucket</span><span class="o">=</span><span class="s1">''</span><span class="p">)</span></code>
 
   <span class="doc doc-labels">
       <small class="doc doc-label doc-label-async"><code>async</code></small>
@@ -1707,9 +1707,9 @@
 <span class="normal">129</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">async_delete_object</span><span class="p">(</span>
     <span class="bp">self</span><span class="p">,</span>
     <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-    <span class="n">bucket</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+    <span class="n">bucket</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">""</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Delete file object from s3 bucket is async env.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Delete file object from s3 bucket is async env."""</span>
     <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">run_sync_as_async</span><span class="p">(</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">delete_object</span><span class="p">,</span>
         <span class="n">key</span><span class="o">=</span><span class="n">key</span><span class="p">,</span>
@@ -1725,7 +1725,7 @@
 
 
 <h3 id="saritasa_s3_tools.async_client.client.AsyncS3Client.async_download_file" class="doc doc-heading">
-            <code class="highlight language-python"><span class="n">async_download_file</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">file_obj</span><span class="p">,</span> <span class="n">bucket</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span></code>
+            <code class="highlight language-python"><span class="n">async_download_file</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">file_obj</span><span class="p">,</span> <span class="n">bucket</span><span class="o">=</span><span class="s1">''</span><span class="p">)</span></code>
 
   <span class="doc doc-labels">
       <small class="doc doc-label doc-label-async"><code>async</code></small>
@@ -1757,9 +1757,9 @@
     <span class="bp">self</span><span class="p">,</span>
     <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="n">file_obj</span><span class="p">:</span> <span class="n">mypy_boto3_s3</span><span class="o">.</span><span class="n">type_defs</span><span class="o">.</span><span class="n">FileobjTypeDef</span><span class="p">,</span>
-    <span class="n">bucket</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+    <span class="n">bucket</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">""</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">mypy_boto3_s3</span><span class="o">.</span><span class="n">type_defs</span><span class="o">.</span><span class="n">FileobjTypeDef</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Download file from s3 in async env.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Download file from s3 in async env."""</span>
     <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">run_sync_as_async</span><span class="p">(</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">download_file</span><span class="p">,</span>
         <span class="n">file_obj</span><span class="o">=</span><span class="n">file_obj</span><span class="p">,</span>
@@ -1776,7 +1776,7 @@
 
 
 <h3 id="saritasa_s3_tools.async_client.client.AsyncS3Client.async_generate_params" class="doc doc-heading">
-            <code class="highlight language-python"><span class="n">async_generate_params</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">config</span><span class="p">,</span> <span class="n">content_type</span><span class="p">,</span> <span class="n">bucket</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">upload_folder</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">extra_metadata</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
+            <code class="highlight language-python"><span class="n">async_generate_params</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">config</span><span class="p">,</span> <span class="n">content_type</span><span class="p">,</span> <span class="n">bucket</span><span class="o">=</span><span class="s1">''</span><span class="p">,</span> <span class="n">upload_folder</span><span class="o">=</span><span class="s1">''</span><span class="p">,</span> <span class="n">extra_metadata</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
 
   <span class="doc doc-labels">
       <small class="doc doc-label doc-label-async"><code>async</code></small>
@@ -1815,11 +1815,11 @@
     <span class="n">filename</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="n">config</span><span class="p">:</span> <span class="n">configs</span><span class="o">.</span><span class="n">S3FileTypeConfig</span><span class="p">,</span>
     <span class="n">content_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-    <span class="n">bucket</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
-    <span class="n">upload_folder</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+    <span class="n">bucket</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">""</span><span class="p">,</span>
+    <span class="n">upload_folder</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">""</span><span class="p">,</span>
     <span class="n">extra_metadata</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">client</span><span class="o">.</span><span class="n">S3UploadParams</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generate params for s3 upload in async env.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Generate params for s3 upload in async env."""</span>
     <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">run_sync_as_async</span><span class="p">(</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">generate_params</span><span class="p">,</span>
         <span class="n">filename</span><span class="o">=</span><span class="n">filename</span><span class="p">,</span>
@@ -1839,7 +1839,7 @@
 
 
 <h3 id="saritasa_s3_tools.async_client.client.AsyncS3Client.async_get_file_metadata" class="doc doc-heading">
-            <code class="highlight language-python"><span class="n">async_get_file_metadata</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">bucket</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span></code>
+            <code class="highlight language-python"><span class="n">async_get_file_metadata</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">bucket</span><span class="o">=</span><span class="s1">''</span><span class="p">)</span></code>
 
   <span class="doc doc-labels">
       <small class="doc doc-label doc-label-async"><code>async</code></small>
@@ -1868,9 +1868,9 @@
 <span class="normal">89</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">async_get_file_metadata</span><span class="p">(</span>
     <span class="bp">self</span><span class="p">,</span>
     <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-    <span class="n">bucket</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+    <span class="n">bucket</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">""</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">mypy_boto3_s3</span><span class="o">.</span><span class="n">type_defs</span><span class="o">.</span><span class="n">HeadObjectOutputTypeDef</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get file&#39;s metadata in async env.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Get file's metadata in async env."""</span>
     <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">run_sync_as_async</span><span class="p">(</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">get_file_metadata</span><span class="p">,</span>
         <span class="n">bucket</span><span class="o">=</span><span class="n">bucket</span><span class="p">,</span>
@@ -1886,7 +1886,7 @@
 
 
 <h3 id="saritasa_s3_tools.async_client.client.AsyncS3Client.async_is_file_in_bucket" class="doc doc-heading">
-            <code class="highlight language-python"><span class="n">async_is_file_in_bucket</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">bucket</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span></code>
+            <code class="highlight language-python"><span class="n">async_is_file_in_bucket</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">bucket</span><span class="o">=</span><span class="s1">''</span><span class="p">)</span></code>
 
   <span class="doc doc-labels">
       <small class="doc doc-label doc-label-async"><code>async</code></small>
@@ -1915,9 +1915,9 @@
 <span class="normal">101</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">async_is_file_in_bucket</span><span class="p">(</span>
     <span class="bp">self</span><span class="p">,</span>
     <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-    <span class="n">bucket</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+    <span class="n">bucket</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">""</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Check if file is in bucket in async env.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Check if file is in bucket in async env."""</span>
     <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">run_sync_as_async</span><span class="p">(</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">is_file_in_bucket</span><span class="p">,</span>
         <span class="n">bucket</span><span class="o">=</span><span class="n">bucket</span><span class="p">,</span>
@@ -1933,7 +1933,7 @@
 
 
 <h3 id="saritasa_s3_tools.async_client.client.AsyncS3Client.async_upload_file" class="doc doc-heading">
-            <code class="highlight language-python"><span class="n">async_upload_file</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">config</span><span class="p">,</span> <span class="n">file_obj</span><span class="p">,</span> <span class="n">bucket</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span></code>
+            <code class="highlight language-python"><span class="n">async_upload_file</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">config</span><span class="p">,</span> <span class="n">file_obj</span><span class="p">,</span> <span class="n">bucket</span><span class="o">=</span><span class="s1">''</span><span class="p">)</span></code>
 
   <span class="doc doc-labels">
       <small class="doc doc-label doc-label-async"><code>async</code></small>
@@ -1968,9 +1968,9 @@
     <span class="n">filename</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="n">config</span><span class="p">:</span> <span class="n">configs</span><span class="o">.</span><span class="n">S3FileTypeConfig</span><span class="p">,</span>
     <span class="n">file_obj</span><span class="p">:</span> <span class="n">mypy_boto3_s3</span><span class="o">.</span><span class="n">type_defs</span><span class="o">.</span><span class="n">FileobjTypeDef</span><span class="p">,</span>
-    <span class="n">bucket</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+    <span class="n">bucket</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">""</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Upload file to s3 in async env.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Upload file to s3 in async env."""</span>
     <span class="k">return</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">run_sync_as_async</span><span class="p">(</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">upload_file</span><span class="p">,</span>
         <span class="n">filename</span><span class="o">=</span><span class="n">filename</span><span class="p">,</span>
@@ -2019,7 +2019,7 @@
     <span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="n">ParamT</span><span class="o">.</span><span class="n">args</span><span class="p">,</span>
     <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">ParamT</span><span class="o">.</span><span class="n">kwargs</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ReturnT</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Make sync function run in async env.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Make sync function run in async env."""</span>
     <span class="k">return</span> <span class="k">await</span> <span class="n">anyio</span><span class="o">.</span><span class="n">to_thread</span><span class="o">.</span><span class="n">run_sync</span><span class="p">(</span>  <span class="c1"># type: ignore</span>
         <span class="n">functools</span><span class="o">.</span><span class="n">partial</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">),</span>
     <span class="p">)</span>

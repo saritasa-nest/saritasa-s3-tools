@@ -1300,12 +1300,12 @@
 <span class="normal">62</span>
 <span class="normal">63</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@dataclasses</span><span class="o">.</span><span class="n">dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">S3FileTypeConfig</span><span class="p">(</span><span class="n">metaclass</span><span class="o">=</span><span class="n">S3FileTypeConfigMeta</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Configuration for S3 file upload.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Configuration for S3 file upload."""</span>
 
-    <span class="n">configs</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">ClassVar</span><span class="p">[</span><span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="s2">&quot;S3FileTypeConfig&quot;</span><span class="p">]]</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">configs</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">ClassVar</span><span class="p">[</span><span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="s2">"S3FileTypeConfig"</span><span class="p">]]</span> <span class="o">=</span> <span class="p">{}</span>
 
     <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
-    <span class="c1"># S3Key are used to generate file&#39;s path</span>
+    <span class="c1"># S3Key are used to generate file's path</span>
     <span class="n">key</span><span class="p">:</span> <span class="n">keys</span><span class="o">.</span><span class="n">S3Key</span>
     <span class="c1"># Mime types are allowed, None - for all</span>
     <span class="n">allowed</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
@@ -1317,27 +1317,27 @@
     <span class="n">expires_in</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">3600</span>
     <span class="n">success_action_status</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">201</span>
     <span class="c1"># https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Disposition</span>
-    <span class="n">content_disposition</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;attachment&quot;</span><span class="p">,</span> <span class="s2">&quot;inline&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;attachment&quot;</span>
+    <span class="n">content_disposition</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Literal</span><span class="p">[</span><span class="s2">"attachment"</span><span class="p">,</span> <span class="s2">"inline"</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"attachment"</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">get_short_description</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get short description for config.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Get short description for config."""</span>
         <span class="n">allowed_types</span> <span class="o">=</span> <span class="p">(</span>
-            <span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">allowed</span><span class="p">)</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">allowed</span> <span class="k">else</span> <span class="s2">&quot;All types&quot;</span>
+            <span class="s2">", "</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">allowed</span><span class="p">)</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">allowed</span> <span class="k">else</span> <span class="s2">"All types"</span>
         <span class="p">)</span>
         <span class="n">content_length_range</span> <span class="o">=</span> <span class="p">(</span>
             <span class="p">(</span>
-                <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">content_length_range</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">-&quot;</span>
-                <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">content_length_range</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2"> bytes&quot;</span>
+                <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">content_length_range</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">-"</span>
+                <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">content_length_range</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2"> bytes"</span>
             <span class="p">)</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">content_length_range</span>
-            <span class="k">else</span> <span class="s2">&quot;Any length&quot;</span>
+            <span class="k">else</span> <span class="s2">"Any length"</span>
         <span class="p">)</span>
         <span class="k">return</span> <span class="p">(</span>
-            <span class="sa">f</span><span class="s2">&quot;*Allowed types*: </span><span class="si">{</span><span class="n">allowed_types</span><span class="si">}</span><span class="s2">, &quot;</span>
-            <span class="sa">f</span><span class="s2">&quot;*Content length range*: </span><span class="si">{</span><span class="n">content_length_range</span><span class="si">}</span><span class="s2">, &quot;</span>
-            <span class="sa">f</span><span class="s2">&quot;*Expires in*: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">expires_in</span><span class="si">}</span><span class="s2"> seconds, &quot;</span>
-            <span class="sa">f</span><span class="s2">&quot;*Success action status*: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">success_action_status</span><span class="si">}</span><span class="s2">, &quot;</span>
-            <span class="sa">f</span><span class="s2">&quot;*Content disposition*: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">content_disposition</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="sa">f</span><span class="s2">"*Allowed types*: </span><span class="si">{</span><span class="n">allowed_types</span><span class="si">}</span><span class="s2">, "</span>
+            <span class="sa">f</span><span class="s2">"*Content length range*: </span><span class="si">{</span><span class="n">content_length_range</span><span class="si">}</span><span class="s2">, "</span>
+            <span class="sa">f</span><span class="s2">"*Expires in*: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">expires_in</span><span class="si">}</span><span class="s2"> seconds, "</span>
+            <span class="sa">f</span><span class="s2">"*Success action status*: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">success_action_status</span><span class="si">}</span><span class="s2">, "</span>
+            <span class="sa">f</span><span class="s2">"*Content disposition*: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">content_disposition</span><span class="si">}</span><span class="s2">"</span>
         <span class="p">)</span>
 </code></pre></div></td></tr></table></div>
               </details>
@@ -1391,24 +1391,24 @@
 <span class="normal">61</span>
 <span class="normal">62</span>
 <span class="normal">63</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">get_short_description</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get short description for config.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Get short description for config."""</span>
     <span class="n">allowed_types</span> <span class="o">=</span> <span class="p">(</span>
-        <span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">allowed</span><span class="p">)</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">allowed</span> <span class="k">else</span> <span class="s2">&quot;All types&quot;</span>
+        <span class="s2">", "</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">allowed</span><span class="p">)</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">allowed</span> <span class="k">else</span> <span class="s2">"All types"</span>
     <span class="p">)</span>
     <span class="n">content_length_range</span> <span class="o">=</span> <span class="p">(</span>
         <span class="p">(</span>
-            <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">content_length_range</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">-&quot;</span>
-            <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">content_length_range</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2"> bytes&quot;</span>
+            <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">content_length_range</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">-"</span>
+            <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">content_length_range</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2"> bytes"</span>
         <span class="p">)</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">content_length_range</span>
-        <span class="k">else</span> <span class="s2">&quot;Any length&quot;</span>
+        <span class="k">else</span> <span class="s2">"Any length"</span>
     <span class="p">)</span>
     <span class="k">return</span> <span class="p">(</span>
-        <span class="sa">f</span><span class="s2">&quot;*Allowed types*: </span><span class="si">{</span><span class="n">allowed_types</span><span class="si">}</span><span class="s2">, &quot;</span>
-        <span class="sa">f</span><span class="s2">&quot;*Content length range*: </span><span class="si">{</span><span class="n">content_length_range</span><span class="si">}</span><span class="s2">, &quot;</span>
-        <span class="sa">f</span><span class="s2">&quot;*Expires in*: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">expires_in</span><span class="si">}</span><span class="s2"> seconds, &quot;</span>
-        <span class="sa">f</span><span class="s2">&quot;*Success action status*: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">success_action_status</span><span class="si">}</span><span class="s2">, &quot;</span>
-        <span class="sa">f</span><span class="s2">&quot;*Content disposition*: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">content_disposition</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="sa">f</span><span class="s2">"*Allowed types*: </span><span class="si">{</span><span class="n">allowed_types</span><span class="si">}</span><span class="s2">, "</span>
+        <span class="sa">f</span><span class="s2">"*Content length range*: </span><span class="si">{</span><span class="n">content_length_range</span><span class="si">}</span><span class="s2">, "</span>
+        <span class="sa">f</span><span class="s2">"*Expires in*: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">expires_in</span><span class="si">}</span><span class="s2"> seconds, "</span>
+        <span class="sa">f</span><span class="s2">"*Success action status*: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">success_action_status</span><span class="si">}</span><span class="s2">, "</span>
+        <span class="sa">f</span><span class="s2">"*Content disposition*: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">content_disposition</span><span class="si">}</span><span class="s2">"</span>
     <span class="p">)</span>
 </code></pre></div></td></tr></table></div>
             </details>
@@ -1466,17 +1466,17 @@
 <span class="normal">18</span>
 <span class="normal">19</span>
 <span class="normal">20</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">S3FileTypeConfigMeta</span><span class="p">(</span><span class="nb">type</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Meta class for S3FileTypeConfig.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Meta class for S3FileTypeConfig."""</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span>
         <span class="bp">cls</span><span class="p">,</span>
         <span class="o">*</span><span class="n">args</span><span class="p">,</span>  <span class="c1"># noqa: ANN002</span>
         <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
-    <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;S3FileTypeConfig&quot;</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Update mapping of S3SupportedFieldConfigs.&quot;&quot;&quot;</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">"S3FileTypeConfig"</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Update mapping of S3SupportedFieldConfigs."""</span>
         <span class="n">instance</span><span class="p">:</span> <span class="n">S3FileTypeConfig</span> <span class="o">=</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__call__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">instance</span><span class="o">.</span><span class="n">name</span> <span class="ow">in</span> <span class="n">S3FileTypeConfig</span><span class="o">.</span><span class="n">configs</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">instance</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> config is already defined&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">instance</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> config is already defined"</span><span class="p">)</span>
         <span class="n">S3FileTypeConfig</span><span class="o">.</span><span class="n">configs</span><span class="p">[</span><span class="n">instance</span><span class="o">.</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">instance</span>
         <span class="k">return</span> <span class="n">instance</span>
 </code></pre></div></td></tr></table></div>
@@ -1525,11 +1525,11 @@
     <span class="bp">cls</span><span class="p">,</span>
     <span class="o">*</span><span class="n">args</span><span class="p">,</span>  <span class="c1"># noqa: ANN002</span>
     <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;S3FileTypeConfig&quot;</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Update mapping of S3SupportedFieldConfigs.&quot;&quot;&quot;</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">"S3FileTypeConfig"</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Update mapping of S3SupportedFieldConfigs."""</span>
     <span class="n">instance</span><span class="p">:</span> <span class="n">S3FileTypeConfig</span> <span class="o">=</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__call__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">instance</span><span class="o">.</span><span class="n">name</span> <span class="ow">in</span> <span class="n">S3FileTypeConfig</span><span class="o">.</span><span class="n">configs</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">instance</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> config is already defined&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">instance</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> config is already defined"</span><span class="p">)</span>
     <span class="n">S3FileTypeConfig</span><span class="o">.</span><span class="n">configs</span><span class="p">[</span><span class="n">instance</span><span class="o">.</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">instance</span>
     <span class="k">return</span> <span class="n">instance</span>
 </code></pre></div></td></tr></table></div>

@@ -1377,7 +1377,7 @@ You can try it out in <code>example</code> folder.</p>
 <span class="kn">from</span><span class="w"> </span><span class="nn">django.db</span><span class="w"> </span><span class="kn">import</span> <span class="n">models</span>
 
 <span class="k">class</span><span class="w"> </span><span class="nc">ModelWithFiles</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Test model with different files configs.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Test model with different files configs."""</span>
 
     <span class="n">file</span> <span class="o">=</span> <span class="n">saritasa_s3_tools</span><span class="o">.</span><span class="n">django</span><span class="o">.</span><span class="n">S3FileField</span><span class="p">(</span>
         <span class="n">blank</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
@@ -1386,9 +1386,9 @@ You can try it out in <code>example</code> folder.</p>
         <span class="c1"># file, who can save file, what files can be save and what are size</span>
         <span class="c1"># constraints</span>
         <span class="n">s3_config</span><span class="o">=</span><span class="n">saritasa_s3_tools</span><span class="o">.</span><span class="n">S3FileTypeConfig</span><span class="p">(</span>
-            <span class="n">name</span><span class="o">=</span><span class="s2">&quot;django-files&quot;</span><span class="p">,</span>
-            <span class="n">key</span><span class="o">=</span><span class="n">saritasa_s3_tools</span><span class="o">.</span><span class="n">keys</span><span class="o">.</span><span class="n">WithPrefixUUIDFolder</span><span class="p">(</span><span class="s2">&quot;django-files&quot;</span><span class="p">),</span>
-            <span class="n">allowed</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;text/plain&quot;</span><span class="p">,),</span>
+            <span class="n">name</span><span class="o">=</span><span class="s2">"django-files"</span><span class="p">,</span>
+            <span class="n">key</span><span class="o">=</span><span class="n">saritasa_s3_tools</span><span class="o">.</span><span class="n">keys</span><span class="o">.</span><span class="n">WithPrefixUUIDFolder</span><span class="p">(</span><span class="s2">"django-files"</span><span class="p">),</span>
+            <span class="n">allowed</span><span class="o">=</span><span class="p">(</span><span class="s2">"text/plain"</span><span class="p">,),</span>
             <span class="n">auth</span><span class="o">=</span><span class="k">lambda</span> <span class="n">user</span><span class="p">:</span> <span class="nb">bool</span><span class="p">(</span><span class="n">user</span> <span class="ow">and</span> <span class="n">user</span><span class="o">.</span><span class="n">is_authenticated</span><span class="p">),</span>
             <span class="n">content_length_range</span><span class="o">=</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">20000000</span><span class="p">),</span>
         <span class="p">),</span>
@@ -1398,9 +1398,9 @@ You can try it out in <code>example</code> folder.</p>
         <span class="n">blank</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
         <span class="n">null</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
         <span class="n">s3_config</span><span class="o">=</span><span class="n">saritasa_s3_tools</span><span class="o">.</span><span class="n">S3FileTypeConfig</span><span class="p">(</span>
-            <span class="n">name</span><span class="o">=</span><span class="s2">&quot;django-images&quot;</span><span class="p">,</span>
-            <span class="n">key</span><span class="o">=</span><span class="n">saritasa_s3_tools</span><span class="o">.</span><span class="n">keys</span><span class="o">.</span><span class="n">WithPrefixUUIDFolder</span><span class="p">(</span><span class="s2">&quot;django-images&quot;</span><span class="p">),</span>
-            <span class="n">allowed</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;image/png&quot;</span><span class="p">,),</span>
+            <span class="n">name</span><span class="o">=</span><span class="s2">"django-images"</span><span class="p">,</span>
+            <span class="n">key</span><span class="o">=</span><span class="n">saritasa_s3_tools</span><span class="o">.</span><span class="n">keys</span><span class="o">.</span><span class="n">WithPrefixUUIDFolder</span><span class="p">(</span><span class="s2">"django-images"</span><span class="p">),</span>
+            <span class="n">allowed</span><span class="o">=</span><span class="p">(</span><span class="s2">"image/png"</span><span class="p">,),</span>
             <span class="n">content_length_range</span><span class="o">=</span><span class="p">(</span><span class="mi">5000</span><span class="p">,</span> <span class="mi">20000000</span><span class="p">),</span>
         <span class="p">),</span>
     <span class="p">)</span>
@@ -1418,20 +1418,20 @@ You can try it out in <code>example</code> folder.</p>
     <span class="n">saritasa_s3_tools</span><span class="o">.</span><span class="n">django</span><span class="o">.</span><span class="n">S3FieldsConfigMixin</span><span class="p">,</span>
     <span class="n">serializers</span><span class="o">.</span><span class="n">ModelSerializer</span><span class="p">,</span>
 <span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Serializer to show info model with files.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Serializer to show info model with files."""</span>
 
     <span class="k">class</span><span class="w"> </span><span class="nc">Meta</span><span class="p">:</span>
         <span class="n">model</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">ModelWithFiles</span>
-        <span class="n">fields</span> <span class="o">=</span> <span class="s2">&quot;__all__&quot;</span>
+        <span class="n">fields</span> <span class="o">=</span> <span class="s2">"__all__"</span>
 </code></pre></div>
 <h3 id="setup-view">Setup view<a class="headerlink" href="#setup-view" title="Permanent link">&para;</a></h3>
 <p>Then just add <code>S3GetParamsView</code> view to your project urls like that.</p>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">django.urls</span><span class="w"> </span><span class="kn">import</span> <span class="n">path</span>
 
 <span class="n">path</span><span class="p">(</span>
-    <span class="s2">&quot;s3/&quot;</span><span class="p">,</span>
-    <span class="n">include</span><span class="p">(</span><span class="s2">&quot;saritasa_s3_tools.django.urls&quot;</span><span class="p">),</span>
-    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;saritasa-s3-tools&quot;</span><span class="p">,</span>
+    <span class="s2">"s3/"</span><span class="p">,</span>
+    <span class="n">include</span><span class="p">(</span><span class="s2">"saritasa_s3_tools.django.urls"</span><span class="p">),</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">"saritasa-s3-tools"</span><span class="p">,</span>
 <span class="p">),</span>
 </code></pre></div>
 <h3 id="setup-pytest">Setup pytest<a class="headerlink" href="#setup-pytest" title="Permanent link">&para;</a></h3>
@@ -1439,12 +1439,12 @@ You can try it out in <code>example</code> folder.</p>
 <div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">pytest</span>
 
 
-<span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span><span class="p">(</span><span class="n">scope</span><span class="o">=</span><span class="s2">&quot;session&quot;</span><span class="p">,</span> <span class="n">autouse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="nd">@pytest</span><span class="o">.</span><span class="n">fixture</span><span class="p">(</span><span class="n">scope</span><span class="o">=</span><span class="s2">"session"</span><span class="p">,</span> <span class="n">autouse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">_adjust_s3_bucket</span><span class="p">(</span><span class="n">django_adjust_s3_bucket</span><span class="p">:</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Set bucket to a test one.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Set bucket to a test one."""</span>
 </code></pre></div>
 <h3 id="setup-settings">Setup settings<a class="headerlink" href="#setup-settings" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><span class="n">AWS_S3_SIGNATURE_VERSION</span> <span class="o">=</span> <span class="s2">&quot;s3v4&quot;</span>
+<div class="highlight"><pre><span></span><code><span class="n">AWS_S3_SIGNATURE_VERSION</span> <span class="o">=</span> <span class="s2">"s3v4"</span>
 </code></pre></div>
 <p>By default we assume <code>s3v4</code> version for signature. We recommend that you would
 set <code>AWS_S3_SIGNATURE_VERSION</code> to <code>s3v4</code>. If you need other versions, set it in
@@ -1473,15 +1473,15 @@ from <code>saritasa_s3_tools.factory</code></li>
 <span class="p">)</span>
 <span class="n">s3_params</span> <span class="o">=</span> <span class="n">s3_client</span><span class="o">.</span><span class="n">generate_params</span><span class="p">(</span>
     <span class="n">filename</span><span class="o">=</span><span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
-    <span class="n">config</span><span class="o">=</span><span class="n">saritasa_s3_tools</span><span class="o">.</span><span class="n">S3FileTypeConfig</span><span class="o">.</span><span class="n">configs</span><span class="p">[</span><span class="s2">&quot;files&quot;</span><span class="p">],</span>
-    <span class="n">content_type</span><span class="o">=</span><span class="s2">&quot;application/x-python-code&quot;</span><span class="p">,</span>
+    <span class="n">config</span><span class="o">=</span><span class="n">saritasa_s3_tools</span><span class="o">.</span><span class="n">S3FileTypeConfig</span><span class="o">.</span><span class="n">configs</span><span class="p">[</span><span class="s2">"files"</span><span class="p">],</span>
+    <span class="n">content_type</span><span class="o">=</span><span class="s2">"application/x-python-code"</span><span class="p">,</span>
     <span class="n">extra_metadata</span><span class="o">=</span><span class="p">{</span>
-        <span class="s2">&quot;test&quot;</span><span class="p">:</span> <span class="s2">&quot;123&quot;</span><span class="p">,</span>
+        <span class="s2">"test"</span><span class="p">:</span> <span class="s2">"123"</span><span class="p">,</span>
     <span class="p">},</span>
 <span class="p">)</span>
 <span class="k">with</span> <span class="p">(</span>
     <span class="n">httpx2</span><span class="o">.</span><span class="n">Client</span><span class="p">()</span> <span class="k">as</span> <span class="n">client</span><span class="p">,</span>
-    <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">&quot;rb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">upload_file</span><span class="p">,</span>
+    <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">"rb"</span><span class="p">)</span> <span class="k">as</span> <span class="n">upload_file</span><span class="p">,</span>
 <span class="p">):</span>
     <span class="n">upload_response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">post</span><span class="p">(</span>
         <span class="n">url</span><span class="o">=</span><span class="n">s3_params</span><span class="o">.</span><span class="n">url</span><span class="p">,</span>
@@ -1490,7 +1490,7 @@ from <code>saritasa_s3_tools.factory</code></li>
             <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">s3_params</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
             <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
         <span class="p">},</span>
-        <span class="n">files</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;file&quot;</span><span class="p">:</span> <span class="n">upload_file</span><span class="o">.</span><span class="n">read</span><span class="p">()},</span>
+        <span class="n">files</span><span class="o">=</span><span class="p">{</span><span class="s2">"file"</span><span class="p">:</span> <span class="n">upload_file</span><span class="o">.</span><span class="n">read</span><span class="p">()},</span>
     <span class="p">)</span>
 <span class="n">parsed_response</span> <span class="o">=</span> <span class="n">xml</span><span class="o">.</span><span class="n">etree</span><span class="o">.</span><span class="n">ElementTree</span><span class="o">.</span><span class="n">fromstring</span><span class="p">(</span>  <span class="c1"># noqa: S314</span>
     <span class="n">upload_response</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">decode</span><span class="p">(),</span>

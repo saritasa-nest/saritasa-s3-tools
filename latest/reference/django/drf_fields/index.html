@@ -1400,18 +1400,18 @@ S3FileTypeConfig instance.</p>
 <span class="normal">65</span>
 <span class="normal">66</span>
 <span class="normal">67</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">S3FileTypeConfigField</span><span class="p">(</span><span class="n">serializers</span><span class="o">.</span><span class="n">ChoiceField</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Custom Choice field for s3 configs.</span>
+<span class="w">    </span><span class="sd">"""Custom Choice field for s3 configs.</span>
 
 <span class="sd">    Represent config choice in api and covert this choice to proper</span>
 <span class="sd">    S3FileTypeConfig instance.</span>
 
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">choices</span><span class="o">=</span><span class="p">(),</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_get_choices</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get choices from S3FileTypeConfig.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Get choices from S3FileTypeConfig."""</span>
         <span class="n">current_choices</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span>
             <span class="p">(</span>
                 <span class="n">config_name</span><span class="p">,</span>
@@ -1427,11 +1427,11 @@ S3FileTypeConfig instance.</p>
         <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">_get_choices</span><span class="p">()</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_set_choices</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">choices</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span> <span class="o">...</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Update choices.</span>
+<span class="w">        </span><span class="sd">"""Update choices.</span>
 
 <span class="sd">        Redefined to avoid recursion.</span>
 
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">grouped_choices</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">to_choices_dict</span><span class="p">(</span><span class="n">choices</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_choices</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">flatten_choices_dict</span><span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">grouped_choices</span><span class="p">,</span>
@@ -1450,11 +1450,11 @@ S3FileTypeConfig instance.</p>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">data</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Any</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">configs</span><span class="o">.</span><span class="n">S3FileTypeConfig</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Convert api data to S3FileTypeConfig.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Convert api data to S3FileTypeConfig."""</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">configs</span><span class="o">.</span><span class="n">S3FileTypeConfig</span><span class="o">.</span><span class="n">configs</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">data</span><span class="p">)]</span>
         <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">fail</span><span class="p">(</span><span class="s2">&quot;invalid_choice&quot;</span><span class="p">,</span> <span class="nb">input</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">fail</span><span class="p">(</span><span class="s2">"invalid_choice"</span><span class="p">,</span> <span class="nb">input</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
               </details>
 
@@ -1499,11 +1499,11 @@ S3FileTypeConfig instance.</p>
     <span class="bp">self</span><span class="p">,</span>
     <span class="n">data</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Any</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">configs</span><span class="o">.</span><span class="n">S3FileTypeConfig</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Convert api data to S3FileTypeConfig.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Convert api data to S3FileTypeConfig."""</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">configs</span><span class="o">.</span><span class="n">S3FileTypeConfig</span><span class="o">.</span><span class="n">configs</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">data</span><span class="p">)]</span>
     <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">fail</span><span class="p">(</span><span class="s2">&quot;invalid_choice&quot;</span><span class="p">,</span> <span class="nb">input</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fail</span><span class="p">(</span><span class="s2">"invalid_choice"</span><span class="p">,</span> <span class="nb">input</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
             </details>
     </div>
@@ -1631,7 +1631,7 @@ will become <code>some-folder/file.txt</code>.</p>
 <span class="normal">145</span>
 <span class="normal">146</span>
 <span class="normal">147</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">S3UploadURLField</span><span class="p">(</span><span class="n">serializers</span><span class="o">.</span><span class="n">CharField</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Char serializer field for S3 `files or keys or URLs or objects`.</span>
+<span class="w">    </span><span class="sd">"""Char serializer field for S3 `files or keys or URLs or objects`.</span>
 
 <span class="sd">    Convert url/path to a valid s3 key for bucket.</span>
 
@@ -1643,17 +1643,17 @@ will become <code>some-folder/file.txt</code>.</p>
 <span class="sd">    https://www.saritasa-s3-tools.s3.localhost/locations/some-folder/file.txt</span>
 <span class="sd">    will become `some-folder/file.txt`.</span>
 
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Make custom initialization.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Make custom initialization."""</span>
         <span class="c1"># Remove explicit max_length limit in field</span>
         <span class="c1"># It causes issues with auto spec generation and validation.</span>
         <span class="c1"># Since it can return full urls with auth query, which can easily pass</span>
         <span class="c1"># a limit specified in model field(which is by default 100), it causes</span>
         <span class="c1"># confusion for openapi specs validators.</span>
-        <span class="n">max_length</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;max_length&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">storage</span><span class="p">:</span> <span class="n">Storage</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;storage&quot;</span><span class="p">,</span> <span class="n">default_storage</span><span class="p">)</span>
+        <span class="n">max_length</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">"max_length"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">storage</span><span class="p">:</span> <span class="n">Storage</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">"storage"</span><span class="p">,</span> <span class="n">default_storage</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">max_length_validator</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">max_length</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
@@ -1662,33 +1662,33 @@ will become <code>some-folder/file.txt</code>.</p>
             <span class="bp">self</span><span class="o">.</span><span class="n">max_length_validator</span> <span class="o">=</span> <span class="n">validators</span><span class="o">.</span><span class="n">MaxLengthValidator</span><span class="p">(</span>
                 <span class="n">limit_value</span><span class="o">=</span><span class="n">max_length</span><span class="p">,</span>
                 <span class="n">message</span><span class="o">=</span><span class="n">lazy_format</span><span class="p">(</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">error_messages</span><span class="p">[</span><span class="s2">&quot;max_length&quot;</span><span class="p">],</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">error_messages</span><span class="p">[</span><span class="s2">"max_length"</span><span class="p">],</span>
                     <span class="n">max_length</span><span class="o">=</span><span class="n">max_length</span><span class="p">,</span>
                 <span class="p">),</span>
             <span class="p">)</span>
         <span class="c1"># Append this validator to enable invalid code for spec</span>
         <span class="n">validator_for_spec</span> <span class="o">=</span> <span class="n">validators</span><span class="o">.</span><span class="n">MinLengthValidator</span><span class="p">(</span>
             <span class="n">limit_value</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
-            <span class="n">message</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">error_messages</span><span class="p">[</span><span class="s2">&quot;invalid&quot;</span><span class="p">],</span>
+            <span class="n">message</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">error_messages</span><span class="p">[</span><span class="s2">"invalid"</span><span class="p">],</span>
         <span class="p">)</span>
-        <span class="n">validator_for_spec</span><span class="o">.</span><span class="n">code</span> <span class="o">=</span> <span class="s2">&quot;invalid&quot;</span>
+        <span class="n">validator_for_spec</span><span class="o">.</span><span class="n">code</span> <span class="o">=</span> <span class="s2">"invalid"</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">validators</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">validator_for_spec</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">to_internal_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Validate `data` and convert it to internal value.</span>
+<span class="w">        </span><span class="sd">"""Validate `data` and convert it to internal value.</span>
 
 <span class="sd">        Cut domain from url to save it in file field.</span>
 
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">fail</span><span class="p">(</span><span class="s2">&quot;invalid&quot;</span><span class="p">)</span>  <span class="c1"># pragma: no cover</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">fail</span><span class="p">(</span><span class="s2">"invalid"</span><span class="p">)</span>  <span class="c1"># pragma: no cover</span>
         <span class="c1"># Crop server domain and port and get relative path to avatar</span>
         <span class="n">file_url</span> <span class="o">=</span> <span class="n">urllib</span><span class="o">.</span><span class="n">parse</span><span class="o">.</span><span class="n">urlparse</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="n">path</span>
 
         <span class="c1"># Crop S3 bucket name</span>
         <span class="n">file_url</span> <span class="o">=</span> <span class="n">file_url</span><span class="o">.</span><span class="n">split</span><span class="p">(</span>
-            <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">storage</span><span class="o">.</span><span class="n">bucket_name</span><span class="si">}</span><span class="s2">/&quot;</span><span class="p">,</span>  <span class="c1"># type: ignore</span>
-        <span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">lstrip</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span>
+            <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">storage</span><span class="o">.</span><span class="n">bucket_name</span><span class="si">}</span><span class="s2">/"</span><span class="p">,</span>  <span class="c1"># type: ignore</span>
+        <span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">lstrip</span><span class="p">(</span><span class="s2">"/"</span><span class="p">)</span>
 
         <span class="c1"># Normalize url</span>
         <span class="n">file_url</span> <span class="o">=</span> <span class="n">urllib</span><span class="o">.</span><span class="n">parse</span><span class="o">.</span><span class="n">unquote_plus</span><span class="p">(</span><span class="n">file_url</span><span class="p">)</span>
@@ -1696,13 +1696,13 @@ will become <code>some-folder/file.txt</code>.</p>
         <span class="c1"># Remove aws-location prefix to keep only file name as key</span>
         <span class="n">aws_location</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">storage</span><span class="o">.</span><span class="n">location</span>  <span class="c1"># type: ignore</span>
         <span class="k">if</span> <span class="n">aws_location</span> <span class="ow">and</span> <span class="n">file_url</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="n">aws_location</span><span class="p">):</span>
-            <span class="n">file_url</span> <span class="o">=</span> <span class="n">file_url</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">aws_location</span><span class="si">}</span><span class="s2">/&quot;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+            <span class="n">file_url</span> <span class="o">=</span> <span class="n">file_url</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">aws_location</span><span class="si">}</span><span class="s2">/"</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_length_validator</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">max_length_validator</span><span class="p">(</span><span class="n">file_url</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">file_url</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">to_representation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return full file url.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Return full file url."""</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">value</span><span class="p">:</span>
             <span class="k">return</span> <span class="kc">None</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
@@ -1768,14 +1768,14 @@ will become <code>some-folder/file.txt</code>.</p>
 <span class="normal">110</span>
 <span class="normal">111</span>
 <span class="normal">112</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Make custom initialization.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Make custom initialization."""</span>
     <span class="c1"># Remove explicit max_length limit in field</span>
     <span class="c1"># It causes issues with auto spec generation and validation.</span>
     <span class="c1"># Since it can return full urls with auth query, which can easily pass</span>
     <span class="c1"># a limit specified in model field(which is by default 100), it causes</span>
     <span class="c1"># confusion for openapi specs validators.</span>
-    <span class="n">max_length</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;max_length&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">storage</span><span class="p">:</span> <span class="n">Storage</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;storage&quot;</span><span class="p">,</span> <span class="n">default_storage</span><span class="p">)</span>
+    <span class="n">max_length</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">"max_length"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">storage</span><span class="p">:</span> <span class="n">Storage</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">"storage"</span><span class="p">,</span> <span class="n">default_storage</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">max_length_validator</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">max_length</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
@@ -1784,16 +1784,16 @@ will become <code>some-folder/file.txt</code>.</p>
         <span class="bp">self</span><span class="o">.</span><span class="n">max_length_validator</span> <span class="o">=</span> <span class="n">validators</span><span class="o">.</span><span class="n">MaxLengthValidator</span><span class="p">(</span>
             <span class="n">limit_value</span><span class="o">=</span><span class="n">max_length</span><span class="p">,</span>
             <span class="n">message</span><span class="o">=</span><span class="n">lazy_format</span><span class="p">(</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">error_messages</span><span class="p">[</span><span class="s2">&quot;max_length&quot;</span><span class="p">],</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">error_messages</span><span class="p">[</span><span class="s2">"max_length"</span><span class="p">],</span>
                 <span class="n">max_length</span><span class="o">=</span><span class="n">max_length</span><span class="p">,</span>
             <span class="p">),</span>
         <span class="p">)</span>
     <span class="c1"># Append this validator to enable invalid code for spec</span>
     <span class="n">validator_for_spec</span> <span class="o">=</span> <span class="n">validators</span><span class="o">.</span><span class="n">MinLengthValidator</span><span class="p">(</span>
         <span class="n">limit_value</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
-        <span class="n">message</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">error_messages</span><span class="p">[</span><span class="s2">&quot;invalid&quot;</span><span class="p">],</span>
+        <span class="n">message</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">error_messages</span><span class="p">[</span><span class="s2">"invalid"</span><span class="p">],</span>
     <span class="p">)</span>
-    <span class="n">validator_for_spec</span><span class="o">.</span><span class="n">code</span> <span class="o">=</span> <span class="s2">&quot;invalid&quot;</span>
+    <span class="n">validator_for_spec</span><span class="o">.</span><span class="n">code</span> <span class="o">=</span> <span class="s2">"invalid"</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">validators</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">validator_for_spec</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
             </details>
@@ -1844,20 +1844,20 @@ will become <code>some-folder/file.txt</code>.</p>
 <span class="normal">137</span>
 <span class="normal">138</span>
 <span class="normal">139</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">to_internal_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Validate `data` and convert it to internal value.</span>
+<span class="w">    </span><span class="sd">"""Validate `data` and convert it to internal value.</span>
 
 <span class="sd">    Cut domain from url to save it in file field.</span>
 
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">fail</span><span class="p">(</span><span class="s2">&quot;invalid&quot;</span><span class="p">)</span>  <span class="c1"># pragma: no cover</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fail</span><span class="p">(</span><span class="s2">"invalid"</span><span class="p">)</span>  <span class="c1"># pragma: no cover</span>
     <span class="c1"># Crop server domain and port and get relative path to avatar</span>
     <span class="n">file_url</span> <span class="o">=</span> <span class="n">urllib</span><span class="o">.</span><span class="n">parse</span><span class="o">.</span><span class="n">urlparse</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="n">path</span>
 
     <span class="c1"># Crop S3 bucket name</span>
     <span class="n">file_url</span> <span class="o">=</span> <span class="n">file_url</span><span class="o">.</span><span class="n">split</span><span class="p">(</span>
-        <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">storage</span><span class="o">.</span><span class="n">bucket_name</span><span class="si">}</span><span class="s2">/&quot;</span><span class="p">,</span>  <span class="c1"># type: ignore</span>
-    <span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">lstrip</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span>
+        <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">storage</span><span class="o">.</span><span class="n">bucket_name</span><span class="si">}</span><span class="s2">/"</span><span class="p">,</span>  <span class="c1"># type: ignore</span>
+    <span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">lstrip</span><span class="p">(</span><span class="s2">"/"</span><span class="p">)</span>
 
     <span class="c1"># Normalize url</span>
     <span class="n">file_url</span> <span class="o">=</span> <span class="n">urllib</span><span class="o">.</span><span class="n">parse</span><span class="o">.</span><span class="n">unquote_plus</span><span class="p">(</span><span class="n">file_url</span><span class="p">)</span>
@@ -1865,7 +1865,7 @@ will become <code>some-folder/file.txt</code>.</p>
     <span class="c1"># Remove aws-location prefix to keep only file name as key</span>
     <span class="n">aws_location</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">storage</span><span class="o">.</span><span class="n">location</span>  <span class="c1"># type: ignore</span>
     <span class="k">if</span> <span class="n">aws_location</span> <span class="ow">and</span> <span class="n">file_url</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="n">aws_location</span><span class="p">):</span>
-        <span class="n">file_url</span> <span class="o">=</span> <span class="n">file_url</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">aws_location</span><span class="si">}</span><span class="s2">/&quot;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">file_url</span> <span class="o">=</span> <span class="n">file_url</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">aws_location</span><span class="si">}</span><span class="s2">/"</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
     <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_length_validator</span><span class="p">:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">max_length_validator</span><span class="p">(</span><span class="n">file_url</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">file_url</span>
@@ -1898,7 +1898,7 @@ will become <code>some-folder/file.txt</code>.</p>
 <span class="normal">145</span>
 <span class="normal">146</span>
 <span class="normal">147</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">to_representation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return full file url.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Return full file url."""</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">value</span><span class="p">:</span>
         <span class="k">return</span> <span class="kc">None</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>

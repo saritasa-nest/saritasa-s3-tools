@@ -1421,7 +1421,7 @@
 <span class="normal">129</span>
 <span class="normal">130</span>
 <span class="normal">131</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">S3GetParamsView</span><span class="p">(</span><span class="n">viewsets</span><span class="o">.</span><span class="n">GenericViewSet</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;View for getting params for s3 to upload file to S3.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""View for getting params for s3 to upload file to S3."""</span>
 
     <span class="n">serializer_class</span> <span class="o">=</span> <span class="n">serializers</span><span class="o">.</span><span class="n">S3RequestParamsSerializer</span>
     <span class="n">permission_classes</span> <span class="o">=</span> <span class="p">(</span><span class="n">permissions</span><span class="o">.</span><span class="n">AllowAny</span><span class="p">,)</span>
@@ -1429,7 +1429,7 @@
     <span class="n">pagination_class</span> <span class="o">=</span> <span class="kc">None</span>
 
     <span class="c1"># Required to make BrowsableAPIRenderer` work.</span>
-    <span class="c1"># DRF&#39;s `BrowsableAPIRenderer` calls `get_queryset` from</span>
+    <span class="c1"># DRF's `BrowsableAPIRenderer` calls `get_queryset` from</span>
     <span class="c1"># `get_filter_form` for every request.</span>
     <span class="c1"># `list_configs` methods returns list of objects,</span>
     <span class="c1"># so there is no clean way to bypass this.</span>
@@ -1438,25 +1438,25 @@
     <span class="n">queryset</span> <span class="o">=</span> <span class="p">()</span>
 
     <span class="nd">@decorators</span><span class="o">.</span><span class="n">action</span><span class="p">(</span>
-        <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;POST&quot;</span><span class="p">],</span>
-        <span class="n">url_path</span><span class="o">=</span><span class="s2">&quot;get-params&quot;</span><span class="p">,</span>
-        <span class="n">url_name</span><span class="o">=</span><span class="s2">&quot;get-params&quot;</span><span class="p">,</span>
+        <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s2">"POST"</span><span class="p">],</span>
+        <span class="n">url_path</span><span class="o">=</span><span class="s2">"get-params"</span><span class="p">,</span>
+        <span class="n">url_name</span><span class="o">=</span><span class="s2">"get-params"</span><span class="p">,</span>
         <span class="n">detail</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
     <span class="p">)</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">get_params</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">request</span><span class="p">:</span> <span class="n">Request</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">response</span><span class="o">.</span><span class="n">Response</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get parameters for upload to S3 bucket.</span>
+<span class="w">        </span><span class="sd">"""Get parameters for upload to S3 bucket.</span>
 
 <span class="sd">        Current endpoint returns all required for s3 upload data,</span>
 <span class="sd">        which should be later sent to `url` as `form-data` url with</span>
-<span class="sd">        &#39;file&#39;. Workflow: First, you make request to this endpoint. Then send</span>
+<span class="sd">        'file'. Workflow: First, you make request to this endpoint. Then send</span>
 <span class="sd">        response data to `url` via `POST` as form-data with file included. In</span>
 <span class="sd">        response you will get an url which you can use in API for value of file</span>
 <span class="sd">        related fields like avatar for example.</span>
 
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">serializer</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">serializer_class</span><span class="p">(</span>
             <span class="n">context_request</span><span class="o">=</span><span class="n">request</span><span class="p">,</span>
             <span class="n">data</span><span class="o">=</span><span class="n">request</span><span class="o">.</span><span class="n">data</span><span class="p">,</span>
@@ -1464,9 +1464,9 @@
         <span class="n">serializer</span><span class="o">.</span><span class="n">is_valid</span><span class="p">(</span><span class="n">raise_exception</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         <span class="n">s3_client</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_s3_client</span><span class="p">()</span>
         <span class="n">params</span> <span class="o">=</span> <span class="n">s3_client</span><span class="o">.</span><span class="n">generate_params</span><span class="p">(</span>
-            <span class="n">filename</span><span class="o">=</span><span class="n">serializer</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;filename&quot;</span><span class="p">],</span>  <span class="c1"># type: ignore</span>
-            <span class="n">config</span><span class="o">=</span><span class="n">serializer</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;config&quot;</span><span class="p">],</span>  <span class="c1"># type: ignore</span>
-            <span class="n">content_type</span><span class="o">=</span><span class="n">serializer</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;content_type&quot;</span><span class="p">],</span>  <span class="c1"># type: ignore</span>
+            <span class="n">filename</span><span class="o">=</span><span class="n">serializer</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s2">"filename"</span><span class="p">],</span>  <span class="c1"># type: ignore</span>
+            <span class="n">config</span><span class="o">=</span><span class="n">serializer</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s2">"config"</span><span class="p">],</span>  <span class="c1"># type: ignore</span>
+            <span class="n">content_type</span><span class="o">=</span><span class="n">serializer</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s2">"content_type"</span><span class="p">],</span>  <span class="c1"># type: ignore</span>
             <span class="n">extra_metadata</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">get_extra_meta_data</span><span class="p">(</span><span class="n">user</span><span class="o">=</span><span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="p">),</span>
         <span class="p">)</span>
         <span class="k">return</span> <span class="n">response</span><span class="o">.</span><span class="n">Response</span><span class="p">(</span>
@@ -1477,16 +1477,16 @@
         <span class="p">)</span>
 
     <span class="nd">@decorators</span><span class="o">.</span><span class="n">action</span><span class="p">(</span>
-        <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;GET&quot;</span><span class="p">],</span>
-        <span class="n">url_path</span><span class="o">=</span><span class="s2">&quot;list-configs&quot;</span><span class="p">,</span>
-        <span class="n">url_name</span><span class="o">=</span><span class="s2">&quot;list-configs&quot;</span><span class="p">,</span>
+        <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s2">"GET"</span><span class="p">],</span>
+        <span class="n">url_path</span><span class="o">=</span><span class="s2">"list-configs"</span><span class="p">,</span>
+        <span class="n">url_name</span><span class="o">=</span><span class="s2">"list-configs"</span><span class="p">,</span>
         <span class="n">detail</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
     <span class="p">)</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">list_configs</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">request</span><span class="p">:</span> <span class="n">Request</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">response</span><span class="o">.</span><span class="n">Response</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;List all configs for s3 upload.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""List all configs for s3 upload."""</span>
         <span class="k">return</span> <span class="n">response</span><span class="o">.</span><span class="n">Response</span><span class="p">(</span>
             <span class="n">status</span><span class="o">=</span><span class="n">status</span><span class="o">.</span><span class="n">HTTP_200_OK</span><span class="p">,</span>
             <span class="n">data</span><span class="o">=</span><span class="n">serializers</span><span class="o">.</span><span class="n">S3ConfigSerializer</span><span class="p">(</span>
@@ -1499,9 +1499,9 @@
         <span class="p">)</span>
 
     <span class="nd">@decorators</span><span class="o">.</span><span class="n">action</span><span class="p">(</span>
-        <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;GET&quot;</span><span class="p">],</span>
-        <span class="n">url_path</span><span class="o">=</span><span class="s2">&quot;retrieve-config/(?P&lt;name&gt;[^/.]+)&quot;</span><span class="p">,</span>
-        <span class="n">url_name</span><span class="o">=</span><span class="s2">&quot;retrieve-config&quot;</span><span class="p">,</span>
+        <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s2">"GET"</span><span class="p">],</span>
+        <span class="n">url_path</span><span class="o">=</span><span class="s2">"retrieve-config/(?P&lt;name&gt;[^/.]+)"</span><span class="p">,</span>
+        <span class="n">url_name</span><span class="o">=</span><span class="s2">"retrieve-config"</span><span class="p">,</span>
         <span class="n">detail</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
     <span class="p">)</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">retrieve_config</span><span class="p">(</span>
@@ -1509,7 +1509,7 @@
         <span class="n">request</span><span class="p">:</span> <span class="n">Request</span><span class="p">,</span>
         <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">response</span><span class="o">.</span><span class="n">Response</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Retrieve config for s3 upload.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Retrieve config for s3 upload."""</span>
         <span class="k">if</span> <span class="n">name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">configs</span><span class="o">.</span><span class="n">S3FileTypeConfig</span><span class="o">.</span><span class="n">configs</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">exceptions</span><span class="o">.</span><span class="n">NotFound</span>
         <span class="k">return</span> <span class="n">response</span><span class="o">.</span><span class="n">Response</span><span class="p">(</span>
@@ -1522,16 +1522,16 @@
         <span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">get_s3_client</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">client</span><span class="o">.</span><span class="n">S3Client</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get s3 client for params generation.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Get s3 client for params generation."""</span>
         <span class="k">return</span> <span class="n">shortcuts</span><span class="o">.</span><span class="n">get_s3_client</span><span class="p">()</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">get_extra_meta_data</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">user</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Any</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Extend meta data for file.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Extend meta data for file."""</span>
         <span class="k">return</span> <span class="p">{</span>
-            <span class="s2">&quot;user-id&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">user</span><span class="o">.</span><span class="n">pk</span><span class="p">),</span>
+            <span class="s2">"user-id"</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">user</span><span class="o">.</span><span class="n">pk</span><span class="p">),</span>
         <span class="p">}</span>
 </code></pre></div></td></tr></table></div>
               </details>
@@ -1576,9 +1576,9 @@
     <span class="bp">self</span><span class="p">,</span>
     <span class="n">user</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">Any</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Extend meta data for file.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Extend meta data for file."""</span>
     <span class="k">return</span> <span class="p">{</span>
-        <span class="s2">&quot;user-id&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">user</span><span class="o">.</span><span class="n">pk</span><span class="p">),</span>
+        <span class="s2">"user-id"</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">user</span><span class="o">.</span><span class="n">pk</span><span class="p">),</span>
     <span class="p">}</span>
 </code></pre></div></td></tr></table></div>
             </details>
@@ -1646,25 +1646,25 @@ related fields like avatar for example.</p>
 <span class="normal">71</span>
 <span class="normal">72</span>
 <span class="normal">73</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@decorators</span><span class="o">.</span><span class="n">action</span><span class="p">(</span>
-    <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;POST&quot;</span><span class="p">],</span>
-    <span class="n">url_path</span><span class="o">=</span><span class="s2">&quot;get-params&quot;</span><span class="p">,</span>
-    <span class="n">url_name</span><span class="o">=</span><span class="s2">&quot;get-params&quot;</span><span class="p">,</span>
+    <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s2">"POST"</span><span class="p">],</span>
+    <span class="n">url_path</span><span class="o">=</span><span class="s2">"get-params"</span><span class="p">,</span>
+    <span class="n">url_name</span><span class="o">=</span><span class="s2">"get-params"</span><span class="p">,</span>
     <span class="n">detail</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
 <span class="p">)</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">get_params</span><span class="p">(</span>
     <span class="bp">self</span><span class="p">,</span>
     <span class="n">request</span><span class="p">:</span> <span class="n">Request</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">response</span><span class="o">.</span><span class="n">Response</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get parameters for upload to S3 bucket.</span>
+<span class="w">    </span><span class="sd">"""Get parameters for upload to S3 bucket.</span>
 
 <span class="sd">    Current endpoint returns all required for s3 upload data,</span>
 <span class="sd">    which should be later sent to `url` as `form-data` url with</span>
-<span class="sd">    &#39;file&#39;. Workflow: First, you make request to this endpoint. Then send</span>
+<span class="sd">    'file'. Workflow: First, you make request to this endpoint. Then send</span>
 <span class="sd">    response data to `url` via `POST` as form-data with file included. In</span>
 <span class="sd">    response you will get an url which you can use in API for value of file</span>
 <span class="sd">    related fields like avatar for example.</span>
 
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">serializer</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">serializer_class</span><span class="p">(</span>
         <span class="n">context_request</span><span class="o">=</span><span class="n">request</span><span class="p">,</span>
         <span class="n">data</span><span class="o">=</span><span class="n">request</span><span class="o">.</span><span class="n">data</span><span class="p">,</span>
@@ -1672,9 +1672,9 @@ related fields like avatar for example.</p>
     <span class="n">serializer</span><span class="o">.</span><span class="n">is_valid</span><span class="p">(</span><span class="n">raise_exception</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="n">s3_client</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_s3_client</span><span class="p">()</span>
     <span class="n">params</span> <span class="o">=</span> <span class="n">s3_client</span><span class="o">.</span><span class="n">generate_params</span><span class="p">(</span>
-        <span class="n">filename</span><span class="o">=</span><span class="n">serializer</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;filename&quot;</span><span class="p">],</span>  <span class="c1"># type: ignore</span>
-        <span class="n">config</span><span class="o">=</span><span class="n">serializer</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;config&quot;</span><span class="p">],</span>  <span class="c1"># type: ignore</span>
-        <span class="n">content_type</span><span class="o">=</span><span class="n">serializer</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;content_type&quot;</span><span class="p">],</span>  <span class="c1"># type: ignore</span>
+        <span class="n">filename</span><span class="o">=</span><span class="n">serializer</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s2">"filename"</span><span class="p">],</span>  <span class="c1"># type: ignore</span>
+        <span class="n">config</span><span class="o">=</span><span class="n">serializer</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s2">"config"</span><span class="p">],</span>  <span class="c1"># type: ignore</span>
+        <span class="n">content_type</span><span class="o">=</span><span class="n">serializer</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s2">"content_type"</span><span class="p">],</span>  <span class="c1"># type: ignore</span>
         <span class="n">extra_metadata</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">get_extra_meta_data</span><span class="p">(</span><span class="n">user</span><span class="o">=</span><span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="p">),</span>
     <span class="p">)</span>
     <span class="k">return</span> <span class="n">response</span><span class="o">.</span><span class="n">Response</span><span class="p">(</span>
@@ -1708,7 +1708,7 @@ related fields like avatar for example.</p>
               <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">120</span>
 <span class="normal">121</span>
 <span class="normal">122</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">get_s3_client</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">client</span><span class="o">.</span><span class="n">S3Client</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get s3 client for params generation.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Get s3 client for params generation."""</span>
     <span class="k">return</span> <span class="n">shortcuts</span><span class="o">.</span><span class="n">get_s3_client</span><span class="p">()</span>
 </code></pre></div></td></tr></table></div>
             </details>
@@ -1753,16 +1753,16 @@ related fields like avatar for example.</p>
 <span class="normal">93</span>
 <span class="normal">94</span>
 <span class="normal">95</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@decorators</span><span class="o">.</span><span class="n">action</span><span class="p">(</span>
-    <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;GET&quot;</span><span class="p">],</span>
-    <span class="n">url_path</span><span class="o">=</span><span class="s2">&quot;list-configs&quot;</span><span class="p">,</span>
-    <span class="n">url_name</span><span class="o">=</span><span class="s2">&quot;list-configs&quot;</span><span class="p">,</span>
+    <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s2">"GET"</span><span class="p">],</span>
+    <span class="n">url_path</span><span class="o">=</span><span class="s2">"list-configs"</span><span class="p">,</span>
+    <span class="n">url_name</span><span class="o">=</span><span class="s2">"list-configs"</span><span class="p">,</span>
     <span class="n">detail</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
 <span class="p">)</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">list_configs</span><span class="p">(</span>
     <span class="bp">self</span><span class="p">,</span>
     <span class="n">request</span><span class="p">:</span> <span class="n">Request</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">response</span><span class="o">.</span><span class="n">Response</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;List all configs for s3 upload.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""List all configs for s3 upload."""</span>
     <span class="k">return</span> <span class="n">response</span><span class="o">.</span><span class="n">Response</span><span class="p">(</span>
         <span class="n">status</span><span class="o">=</span><span class="n">status</span><span class="o">.</span><span class="n">HTTP_200_OK</span><span class="p">,</span>
         <span class="n">data</span><span class="o">=</span><span class="n">serializers</span><span class="o">.</span><span class="n">S3ConfigSerializer</span><span class="p">(</span>
@@ -1817,9 +1817,9 @@ related fields like avatar for example.</p>
 <span class="normal">116</span>
 <span class="normal">117</span>
 <span class="normal">118</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@decorators</span><span class="o">.</span><span class="n">action</span><span class="p">(</span>
-    <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;GET&quot;</span><span class="p">],</span>
-    <span class="n">url_path</span><span class="o">=</span><span class="s2">&quot;retrieve-config/(?P&lt;name&gt;[^/.]+)&quot;</span><span class="p">,</span>
-    <span class="n">url_name</span><span class="o">=</span><span class="s2">&quot;retrieve-config&quot;</span><span class="p">,</span>
+    <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s2">"GET"</span><span class="p">],</span>
+    <span class="n">url_path</span><span class="o">=</span><span class="s2">"retrieve-config/(?P&lt;name&gt;[^/.]+)"</span><span class="p">,</span>
+    <span class="n">url_name</span><span class="o">=</span><span class="s2">"retrieve-config"</span><span class="p">,</span>
     <span class="n">detail</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
 <span class="p">)</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">retrieve_config</span><span class="p">(</span>
@@ -1827,7 +1827,7 @@ related fields like avatar for example.</p>
     <span class="n">request</span><span class="p">:</span> <span class="n">Request</span><span class="p">,</span>
     <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">response</span><span class="o">.</span><span class="n">Response</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Retrieve config for s3 upload.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Retrieve config for s3 upload."""</span>
     <span class="k">if</span> <span class="n">name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">configs</span><span class="o">.</span><span class="n">S3FileTypeConfig</span><span class="o">.</span><span class="n">configs</span><span class="p">:</span>
         <span class="k">raise</span> <span class="n">exceptions</span><span class="o">.</span><span class="n">NotFound</span>
     <span class="k">return</span> <span class="n">response</span><span class="o">.</span><span class="n">Response</span><span class="p">(</span>

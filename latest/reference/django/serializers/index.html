@@ -1401,7 +1401,7 @@
 <span class="normal">147</span>
 <span class="normal">148</span>
 <span class="normal">149</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">S3ConfigSerializer</span><span class="p">(</span><span class="n">serializers</span><span class="o">.</span><span class="n">Serializer</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Serializer to represent s3 config.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Serializer to represent s3 config."""</span>
 
     <span class="n">name</span> <span class="o">=</span> <span class="n">serializers</span><span class="o">.</span><span class="n">CharField</span><span class="p">()</span>
     <span class="n">allowed</span> <span class="o">=</span> <span class="n">serializers</span><span class="o">.</span><span class="n">ListField</span><span class="p">(</span>
@@ -1486,17 +1486,17 @@
 <span class="normal">29</span>
 <span class="normal">30</span>
 <span class="normal">31</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">S3FieldsConfigMixin</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Extend serializer_field_mapping with s3 fields.</span>
+<span class="w">    </span><span class="sd">"""Extend serializer_field_mapping with s3 fields.</span>
 
 <span class="sd">    Deprecate it once encode/django-rest-framework#9507 is accepted.</span>
 
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">serializer_field_mapping</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">type</span><span class="p">[</span><span class="n">models</span><span class="o">.</span><span class="n">Field</span><span class="p">],</span> <span class="nb">type</span><span class="p">[</span><span class="n">serializers</span><span class="o">.</span><span class="n">Field</span><span class="p">]]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Extend serializer mapping with s3 fields.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Extend serializer mapping with s3 fields."""</span>
         <span class="n">serializer_field_mapping</span> <span class="o">=</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">serializer_field_mapping</span>  <span class="c1"># type: ignore</span>
         <span class="n">serializer_field_mapping</span><span class="p">[</span><span class="n">models</span><span class="o">.</span><span class="n">FileField</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
             <span class="n">drf_fields</span><span class="o">.</span><span class="n">S3UploadURLField</span>
@@ -1595,13 +1595,13 @@
 <span class="normal">117</span>
 <span class="normal">118</span>
 <span class="normal">119</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">S3ParamsSerializer</span><span class="p">(</span><span class="n">serializers</span><span class="o">.</span><span class="n">Serializer</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Serializer for showing params for s3 upload.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Serializer for showing params for s3 upload."""</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="n">fields</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span>
             <span class="n">settings</span><span class="p">,</span>
-            <span class="s2">&quot;SARITASA_S3_TOOLS_UPLOAD_PARAMS&quot;</span><span class="p">,</span>
+            <span class="s2">"SARITASA_S3_TOOLS_UPLOAD_PARAMS"</span><span class="p">,</span>
             <span class="n">constants</span><span class="o">.</span><span class="n">s3v4_signature_fields</span><span class="p">,</span>
         <span class="p">)</span>
         <span class="k">for</span> <span class="n">field</span> <span class="ow">in</span> <span class="n">fields</span><span class="p">:</span>
@@ -1730,7 +1730,7 @@
 <span class="normal"> 99</span>
 <span class="normal">100</span>
 <span class="normal">101</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">S3RequestParamsSerializer</span><span class="p">(</span><span class="n">serializers</span><span class="o">.</span><span class="n">Serializer</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Serializer for validation s3 uploading fields.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Serializer for validation s3 uploading fields."""</span>
 
     <span class="n">config</span> <span class="o">=</span> <span class="n">drf_fields</span><span class="o">.</span><span class="n">S3FileTypeConfigField</span><span class="p">()</span>
     <span class="n">filename</span> <span class="o">=</span> <span class="n">serializers</span><span class="o">.</span><span class="n">CharField</span><span class="p">()</span>
@@ -1743,56 +1743,56 @@
         <span class="o">*</span><span class="n">args</span><span class="p">,</span>  <span class="c1"># noqa: ANN002</span>
         <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set current user.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Set current user."""</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_request</span><span class="p">:</span> <span class="n">request</span><span class="o">.</span><span class="n">Request</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="n">context_request</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_user</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_request</span><span class="p">,</span> <span class="s2">&quot;user&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_user</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_request</span><span class="p">,</span> <span class="s2">"user"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">validate_config</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">config</span><span class="p">:</span> <span class="n">configs</span><span class="o">.</span><span class="n">S3FileTypeConfig</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">configs</span><span class="o">.</span><span class="n">S3FileTypeConfig</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Check that user can use dest.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Check that user can use dest."""</span>
         <span class="k">if</span> <span class="n">config</span><span class="o">.</span><span class="n">auth</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">config</span><span class="o">.</span><span class="n">auth</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_user</span><span class="p">):</span>
             <span class="k">raise</span> <span class="n">exceptions</span><span class="o">.</span><span class="n">ValidationError</span><span class="p">(</span>
-                <span class="s2">&quot;Current user can&#39;t use this destination&quot;</span><span class="p">,</span>
+                <span class="s2">"Current user can't use this destination"</span><span class="p">,</span>
             <span class="p">)</span>
         <span class="k">return</span> <span class="n">config</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">validate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">attrs</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">typing</span><span class="o">.</span><span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">typing</span><span class="o">.</span><span class="n">Any</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Perform validations.</span>
+<span class="w">        </span><span class="sd">"""Perform validations.</span>
 
 <span class="sd">        Check what input data is valid for specified configuration.</span>
 
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">errors</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
-        <span class="n">config</span><span class="p">:</span> <span class="n">configs</span><span class="o">.</span><span class="n">S3FileTypeConfig</span> <span class="o">=</span> <span class="n">attrs</span><span class="p">[</span><span class="s2">&quot;config&quot;</span><span class="p">]</span>
-        <span class="n">filename</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">attrs</span><span class="p">[</span><span class="s2">&quot;filename&quot;</span><span class="p">]</span>
-        <span class="n">content_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">attrs</span><span class="p">[</span><span class="s2">&quot;content_type&quot;</span><span class="p">]</span>
-        <span class="n">content_length</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">attrs</span><span class="p">[</span><span class="s2">&quot;content_length&quot;</span><span class="p">]</span>
+        <span class="n">config</span><span class="p">:</span> <span class="n">configs</span><span class="o">.</span><span class="n">S3FileTypeConfig</span> <span class="o">=</span> <span class="n">attrs</span><span class="p">[</span><span class="s2">"config"</span><span class="p">]</span>
+        <span class="n">filename</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">attrs</span><span class="p">[</span><span class="s2">"filename"</span><span class="p">]</span>
+        <span class="n">content_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">attrs</span><span class="p">[</span><span class="s2">"content_type"</span><span class="p">]</span>
+        <span class="n">content_length</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">attrs</span><span class="p">[</span><span class="s2">"content_length"</span><span class="p">]</span>
         <span class="k">if</span> <span class="n">config</span><span class="o">.</span><span class="n">allowed</span> <span class="ow">and</span> <span class="n">content_type</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">config</span><span class="o">.</span><span class="n">allowed</span><span class="p">:</span>
-            <span class="n">expected</span> <span class="o">=</span> <span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">allowed</span><span class="p">)</span>
-            <span class="n">errors</span><span class="p">[</span><span class="s2">&quot;content_type&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
-                <span class="sa">f</span><span class="s2">&quot;Invalid file type - `</span><span class="si">{</span><span class="n">content_type</span><span class="si">}</span><span class="s2">` of `</span><span class="si">{</span><span class="n">filename</span><span class="si">}</span><span class="s2">`. &quot;</span>
-                <span class="sa">f</span><span class="s2">&quot;Expected: </span><span class="si">{</span><span class="n">expected</span><span class="si">}</span><span class="s2">.&quot;</span>
+            <span class="n">expected</span> <span class="o">=</span> <span class="s2">", "</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">allowed</span><span class="p">)</span>
+            <span class="n">errors</span><span class="p">[</span><span class="s2">"content_type"</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="sa">f</span><span class="s2">"Invalid file type - `</span><span class="si">{</span><span class="n">content_type</span><span class="si">}</span><span class="s2">` of `</span><span class="si">{</span><span class="n">filename</span><span class="si">}</span><span class="s2">`. "</span>
+                <span class="sa">f</span><span class="s2">"Expected: </span><span class="si">{</span><span class="n">expected</span><span class="si">}</span><span class="s2">."</span>
             <span class="p">)</span>
         <span class="k">if</span> <span class="n">config</span><span class="o">.</span><span class="n">content_length_range</span><span class="p">:</span>
             <span class="n">min_bound</span><span class="p">,</span> <span class="n">max_bound</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">content_length_range</span>
             <span class="k">if</span> <span class="n">min_bound</span> <span class="o">&gt;</span> <span class="n">content_length</span><span class="p">:</span>
-                <span class="n">errors</span><span class="p">[</span><span class="s2">&quot;content_length&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
-                    <span class="s2">&quot;Invalid file size &quot;</span>
-                    <span class="sa">f</span><span class="s2">&quot;- </span><span class="si">{</span><span class="n">humanize</span><span class="o">.</span><span class="n">naturalsize</span><span class="p">(</span><span class="n">content_length</span><span class="p">)</span><span class="si">}</span><span class="s2"> &quot;</span>
-                    <span class="sa">f</span><span class="s2">&quot;of </span><span class="si">{</span><span class="n">filename</span><span class="si">}</span><span class="s2">. &quot;</span>
-                    <span class="sa">f</span><span class="s2">&quot;Need between </span><span class="si">{</span><span class="n">humanize</span><span class="o">.</span><span class="n">naturalsize</span><span class="p">(</span><span class="n">min_bound</span><span class="p">)</span><span class="si">}</span><span class="s2"> &quot;</span>
-                    <span class="sa">f</span><span class="s2">&quot;and </span><span class="si">{</span><span class="n">humanize</span><span class="o">.</span><span class="n">naturalsize</span><span class="p">(</span><span class="n">max_bound</span><span class="p">)</span><span class="si">}</span><span class="s2">.&quot;</span>
+                <span class="n">errors</span><span class="p">[</span><span class="s2">"content_length"</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+                    <span class="s2">"Invalid file size "</span>
+                    <span class="sa">f</span><span class="s2">"- </span><span class="si">{</span><span class="n">humanize</span><span class="o">.</span><span class="n">naturalsize</span><span class="p">(</span><span class="n">content_length</span><span class="p">)</span><span class="si">}</span><span class="s2"> "</span>
+                    <span class="sa">f</span><span class="s2">"of </span><span class="si">{</span><span class="n">filename</span><span class="si">}</span><span class="s2">. "</span>
+                    <span class="sa">f</span><span class="s2">"Need between </span><span class="si">{</span><span class="n">humanize</span><span class="o">.</span><span class="n">naturalsize</span><span class="p">(</span><span class="n">min_bound</span><span class="p">)</span><span class="si">}</span><span class="s2"> "</span>
+                    <span class="sa">f</span><span class="s2">"and </span><span class="si">{</span><span class="n">humanize</span><span class="o">.</span><span class="n">naturalsize</span><span class="p">(</span><span class="n">max_bound</span><span class="p">)</span><span class="si">}</span><span class="s2">."</span>
                 <span class="p">)</span>
             <span class="k">if</span> <span class="n">max_bound</span> <span class="o">&lt;</span> <span class="n">content_length</span><span class="p">:</span>
-                <span class="n">errors</span><span class="p">[</span><span class="s2">&quot;content_length&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
-                    <span class="s2">&quot;Invalid file size &quot;</span>
-                    <span class="sa">f</span><span class="s2">&quot;- </span><span class="si">{</span><span class="n">humanize</span><span class="o">.</span><span class="n">naturalsize</span><span class="p">(</span><span class="n">content_length</span><span class="p">)</span><span class="si">}</span><span class="s2"> &quot;</span>
-                    <span class="sa">f</span><span class="s2">&quot;of </span><span class="si">{</span><span class="n">filename</span><span class="si">}</span><span class="s2">. &quot;</span>
-                    <span class="sa">f</span><span class="s2">&quot;Need between </span><span class="si">{</span><span class="n">humanize</span><span class="o">.</span><span class="n">naturalsize</span><span class="p">(</span><span class="n">min_bound</span><span class="p">)</span><span class="si">}</span><span class="s2"> &quot;</span>
-                    <span class="sa">f</span><span class="s2">&quot;and </span><span class="si">{</span><span class="n">humanize</span><span class="o">.</span><span class="n">naturalsize</span><span class="p">(</span><span class="n">max_bound</span><span class="p">)</span><span class="si">}</span><span class="s2">.&quot;</span>
+                <span class="n">errors</span><span class="p">[</span><span class="s2">"content_length"</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+                    <span class="s2">"Invalid file size "</span>
+                    <span class="sa">f</span><span class="s2">"- </span><span class="si">{</span><span class="n">humanize</span><span class="o">.</span><span class="n">naturalsize</span><span class="p">(</span><span class="n">content_length</span><span class="p">)</span><span class="si">}</span><span class="s2"> "</span>
+                    <span class="sa">f</span><span class="s2">"of </span><span class="si">{</span><span class="n">filename</span><span class="si">}</span><span class="s2">. "</span>
+                    <span class="sa">f</span><span class="s2">"Need between </span><span class="si">{</span><span class="n">humanize</span><span class="o">.</span><span class="n">naturalsize</span><span class="p">(</span><span class="n">min_bound</span><span class="p">)</span><span class="si">}</span><span class="s2"> "</span>
+                    <span class="sa">f</span><span class="s2">"and </span><span class="si">{</span><span class="n">humanize</span><span class="o">.</span><span class="n">naturalsize</span><span class="p">(</span><span class="n">max_bound</span><span class="p">)</span><span class="si">}</span><span class="s2">."</span>
                 <span class="p">)</span>
         <span class="k">if</span> <span class="n">errors</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">exceptions</span><span class="o">.</span><span class="n">ValidationError</span><span class="p">(</span><span class="n">errors</span><span class="p">)</span>
@@ -1844,10 +1844,10 @@
     <span class="o">*</span><span class="n">args</span><span class="p">,</span>  <span class="c1"># noqa: ANN002</span>
     <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Set current user.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Set current user."""</span>
     <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">_request</span><span class="p">:</span> <span class="n">request</span><span class="o">.</span><span class="n">Request</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="n">context_request</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">_user</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_request</span><span class="p">,</span> <span class="s2">&quot;user&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_user</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_request</span><span class="p">,</span> <span class="s2">"user"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
             </details>
     </div>
@@ -1909,39 +1909,39 @@
 <span class="normal"> 99</span>
 <span class="normal">100</span>
 <span class="normal">101</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">validate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">attrs</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">typing</span><span class="o">.</span><span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">typing</span><span class="o">.</span><span class="n">Any</span><span class="p">]:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Perform validations.</span>
+<span class="w">    </span><span class="sd">"""Perform validations.</span>
 
 <span class="sd">    Check what input data is valid for specified configuration.</span>
 
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">errors</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
-    <span class="n">config</span><span class="p">:</span> <span class="n">configs</span><span class="o">.</span><span class="n">S3FileTypeConfig</span> <span class="o">=</span> <span class="n">attrs</span><span class="p">[</span><span class="s2">&quot;config&quot;</span><span class="p">]</span>
-    <span class="n">filename</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">attrs</span><span class="p">[</span><span class="s2">&quot;filename&quot;</span><span class="p">]</span>
-    <span class="n">content_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">attrs</span><span class="p">[</span><span class="s2">&quot;content_type&quot;</span><span class="p">]</span>
-    <span class="n">content_length</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">attrs</span><span class="p">[</span><span class="s2">&quot;content_length&quot;</span><span class="p">]</span>
+    <span class="n">config</span><span class="p">:</span> <span class="n">configs</span><span class="o">.</span><span class="n">S3FileTypeConfig</span> <span class="o">=</span> <span class="n">attrs</span><span class="p">[</span><span class="s2">"config"</span><span class="p">]</span>
+    <span class="n">filename</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">attrs</span><span class="p">[</span><span class="s2">"filename"</span><span class="p">]</span>
+    <span class="n">content_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">attrs</span><span class="p">[</span><span class="s2">"content_type"</span><span class="p">]</span>
+    <span class="n">content_length</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">attrs</span><span class="p">[</span><span class="s2">"content_length"</span><span class="p">]</span>
     <span class="k">if</span> <span class="n">config</span><span class="o">.</span><span class="n">allowed</span> <span class="ow">and</span> <span class="n">content_type</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">config</span><span class="o">.</span><span class="n">allowed</span><span class="p">:</span>
-        <span class="n">expected</span> <span class="o">=</span> <span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">allowed</span><span class="p">)</span>
-        <span class="n">errors</span><span class="p">[</span><span class="s2">&quot;content_type&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
-            <span class="sa">f</span><span class="s2">&quot;Invalid file type - `</span><span class="si">{</span><span class="n">content_type</span><span class="si">}</span><span class="s2">` of `</span><span class="si">{</span><span class="n">filename</span><span class="si">}</span><span class="s2">`. &quot;</span>
-            <span class="sa">f</span><span class="s2">&quot;Expected: </span><span class="si">{</span><span class="n">expected</span><span class="si">}</span><span class="s2">.&quot;</span>
+        <span class="n">expected</span> <span class="o">=</span> <span class="s2">", "</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">allowed</span><span class="p">)</span>
+        <span class="n">errors</span><span class="p">[</span><span class="s2">"content_type"</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="sa">f</span><span class="s2">"Invalid file type - `</span><span class="si">{</span><span class="n">content_type</span><span class="si">}</span><span class="s2">` of `</span><span class="si">{</span><span class="n">filename</span><span class="si">}</span><span class="s2">`. "</span>
+            <span class="sa">f</span><span class="s2">"Expected: </span><span class="si">{</span><span class="n">expected</span><span class="si">}</span><span class="s2">."</span>
         <span class="p">)</span>
     <span class="k">if</span> <span class="n">config</span><span class="o">.</span><span class="n">content_length_range</span><span class="p">:</span>
         <span class="n">min_bound</span><span class="p">,</span> <span class="n">max_bound</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">content_length_range</span>
         <span class="k">if</span> <span class="n">min_bound</span> <span class="o">&gt;</span> <span class="n">content_length</span><span class="p">:</span>
-            <span class="n">errors</span><span class="p">[</span><span class="s2">&quot;content_length&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
-                <span class="s2">&quot;Invalid file size &quot;</span>
-                <span class="sa">f</span><span class="s2">&quot;- </span><span class="si">{</span><span class="n">humanize</span><span class="o">.</span><span class="n">naturalsize</span><span class="p">(</span><span class="n">content_length</span><span class="p">)</span><span class="si">}</span><span class="s2"> &quot;</span>
-                <span class="sa">f</span><span class="s2">&quot;of </span><span class="si">{</span><span class="n">filename</span><span class="si">}</span><span class="s2">. &quot;</span>
-                <span class="sa">f</span><span class="s2">&quot;Need between </span><span class="si">{</span><span class="n">humanize</span><span class="o">.</span><span class="n">naturalsize</span><span class="p">(</span><span class="n">min_bound</span><span class="p">)</span><span class="si">}</span><span class="s2"> &quot;</span>
-                <span class="sa">f</span><span class="s2">&quot;and </span><span class="si">{</span><span class="n">humanize</span><span class="o">.</span><span class="n">naturalsize</span><span class="p">(</span><span class="n">max_bound</span><span class="p">)</span><span class="si">}</span><span class="s2">.&quot;</span>
+            <span class="n">errors</span><span class="p">[</span><span class="s2">"content_length"</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="s2">"Invalid file size "</span>
+                <span class="sa">f</span><span class="s2">"- </span><span class="si">{</span><span class="n">humanize</span><span class="o">.</span><span class="n">naturalsize</span><span class="p">(</span><span class="n">content_length</span><span class="p">)</span><span class="si">}</span><span class="s2"> "</span>
+                <span class="sa">f</span><span class="s2">"of </span><span class="si">{</span><span class="n">filename</span><span class="si">}</span><span class="s2">. "</span>
+                <span class="sa">f</span><span class="s2">"Need between </span><span class="si">{</span><span class="n">humanize</span><span class="o">.</span><span class="n">naturalsize</span><span class="p">(</span><span class="n">min_bound</span><span class="p">)</span><span class="si">}</span><span class="s2"> "</span>
+                <span class="sa">f</span><span class="s2">"and </span><span class="si">{</span><span class="n">humanize</span><span class="o">.</span><span class="n">naturalsize</span><span class="p">(</span><span class="n">max_bound</span><span class="p">)</span><span class="si">}</span><span class="s2">."</span>
             <span class="p">)</span>
         <span class="k">if</span> <span class="n">max_bound</span> <span class="o">&lt;</span> <span class="n">content_length</span><span class="p">:</span>
-            <span class="n">errors</span><span class="p">[</span><span class="s2">&quot;content_length&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
-                <span class="s2">&quot;Invalid file size &quot;</span>
-                <span class="sa">f</span><span class="s2">&quot;- </span><span class="si">{</span><span class="n">humanize</span><span class="o">.</span><span class="n">naturalsize</span><span class="p">(</span><span class="n">content_length</span><span class="p">)</span><span class="si">}</span><span class="s2"> &quot;</span>
-                <span class="sa">f</span><span class="s2">&quot;of </span><span class="si">{</span><span class="n">filename</span><span class="si">}</span><span class="s2">. &quot;</span>
-                <span class="sa">f</span><span class="s2">&quot;Need between </span><span class="si">{</span><span class="n">humanize</span><span class="o">.</span><span class="n">naturalsize</span><span class="p">(</span><span class="n">min_bound</span><span class="p">)</span><span class="si">}</span><span class="s2"> &quot;</span>
-                <span class="sa">f</span><span class="s2">&quot;and </span><span class="si">{</span><span class="n">humanize</span><span class="o">.</span><span class="n">naturalsize</span><span class="p">(</span><span class="n">max_bound</span><span class="p">)</span><span class="si">}</span><span class="s2">.&quot;</span>
+            <span class="n">errors</span><span class="p">[</span><span class="s2">"content_length"</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="s2">"Invalid file size "</span>
+                <span class="sa">f</span><span class="s2">"- </span><span class="si">{</span><span class="n">humanize</span><span class="o">.</span><span class="n">naturalsize</span><span class="p">(</span><span class="n">content_length</span><span class="p">)</span><span class="si">}</span><span class="s2"> "</span>
+                <span class="sa">f</span><span class="s2">"of </span><span class="si">{</span><span class="n">filename</span><span class="si">}</span><span class="s2">. "</span>
+                <span class="sa">f</span><span class="s2">"Need between </span><span class="si">{</span><span class="n">humanize</span><span class="o">.</span><span class="n">naturalsize</span><span class="p">(</span><span class="n">min_bound</span><span class="p">)</span><span class="si">}</span><span class="s2"> "</span>
+                <span class="sa">f</span><span class="s2">"and </span><span class="si">{</span><span class="n">humanize</span><span class="o">.</span><span class="n">naturalsize</span><span class="p">(</span><span class="n">max_bound</span><span class="p">)</span><span class="si">}</span><span class="s2">."</span>
             <span class="p">)</span>
     <span class="k">if</span> <span class="n">errors</span><span class="p">:</span>
         <span class="k">raise</span> <span class="n">exceptions</span><span class="o">.</span><span class="n">ValidationError</span><span class="p">(</span><span class="n">errors</span><span class="p">)</span>
@@ -1981,10 +1981,10 @@
     <span class="bp">self</span><span class="p">,</span>
     <span class="n">config</span><span class="p">:</span> <span class="n">configs</span><span class="o">.</span><span class="n">S3FileTypeConfig</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">configs</span><span class="o">.</span><span class="n">S3FileTypeConfig</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Check that user can use dest.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Check that user can use dest."""</span>
     <span class="k">if</span> <span class="n">config</span><span class="o">.</span><span class="n">auth</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">config</span><span class="o">.</span><span class="n">auth</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_user</span><span class="p">):</span>
         <span class="k">raise</span> <span class="n">exceptions</span><span class="o">.</span><span class="n">ValidationError</span><span class="p">(</span>
-            <span class="s2">&quot;Current user can&#39;t use this destination&quot;</span><span class="p">,</span>
+            <span class="s2">"Current user can't use this destination"</span><span class="p">,</span>
         <span class="p">)</span>
     <span class="k">return</span> <span class="n">config</span>
 </code></pre></div></td></tr></table></div>
@@ -2043,13 +2043,13 @@ could see specs for response for view.</p>
 <span class="normal">130</span>
 <span class="normal">131</span>
 <span class="normal">132</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">S3UploadSerializer</span><span class="p">(</span><span class="n">serializers</span><span class="o">.</span><span class="n">Serializer</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Serializer auto swagger documentation.</span>
+<span class="w">    </span><span class="sd">"""Serializer auto swagger documentation.</span>
 
 <span class="sd">    This serializer used just for packages that capable to generate</span>
 <span class="sd">    openapi/swagger specs, so that front-end team</span>
 <span class="sd">    could see specs for response for view.</span>
 
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="n">url</span> <span class="o">=</span> <span class="n">serializers</span><span class="o">.</span><span class="n">URLField</span><span class="p">()</span>
     <span class="n">params</span> <span class="o">=</span> <span class="n">S3ParamsSerializer</span><span class="p">()</span>

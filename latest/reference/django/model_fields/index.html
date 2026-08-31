@@ -1288,7 +1288,7 @@
                 <summary>Source code in <code>saritasa_s3_tools/django/model_fields.py</code></summary>
                 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">118</span>
 <span class="normal">119</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">S3FileField</span><span class="p">(</span><span class="n">S3FileFieldMixin</span><span class="p">,</span> <span class="n">models</span><span class="o">.</span><span class="n">FileField</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;FileField with S3 capabilities.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""FileField with S3 capabilities."""</span>
 </code></pre></div></td></tr></table></div>
               </details>
 
@@ -1441,11 +1441,11 @@
 <span class="normal">113</span>
 <span class="normal">114</span>
 <span class="normal">115</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">S3FileFieldMixin</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Mixin which adds support for s3 configuration.</span>
+<span class="w">    </span><span class="sd">"""Mixin which adds support for s3 configuration.</span>
 
 <span class="sd">    This mixin will upload to proper path by using key generator from config.</span>
 
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
@@ -1457,7 +1457,7 @@
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">s3_config</span> <span class="o">=</span> <span class="n">s3_config</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">validate_key_pattern</span> <span class="o">=</span> <span class="n">validate_key_pattern</span>
-        <span class="n">kwargs</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s2">&quot;max_length&quot;</span><span class="p">,</span> <span class="mi">512</span><span class="p">)</span>
+        <span class="n">kwargs</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s2">"max_length"</span><span class="p">,</span> <span class="mi">512</span><span class="p">)</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
             <span class="n">verbose_name</span><span class="o">=</span><span class="n">verbose_name</span><span class="p">,</span>  <span class="c1"># type: ignore</span>
             <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
@@ -1469,7 +1469,7 @@
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">collections</span><span class="o">.</span><span class="n">abc</span><span class="o">.</span><span class="n">Sequence</span><span class="p">[</span>
         <span class="n">collections</span><span class="o">.</span><span class="n">abc</span><span class="o">.</span><span class="n">Callable</span><span class="p">[[</span><span class="n">files</span><span class="o">.</span><span class="n">FieldFile</span> <span class="o">|</span> <span class="nb">str</span><span class="p">],</span> <span class="kc">None</span><span class="p">],</span>
     <span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get validators.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Get validators."""</span>
         <span class="n">validators</span> <span class="o">=</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">validators</span>  <span class="c1"># type: ignore</span>
         <span class="n">validators</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_validate_file_existence</span><span class="p">)</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">validate_key_pattern</span><span class="p">:</span>
@@ -1481,10 +1481,10 @@
         <span class="n">instance</span><span class="p">:</span> <span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">,</span>
         <span class="n">filename</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Generate filename via config.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Generate filename via config."""</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">s3_config</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">exceptions</span><span class="o">.</span><span class="n">ImproperlyConfigured</span><span class="p">(</span>  <span class="c1"># pragma: no cover</span>
-                <span class="s2">&quot;Please set s3_config for field&quot;</span><span class="p">,</span>
+                <span class="s2">"Please set s3_config for field"</span><span class="p">,</span>
             <span class="p">)</span>
         <span class="n">filename</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">s3_config</span><span class="o">.</span><span class="n">key</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="n">filename</span><span class="p">)</span>
         <span class="n">filename</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">validate_file_name</span><span class="p">(</span>  <span class="c1"># type: ignore</span>
@@ -1497,9 +1497,9 @@
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">value</span><span class="p">:</span> <span class="n">files</span><span class="o">.</span><span class="n">FieldFile</span> <span class="o">|</span> <span class="nb">str</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Check key is present in bucket.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Check key is present in bucket."""</span>
         <span class="n">is_field_file</span> <span class="o">=</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">files</span><span class="o">.</span><span class="n">FieldFile</span><span class="p">)</span>
-        <span class="n">file_obj</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="s2">&quot;_file&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="n">file_obj</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="s2">"_file"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">is_field_file</span> <span class="ow">and</span> <span class="n">file_obj</span><span class="p">:</span>
             <span class="c1"># Skip if value has reference to actual file</span>
             <span class="k">return</span>  <span class="c1"># pragma: no cover</span>
@@ -1507,7 +1507,7 @@
         <span class="k">try</span><span class="p">:</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">storage</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">)):</span>  <span class="c1"># type: ignore</span>
                 <span class="k">raise</span> <span class="n">exceptions</span><span class="o">.</span><span class="n">ValidationError</span><span class="p">(</span>
-                    <span class="n">_</span><span class="p">(</span><span class="s2">&quot;File does not exist.&quot;</span><span class="p">),</span>
+                    <span class="n">_</span><span class="p">(</span><span class="s2">"File does not exist."</span><span class="p">),</span>
                 <span class="p">)</span>
         <span class="c1"># If url comes not from s3, then botocore on key validation will</span>
         <span class="c1"># raise ParamValidationError</span>
@@ -1524,9 +1524,9 @@
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">value</span><span class="p">:</span> <span class="n">files</span><span class="o">.</span><span class="n">FieldFile</span> <span class="o">|</span> <span class="nb">str</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Check that key valid for s3 config.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Check that key valid for s3 config."""</span>
         <span class="n">is_field_file</span> <span class="o">=</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">files</span><span class="o">.</span><span class="n">FieldFile</span><span class="p">)</span>
-        <span class="n">file_obj</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="s2">&quot;_file&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="n">file_obj</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="s2">"_file"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">is_field_file</span> <span class="ow">and</span> <span class="n">file_obj</span><span class="p">:</span>
             <span class="c1"># Skip if value has reference to actual file</span>
             <span class="c1"># It will be saved with key generated by config</span>
@@ -1534,12 +1534,12 @@
 
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">s3_config</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">exceptions</span><span class="o">.</span><span class="n">ImproperlyConfigured</span><span class="p">(</span>  <span class="c1"># pragma: no cover</span>
-                <span class="s2">&quot;Please set s3_config for field&quot;</span><span class="p">,</span>
+                <span class="s2">"Please set s3_config for field"</span><span class="p">,</span>
             <span class="p">)</span>
 
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">s3_config</span><span class="o">.</span><span class="n">key</span><span class="o">.</span><span class="n">validate</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">)):</span>
             <span class="k">raise</span> <span class="n">exceptions</span><span class="o">.</span><span class="n">ValidationError</span><span class="p">(</span>
-                <span class="n">_</span><span class="p">(</span><span class="s2">&quot;File&#39;s path doesn&#39;t match with config&#39;s pattern.&quot;</span><span class="p">),</span>
+                <span class="n">_</span><span class="p">(</span><span class="s2">"File's path doesn't match with config's pattern."</span><span class="p">),</span>
             <span class="p">)</span>
 </code></pre></div></td></tr></table></div>
               </details>
@@ -1593,10 +1593,10 @@
     <span class="n">instance</span><span class="p">:</span> <span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">,</span>
     <span class="n">filename</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generate filename via config.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Generate filename via config."""</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">s3_config</span><span class="p">:</span>
         <span class="k">raise</span> <span class="n">exceptions</span><span class="o">.</span><span class="n">ImproperlyConfigured</span><span class="p">(</span>  <span class="c1"># pragma: no cover</span>
-            <span class="s2">&quot;Please set s3_config for field&quot;</span><span class="p">,</span>
+            <span class="s2">"Please set s3_config for field"</span><span class="p">,</span>
         <span class="p">)</span>
     <span class="n">filename</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">s3_config</span><span class="o">.</span><span class="n">key</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="n">filename</span><span class="p">)</span>
     <span class="n">filename</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">validate_file_name</span><span class="p">(</span>  <span class="c1"># type: ignore</span>
@@ -1643,7 +1643,7 @@
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">collections</span><span class="o">.</span><span class="n">abc</span><span class="o">.</span><span class="n">Sequence</span><span class="p">[</span>
     <span class="n">collections</span><span class="o">.</span><span class="n">abc</span><span class="o">.</span><span class="n">Callable</span><span class="p">[[</span><span class="n">files</span><span class="o">.</span><span class="n">FieldFile</span> <span class="o">|</span> <span class="nb">str</span><span class="p">],</span> <span class="kc">None</span><span class="p">],</span>
 <span class="p">]:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get validators.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Get validators."""</span>
     <span class="n">validators</span> <span class="o">=</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">validators</span>  <span class="c1"># type: ignore</span>
     <span class="n">validators</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_validate_file_existence</span><span class="p">)</span>
     <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">validate_key_pattern</span><span class="p">:</span>
@@ -1693,7 +1693,7 @@
                 <summary>Source code in <code>saritasa_s3_tools/django/model_fields.py</code></summary>
                 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">122</span>
 <span class="normal">123</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">S3ImageField</span><span class="p">(</span><span class="n">S3FileFieldMixin</span><span class="p">,</span> <span class="n">models</span><span class="o">.</span><span class="n">ImageField</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;FileField with S3 capabilities.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""FileField with S3 capabilities."""</span>
 </code></pre></div></td></tr></table></div>
               </details>
 
