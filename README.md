@@ -69,6 +69,7 @@ import saritasa_s3_tools.django
 
 from django.db import models
 
+
 class ModelWithFiles(models.Model):
     """Test model with different files configs."""
 
@@ -120,7 +121,6 @@ class ModelWithFilesSerializer(
     class Meta:
         model = models.ModelWithFiles
         fields = "__all__"
-
 ```
 
 ### Setup view
@@ -130,11 +130,13 @@ Then just add `S3GetParamsView` view to your project urls like that.
 ```python
 from django.urls import path
 
-path(
-    "s3/",
-    include("saritasa_s3_tools.django.urls"),
-    name="saritasa-s3-tools",
-),
+(
+    path(
+        "s3/",
+        include("saritasa_s3_tools.django.urls"),
+        name="saritasa-s3-tools",
+    ),
+)
 ```
 
 ### Setup pytest
