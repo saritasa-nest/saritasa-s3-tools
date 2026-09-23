@@ -1376,6 +1376,7 @@ You can try it out in <code>example</code> folder.</p>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">django.db</span><span class="w"> </span><span class="kn">import</span> <span class="n">models</span>
 
+
 <span class="k">class</span><span class="w"> </span><span class="nc">ModelWithFiles</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">"""Test model with different files configs."""</span>
 
@@ -1428,11 +1429,13 @@ You can try it out in <code>example</code> folder.</p>
 <p>Then just add <code>S3GetParamsView</code> view to your project urls like that.</p>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">django.urls</span><span class="w"> </span><span class="kn">import</span> <span class="n">path</span>
 
-<span class="n">path</span><span class="p">(</span>
-    <span class="s2">"s3/"</span><span class="p">,</span>
-    <span class="n">include</span><span class="p">(</span><span class="s2">"saritasa_s3_tools.django.urls"</span><span class="p">),</span>
-    <span class="n">name</span><span class="o">=</span><span class="s2">"saritasa-s3-tools"</span><span class="p">,</span>
-<span class="p">),</span>
+<span class="p">(</span>
+    <span class="n">path</span><span class="p">(</span>
+        <span class="s2">"s3/"</span><span class="p">,</span>
+        <span class="n">include</span><span class="p">(</span><span class="s2">"saritasa_s3_tools.django.urls"</span><span class="p">),</span>
+        <span class="n">name</span><span class="o">=</span><span class="s2">"saritasa-s3-tools"</span><span class="p">,</span>
+    <span class="p">),</span>
+<span class="p">)</span>
 </code></pre></div>
 <h3 id="setup-pytest">Setup pytest<a class="headerlink" href="#setup-pytest" title="Permanent link">&para;</a></h3>
 <p>Just add this to core <code>conftest.py</code> file</p>
