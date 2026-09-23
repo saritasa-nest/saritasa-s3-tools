@@ -13,6 +13,7 @@ localstack
 naturalsize
 norecursedirs
 rootroot
+rustfs
 Stanislav
 usefixtures
 viewset

@@ -1,33 +1,29 @@
 name: "saritasa-s3-tools"
 
 volumes:
-  minio_data:
+  rustfs_data:
 
 services:
   # ###########################################################################
-  # MinIO Storage
-  # minio:9001 - Server
-  # minio:9000 - UI
-
-  # We preferred to choose `Minio` instead of `Localstack` due to the fact
-  # that `localstack` does not support saving files after restarting the docker
-  # container for the free version.
-  # https://github.com/localstack/localstack/issues/6281#issuecomment-1169731265
+  # RustFS Storage
+  # rustfs:9000 - Server
+  # rustfs:9001 - UI
   # ###########################################################################
-  minio:
-    image: minio/minio:latest
-    command: server --address 0.0.0.0:9001 --console-address 0.0.0.0:9000 /data
+  rustfs:
+    image: rustfs/rustfs:latest
     environment:
-      - MINIO_ROOT_USER=root
-      - MINIO_ROOT_PASSWORD=rootroot
-      # Set `MINIO_DOMAIN` to enable virtual-hosted-style for minio.
-      # https://min.io/docs/minio/linux/administration/object-management.html#id1
-      - MINIO_DOMAIN=s3.minio.localhost
+      - RUSTFS_ACCESS_KEY=root
+      - RUSTFS_SECRET_KEY=rootroot
+      - RUSTFS_CONSOLE_ENABLE=true
+      # Set `RUSTFS_SERVER_DOMAINS` to enable virtual-hosted-style for rustfs.
+      # https://docs.rustfs.com/en/integration/virtual
+      - RUSTFS_SERVER_DOMAINS=s3.rustfs.localhost
+      - RUSTFS_CORS_ALLOWED_ORIGINS=*
     ports:
-      - "9001:9001"
       - "9000:9000"
+      - "9001:9001"
     volumes:
-      - minio_data:/data
+      - rustfs_data:/data
     networks:
       default:
         aliases:
@@ -37,20 +33,26 @@ services:
           # URLs will be discontinued in the future, and we want to make
           # consistent URLs for uploading and downloading files.
           # https://docs.aws.amazon.com/AmazonS3/latest/userguide/VirtualHosting.html
-          - ${COMPOSE_PROJECT_NAME}-files.s3.minio.localhost
+          - ${COMPOSE_PROJECT_NAME}-files.s3.rustfs.localhost
+    healthcheck:
+      test: curl -f http://127.0.0.1:9001/health/ready
+      interval: 0.1s
+      timeout: 3s
+      retries: 30
 
   # ###########################################################################
-  # Service for creating bucket in minio service
+  # Service for creating bucket in rustfs service
   # ###########################################################################
-  minio-create-bucket:
-    image: minio/mc:latest
+  rustfs-create-bucket:
+    image: rustfs/rc:latest
     depends_on:
-      - minio
+      rustfs:
+        condition: service_healthy
     entrypoint: >
       /bin/sh -c "
-      /usr/bin/mc alias set s3minio http://minio:9001 root rootroot;
-      /usr/bin/mc mb s3minio/${COMPOSE_PROJECT_NAME}-files;
-      /usr/bin/mc anonymous set public s3minio/${COMPOSE_PROJECT_NAME}-files;
+      /usr/bin/rc alias set local http://rustfs:9000 root rootroot;
+      /usr/bin/rc bucket create --ignore-existing local/${COMPOSE_PROJECT_NAME}-files;
+      /usr/bin/rc anonymous set public local/${COMPOSE_PROJECT_NAME}-files;
       exit 0;
       "
 

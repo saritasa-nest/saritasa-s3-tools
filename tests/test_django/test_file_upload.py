@@ -41,7 +41,6 @@ def test_file_upload(
     file_url, file_key = saritasa_s3_tools.testing.upload_file_and_verify(
         filepath=__file__,
         s3_params=saritasa_s3_tools.client.S3UploadParams(**response.data),
-        is_minio=True,
     )
     value_to_send: str
     match value:
@@ -81,7 +80,6 @@ def test_file_upload_invalid_config_used(
     _, _ = saritasa_s3_tools.testing.upload_file_and_verify(
         filepath=__file__,
         s3_params=saritasa_s3_tools.client.S3UploadParams(**response.data),
-        is_minio=True,
     )
     response = api_client.post(
         path=reverse_lazy("model-api-list"),

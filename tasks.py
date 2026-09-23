@@ -38,8 +38,8 @@ ns.configure(
             ),
             docker=saritasa_invocations.DockerSettings(
                 main_containers=(
-                    "minio",
-                    "minio-create-bucket",
+                    "rustfs",
+                    "rustfs-create-bucket",
                     "postgres",
                 ),
             ),

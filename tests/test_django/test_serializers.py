@@ -28,7 +28,6 @@ def test_s3_upload_field_with_str_value(
     _, file_key = saritasa_s3_tools.testing.upload_file_and_verify(
         filepath=__file__,
         s3_params=saritasa_s3_tools.client.S3UploadParams(**response.data),
-        is_minio=True,
     )
     signed_file_url = (
         saritasa_s3_tools.django.S3UploadURLField().to_representation(
@@ -37,5 +36,5 @@ def test_s3_upload_field_with_str_value(
     )
     assert signed_file_url
     with httpx2.Client() as client:
-        response = client.get(url=signed_file_url)
-        assert response.status_code == http.HTTPStatus.OK
+        http_response = client.get(url=signed_file_url)
+        assert http_response.status_code == http.HTTPStatus.OK
