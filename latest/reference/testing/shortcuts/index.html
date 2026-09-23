@@ -1250,7 +1250,7 @@
 
 
 <h2 id="saritasa_s3_tools.testing.shortcuts.upload_file_and_verify" class="doc doc-heading">
-            <code class="highlight language-python"><span class="n">upload_file_and_verify</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="n">s3_params</span><span class="p">,</span> <span class="n">is_minio</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
+            <code class="highlight language-python"><span class="n">upload_file_and_verify</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="n">s3_params</span><span class="p">)</span></code>
 
 <a href="#saritasa_s3_tools.testing.shortcuts.upload_file_and_verify" class="headerlink" title="Permanent link">&para;</a></h2>
 
@@ -1279,15 +1279,9 @@
 <span class="normal">47</span>
 <span class="normal">48</span>
 <span class="normal">49</span>
-<span class="normal">50</span>
-<span class="normal">51</span>
-<span class="normal">52</span>
-<span class="normal">53</span>
-<span class="normal">54</span>
-<span class="normal">55</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">upload_file_and_verify</span><span class="p">(</span>
+<span class="normal">50</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">upload_file_and_verify</span><span class="p">(</span>
     <span class="n">filepath</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="n">s3_params</span><span class="p">:</span> <span class="n">client</span><span class="o">.</span><span class="n">S3UploadParams</span><span class="p">,</span>
-    <span class="n">is_minio</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">"""Upload and verify that file is uploaded."""</span>
     <span class="n">upload_response</span> <span class="o">=</span> <span class="n">upload_file</span><span class="p">(</span>
@@ -1298,12 +1292,8 @@
     <span class="n">parsed_response</span> <span class="o">=</span> <span class="n">xml</span><span class="o">.</span><span class="n">etree</span><span class="o">.</span><span class="n">ElementTree</span><span class="o">.</span><span class="n">fromstring</span><span class="p">(</span>  <span class="c1"># noqa: S314</span>
         <span class="n">upload_response</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">decode</span><span class="p">(),</span>
     <span class="p">)</span>
-    <span class="k">if</span> <span class="n">is_minio</span><span class="p">:</span>
-        <span class="n">file_key</span> <span class="o">=</span> <span class="n">parsed_response</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">text</span>
-        <span class="n">file_url</span> <span class="o">=</span> <span class="n">parsed_response</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">text</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="n">file_key</span> <span class="o">=</span> <span class="n">parsed_response</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">text</span>
-        <span class="n">file_url</span> <span class="o">=</span> <span class="n">parsed_response</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">text</span>
+    <span class="n">file_key</span> <span class="o">=</span> <span class="n">parsed_response</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">text</span>
+    <span class="n">file_url</span> <span class="o">=</span> <span class="n">parsed_response</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">text</span>
     <span class="k">assert</span> <span class="n">file_url</span><span class="p">,</span> <span class="n">upload_response</span><span class="o">.</span><span class="n">content</span>  <span class="c1"># noqa: S101</span>
     <span class="k">assert</span> <span class="n">file_key</span><span class="p">,</span> <span class="n">upload_response</span><span class="o">.</span><span class="n">content</span>  <span class="c1"># noqa: S101</span>
     <span class="k">return</span> <span class="n">file_url</span><span class="p">,</span> <span class="n">file_key</span>
