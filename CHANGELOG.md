@@ -4,6 +4,7 @@ We follow [Semantic Versions](https://semver.org/).
 
 ## Unreleased
 
+- Confirm support for python 3.15
 - Change default `max_length` from 100 to 512 for `S3FileField` and `S3ImageField`
   > **NOTE:**  If you already had migrations with default 100, then you need to manually set it in
   > your models or add length specifications to migrations so that `Django` could pick up changes
