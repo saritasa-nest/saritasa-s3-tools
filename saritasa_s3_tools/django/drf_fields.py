@@ -128,7 +128,7 @@ class S3UploadURLField(serializers.CharField):
         )[-1].lstrip("/")
 
         # Normalize url
-        file_url = urllib.parse.unquote_plus(file_url)
+        file_url = urllib.parse.unquote(file_url)
 
         # Remove aws-location prefix to keep only file name as key
         aws_location = self.storage.location  # type: ignore
